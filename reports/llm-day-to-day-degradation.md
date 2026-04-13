@@ -1,10 +1,9 @@
-# LLM Day-to-Day Degradation: Myth vs Reality
+﻿# LLM 鏃ュ父鈥滃彉绗ㄢ€濓細閿欒銆佺幇瀹炰笌鐪熸鎴愬洜
 
-Can a deployed LLM's performance change day-to-day even though the model weights are frozen? A deep-dive into proven causes, infrastructure bugs, and psychological factors.
-
+涓€涓凡缁忎笂绾跨殑澶фā鍨嬶紝濡傛灉鏉冮噸骞舵病鏈夐噸鏂拌缁冿紝鏃ュ父琛ㄧ幇浠嶇劧浼氭尝鍔ㄥ悧锛熻繖浠芥姤鍛婅璁虹殑鏄細涓轰粈涔堢敤鎴蜂細鐪熷疄鎰熷彈鍒扳€滀粖澶╂ā鍨嬪彉宸簡鈥濓紝浠ュ強杩欑鎰熷彈閲屽摢浜涢儴鍒嗘潵鑷熀纭€璁炬柦闂锛屽摢浜涙潵鑷笂涓嬫枃姹℃煋锛屽摢浜涘張鏉ヨ嚜浜虹殑蹇冪悊棰勬湡銆?
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">鈫?杩斿洖 Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
@@ -13,348 +12,220 @@ Can a deployed LLM's performance change day-to-day even though the model weights
 
 <table width="100%">
 <tr>
-<td width="50%"><a href="https://x.com/nicksdot/status/2029520949176049704"><img src="assets/llm-degradation.png" alt="Twitter users reporting day-to-day Claude quality degradation" width="100%" /></a></td>
-<td width="50%"><a href="https://x.com/levelsio/status/2029369159893569680"><img src="assets/llm-degradation-2.png" alt="Twitter users reporting day-to-day Claude quality degradation" width="100%" /></a></td>
+<td width="50%"><a href="https://x.com/nicksdot/status/2029520949176049704"><img src="assets/llm-degradation.png" alt="鐢ㄦ埛鍦ㄧぞ浜ゅ獟浣撲笂鍙嶉 Claude 璐ㄩ噺鏃ュ父娉㈠姩" width="100%" /></a></td>
+<td width="50%"><a href="https://x.com/levelsio/status/2029369159893569680"><img src="assets/llm-degradation-2.png" alt="鐢ㄦ埛鍦ㄧぞ浜ゅ獟浣撲笂鍙嶉 Claude 璐ㄩ噺鏃ュ父娉㈠姩" width="100%" /></a></td>
 </tr>
 </table>
 
 ---
----
 
-# 🔥 Claude Code Ops 4.6 Analysis. High Reasoning
+## 鏍稿績缁撹
 
-When Anthropic launches a model like Opus 4.6, the **model weights** — billions of learned parameters — are frozen. Training is enormously expensive (millions of dollars, weeks of compute). Nobody is retraining the model overnight.
-
-But weights are only one layer of a much larger system. Research reveals at least **7 distinct mechanisms** that can cause real or perceived quality changes, even when model weights are frozen.
-
-| Question | Answer |
-|----------|--------|
-| Do model weights change after launch? | **No** — confirmed by all providers |
-| Can the model behave differently day-to-day? | **Yes** — proven with ±8-14% variance |
-| Is it intentional "nerfing"? | **No** — no evidence of deliberate degradation |
-| Are infrastructure bugs real? | **Yes** — Anthropic confirmed 3 bugs affecting up to 16% of requests |
-| Is some of it psychological? | **Yes** — confirmation bias and honeymoon effects are real |
-| Can system prompts/post-training change? | **Yes** — documented across providers |
-| Should users trust their perception? | **Partially** — real causes exist, but perception amplifies them |
+褰?Anthropic 鍙戝竷 Opus 4.6 杩欑被妯″瀷鏃讹紝**妯″瀷鏉冮噸鏈韩鏄喕缁撶殑**銆傝缁冩垚鏈瀬楂橈紝涓嶅彲鑳戒粖澶╀笂绾裤€佹槑澶╁伔鍋烽噸鏂拌缁冧竴娆°€?
+浣嗏€滄潈閲嶅喕缁撯€濅笉绛変簬鈥滅敤鎴蜂綋楠屽喕缁撯€濄€傜爺绌朵笌浜嬫晠澶嶇洏鏄剧ず锛屽嵆浣垮簳灞傛潈閲嶄笉鍙橈紝涔熻嚦灏戝瓨鍦?**7 绫绘満鍒?* 浼氬鑷寸湡瀹炴垨鎰熺煡涓婄殑璐ㄩ噺娉㈠姩銆?
+| 闂 | 缁撹 |
+|------|------|
+| 妯″瀷鍙戝竷鍚庢潈閲嶄細鍙樺悧锛?| **涓嶄細**锛屼富娴佸巶鍟嗛兘杩欎箞鍋?|
+| 妯″瀷浼氫笉浼氭寜澶╄〃鐜颁笉鍚岋紵 | **浼?*锛屽凡缁忔湁 卤8% 鍒?卤14% 鐨勬尝鍔ㄦ暟鎹?|
+| 鏄笉鏄巶鍟嗘晠鎰忊€滃墛寮扁€濇ā鍨嬶紵 | **娌℃湁璇佹嵁**鏀寔杩欑璇存硶 |
+| 鍩虹璁炬柦 bug 浼氫笉浼氶€犳垚闄嶈川锛?| **浼?*锛孉nthropic 鏇剧‘璁?3 涓弗閲嶉棶棰?|
+| 鐢ㄦ埛鎰熺煡閲屾湁蹇冪悊鍥犵礌鍚楋紵 | **鏈?*锛岀‘璁ゅ亸宸笌铚滄湀鏁堝簲閮藉緢鏄庢樉 |
+| system prompt 鎴栧悗璁粌浼氫笉浼氭洿鏂帮紵 | **浼?*锛岃€屼笖寰堝鏇存柊骞朵笉鏄炬€ф毚闇茬粰鐢ㄦ埛 |
+| 鐢ㄦ埛鐨勪富瑙傛劅鍙楀畬鍏ㄤ笉鍙俊鍚楋紵 | **涔熶笉鏄?*锛屽緢澶氭尝鍔ㄧ殑纭湁鐪熷疄鎶€鏈師鍥?|
 
 ---
 
-## The Full Inference Stack
+## 鎺ㄧ悊鏍堢殑鐪熸缁撴瀯
 
-The model weights are frozen, but **nine layers above them** can independently affect what you experience:
-
-```
-┌──────────────────────────────────────────────┐
-│  YOUR SESSION CONTEXT                        │  ← Degrades within session
-│  (accumulated errors, long conversations)    │
-├──────────────────────────────────────────────┤
-│  SYSTEM PROMPT                               │  ← Updated regularly
-│  (safety rules, behavior instructions)       │
-├──────────────────────────────────────────────┤
-│  POST-TRAINING (RLHF / Fine-tuning)         │  ← Can be updated quietly
-│  (instruction following, safety alignment)   │
-├──────────────────────────────────────────────┤
-│  SAMPLING PARAMETERS                         │  ← Can be tuned server-side
-│  (temperature, top-p, top-k)                 │
-├──────────────────────────────────────────────┤
-│  SPECULATIVE DECODING                        │  ← Draft model quality varies
-│  (draft model predictions + verification)    │
-├──────────────────────────────────────────────┤
-│  MoE ROUTING / BATCH COMPOSITION             │  ← ±8-14% variance proven
-│  (which experts activate per request)        │
-├──────────────────────────────────────────────┤
-│  HARDWARE ROUTING                            │  ← TPU vs GPU vs Trainium
-│  (which cluster serves your request)         │
-├──────────────────────────────────────────────┤
-│  QUANTIZATION LEVEL                          │  ← May vary under load
-│  (FP16 vs INT8 vs INT4 precision)            │
-├──────────────────────────────────────────────┤
-│  COMPILER & RUNTIME                          │  ← XLA bugs proven real
-│  (XLA:TPU, CUDA, hardware-specific code)     │
-├──────────────────────────────────────────────┤
-│  MODEL WEIGHTS (FROZEN)                      │  ← These DON'T change
-│  (billions of learned parameters)            │
-└──────────────────────────────────────────────┘
+鐢ㄦ埛鐪嬪埌鐨勮緭鍑哄苟涓嶅彧鐢扁€滄ā鍨嬫潈閲嶁€濆喅瀹氥€傚疄闄呬笂锛屽湪鏉冮噸涔嬩笂杩樻湁寰堝灞備細褰卞搷缁撴灉锛?
+```text
+浣犵殑浼氳瘽涓婁笅鏂?          -> 闀垮璇濅細绱Н閿欒涓庢薄鏌?绯荤粺鎻愮ず璇?              -> 鍙鎸佺画鏇存柊
+鍚庤缁?/ RLHF           -> 鍙崟鐙洿鏂?閲囨牱鍙傛暟                 -> 鏈嶅姟鍣ㄧ鍙皟鏁?鎺ㄦ祴瑙ｇ爜                 -> 鑽夌妯″瀷璐ㄩ噺浼氬奖鍝嶈〃鐜?MoE 璺敱涓庢壒娆＄粍鎴?      -> 宸茶瘉鏄庝細甯︽潵鏄庢樉鏂瑰樊
+纭欢璺敱                 -> GPU / TPU / Trainium 琛屼负涓嶅悓
+閲忓寲绮惧害                 -> 璐熻浇涓嬪彲鑳藉垏鎹?缂栬瘧鍣ㄤ笌杩愯鏃?          -> XLA / CUDA 绛夊眰闈㈠彲鑳芥湁 bug
+妯″瀷鏉冮噸                 -> 杩欎竴灞傞€氬父涓嶅彉
 ```
 
-The key mental model: **frozen weights ≠ frozen behavior**. This is like saying "same engine = same driving experience" while ignoring the tires, road conditions, fuel quality, and driver fatigue.
+鐪熸搴旇璁颁綇鐨勬槸锛?
+**鏉冮噸涓嶅彉锛屼笉浠ｈ〃琛屼负瀹屽叏涓嶅彉銆?*
 
 ---
 
-## Proven Causes: Infrastructure Bugs
+## 宸茶瘉瀹炵殑鍘熷洜涓€锛氬熀纭€璁炬柦浜嬫晠
 
-### Anthropic's September 2025 Postmortem
+### Anthropic 2025 骞?9 鏈堝鐩?
+Anthropic 鏇惧叕寮€鍙戝竷涓€绡囧鐩橈紝璇存槑 **2025 骞?8 鏈堝埌 9 鏈?* 闂村彂鐢熶簡涓夎捣鐙珛鐨勫熀纭€璁炬柦闂锛岀‘瀹炶 Claude 鍦ㄤ竴娈垫椂闂村唴鍙樺樊銆?
+浠栦滑鐨勫畼鏂硅〃杩伴潪甯告槑纭細
 
-In September 2025, Anthropic published a detailed postmortem revealing **three separate infrastructure bugs** that degraded Claude's quality between August and September 2025. Their official statement:
+> 鎴戜滑涓嶄細鍥犱负闇€姹傘€佹椂闂存鎴栨湇鍔″櫒璐熻浇鑰屼富鍔ㄩ檷浣庢ā鍨嬭川閲忋€傜敤鎴锋劅鐭ュ埌鐨勯棶棰樻潵鑷熀纭€璁炬柦 bug锛岃€屼笉鏄晠鎰忛檷绾с€?
+### Bug 1锛氫笂涓嬫枃绐楀彛璺敱閿欒
 
-> "We never reduce model quality due to demand, time of day, or server load. The problems our users reported were due to infrastructure bugs alone."
+Sonnet 4 鐨勯儴鍒嗚姹傝閿欒璺敱鍒颁簡涓?1M 涓婁笅鏂囩獥鍙ｉ厤缃殑鏈嶅姟鍣紝鑰屼笉鏄爣鍑嗘湇鍔¤妭鐐广€?
+- **鏃堕棿绾?*锛? 鏈?5 鏃ュ紩鍏ワ紝8 鏈?29 鏃ュ洜璐熻浇鍧囪　鍙樻洿鑰屾伓鍖?- **宄板€煎奖鍝?*锛氭渶涓ラ噸鏃舵煇涓€灏忔椂褰卞搷 16% 鐨?Sonnet 4 璇锋眰
+- **鐢ㄦ埛褰卞搷**锛氱害 30% 鐨?Claude Code 鐢ㄦ埛鑷冲皯纰板埌杩囦竴娆￠檷璐ㄦ秷鎭?- **闅愯斀鎬?*锛氳矾鐢卞叿澶囩矘鎬э紝涓€鏃︽墦鍒板潖鑺傜偣锛屽悗缁姹傚鏄撲竴鐩寸户缁惤鍒伴偅閲?- **淇鏃堕棿**锛? 鏈?4 鏃ュ埌 9 鏈?8 鏃ュ垎鎵逛慨澶?
+### Bug 2锛歍PU 杈撳嚭鎹熷潖
 
-### Bug #1 — Context Window Routing Error
+鏌愪簺 TPU 鏈嶅姟鍣ㄩ厤缃敊璇紝瀵艰嚧 token 鐢熸垚闃舵姒傜巼鍒嗗竷寮傚父銆?
+- **琛ㄧ幇**锛氳嫳鏂囧洖绛斾腑绐佺劧鎻掑叆娉版枃鎴栦腑鏂囧瓧绗︼紱浠ｇ爜閲屽嚭鐜版槑鏄捐娉曢敊璇?- **褰卞搷妯″瀷**锛歄pus 4.1銆丱pus 4銆丼onnet 4
+- **鑼冨洿**锛氫富瑕佸奖鍝?Claude API锛岀涓夋柟骞冲彴褰卞搷杈冨皬鎴栦笉瀛樺湪
+- **淇鏂瑰紡**锛? 鏈?2 鏃ュ洖婊?
+### Bug 3锛歑LA:TPU 缂栬瘧鍣ㄨ缂栬瘧
 
-Sonnet 4 requests were accidentally routed to servers configured for 1M token context windows instead of standard servers.
+杩欐槸鏈€闅惧畾浣嶇殑涓€涓棶棰樸€備负浜嗕慨绮惧害闂鐨勪竴澶勬敼鍔紝瑙﹀彂浜?Google XLA:TPU 涓綔浼忕殑缂栬瘧鍣?bug銆?
+- **鏍瑰洜**锛氱敤浜庨€夊彇鍊欓€?token 鐨?approximate top-k 鎿嶄綔锛屽湪鏌愪簺 batch size 鍜屾ā鍨嬮厤缃笅浼氳繑鍥炲畬鍏ㄩ敊璇殑缁撴灉
+- **闅剧偣**锛氬畠涓庡墠鍚庣畻瀛愰『搴忋€佽皟璇曞紑鍏抽兘浼氱浉浜掍綔鐢?- **褰卞搷鑼冨洿**锛欻aiku 3.5 宸茬‘璁わ紝閮ㄥ垎 Sonnet 4 涓?Opus 3 涔熸湁鎬€鐤?- **淇鏂瑰紡**锛氭敼鐢?exact top-k锛屽嵆渚挎晥鐜囩◢闄嶏紝涔熶紭鍏堜繚璇佹ā鍨嬭川閲?
+### 涓轰粈涔堥毦妫€娴?
+Anthropic 鎸囧嚭锛岃嚜鍔ㄥ寲璇勬祴涔嬫墍浠ユ病鑳藉強鏃舵崟鎹夌敤鎴锋姤鍛婄殑闂锛屼竴涓噸瑕佸師鍥犳槸锛?
+- Claude 鏈夋椂浼氳嚜琛屼粠鍗曟閿欒閲屾仮澶?- 涓嶅悓 bug 鍦ㄤ笉鍚屽钩鍙颁笂鐨勮〃鐜颁笉鍚?- 鐢ㄦ埛鐪嬪埌鐨勬槸涓€缁勬贩鍚堝紓甯革紝鑰屼笉鏄崟涓€鏁呴殰妯″紡
 
-- **Timeline**: Introduced August 5, worsened August 29 after a load balancing change
-- **Peak impact**: 16% of Sonnet 4 requests affected at worst hour (August 31)
-- **User impact**: ~30% of Claude Code users had at least one degraded message
-- **Insidious detail**: Routing was "sticky" — once you hit a bad server, subsequent requests kept going there
-- **Fixed**: September 4–18 (rolled out across platforms)
+鍐嶅姞涓?Claude 浼氳繍琛屽湪 **AWS Trainium銆丯VIDIA GPU銆丟oogle TPU** 涓夌被纭欢涓婏紝鍚屼竴澶┿€佸悓涓€鎻愮ず璇嶏紝鍛戒腑涓嶅悓纭欢璺緞锛屼綋楠屼篃鍙兘涓嶅悓銆?
+---
 
-### Bug #2 — TPU Output Corruption
+## 宸茶瘉瀹炵殑鍘熷洜浜岋細MoE 璺敱鏂瑰樊
 
-A misconfiguration on TPU servers caused errors during token generation, assigning high probability to tokens that should rarely appear.
+寰堝鐜颁唬澶фā鍨嬩娇鐢?**Mixture-of-Experts锛圡oE锛?* 鏋舵瀯銆備篃灏辨槸璇达細
 
-- **Symptoms**: Thai or Chinese characters appearing mid-English response, obvious code syntax errors
-- **Affected**: Opus 4.1 and Opus 4 (August 25–28), Sonnet 4 (August 25–September 2)
-- **Scope**: Only Claude API; third-party platforms unaffected
-- **Fixed**: Rolled back September 2
+- 骞朵笉鏄墍鏈夊弬鏁版瘡娆￠兘鍙備笌鎺ㄧ悊锛?- 绯荤粺浼氭牴鎹緭鍏ョ敱璺敱鍣ㄦ寫閫変竴灏忛儴鍒嗏€滀笓瀹垛€濇縺娲汇€?
+Scale AI 鐨勭爺绌跺彂鐜帮細
 
-### Bug #3 — XLA:TPU Compiler Miscompilation (the nastiest)
+> 绋€鐤?MoE 涓庢壒閲忔帹鐞嗙粨鍚堝悗锛屼笉鍚岃姹備細鍥犱负鎵规涓殑鍏朵粬鏍锋湰涓嶅悓锛岃€岃鍒嗗彂鍒颁笉鍚屼笓瀹朵笂锛岄€犳垚杈撳嚭娉㈠姩銆?
+### 宸叉祴寰楃殑璺ㄥ巶鍟嗘尝鍔ㄨ寖鍥?
+| 鍘傚晢 | 鏃ヤ笌鏃ヤ箣闂寸殑璇勫垎娉㈠姩 |
+|------|----------------------|
+| OpenAI锛圙PT-4 绯诲垪锛?| 卤10% 鍒?卤12% |
+| Anthropic锛圕laude 绯诲垪锛?| 卤8% 鍒?卤11% |
+| Google锛圙emini 绯诲垪锛?| 卤9% 鍒?卤14% |
 
-A code change to fix precision issues accidentally exposed a **latent compiler bug** in Google's XLA:TPU.
+涓€涓洿瑙備緥瀛愭槸锛?
+- 鍚屼竴涓ā鍨?- 鍚屼竴涓祴璇?- 鍚屼竴澶╄兘鎷垮埌 77%
+- 鍙︿竴澶╁嵈鍙湁 63%
 
-- **Root cause**: The approximate top-k operation (used to pick the most likely next tokens) "sometimes returned completely wrong results, but only for certain batch sizes and model configurations"
-- **Why it was hard to find**: It changed behavior depending on what operations ran before or after it, and whether debugging tools were enabled
-- **Hidden for months**: A previous workaround from December 2024 had been accidentally masking this deeper bug
-- **Affected**: Haiku 3.5 confirmed; subset of Sonnet 4 and Opus 3 suspected
-- **Resolution**: Switched from approximate to exact top-k; accepted "minor efficiency impact" because "Model quality is non-negotiable"
+杩欎笉鏄敤鎴烽敊瑙夛紝鑰屾槸鐜颁唬鎺ㄧ悊鍩虹璁炬柦鏈韩灏变細寮曞叆鍣０銆?
+杩欎篃鎰忓懗鐫€锛氬鏋滅湡瀹炶川閲忓彉鍖栧彧鏈?5%锛岃€岃嚜鐒跺櫔澹板凡缁忚揪鍒?10% 宸﹀彸锛岀敤鎴峰嚑涔庝笉鍙兘鍗曢潬浣撴劅鍒ゆ柇鈥滃埌搴曟槸涓嶆槸妯″瀷鍙樺樊浜嗏€濄€?
+---
 
-### Why Detection Was Difficult
+## 宸茶瘉瀹炵殑鍘熷洜涓夛細System Prompt 涓庡悗璁粌鏇存柊
 
-Anthropic's own automated evaluations didn't catch the degradation users reported, "in part because Claude often recovers well from isolated mistakes." Each bug produced different symptoms on different platforms at different rates, creating "a confusing mix of reports that didn't point to any single cause."
+### System Prompt 鐨勫彉鍖?
+鏉冮噸涓嶅彉锛屽苟涓嶄唬琛ㄥ寘瑁呮潈閲嶇殑 **system prompt** 涓嶅彉銆?
+瀵?Claude system prompt 婕旇繘鐨勫叕寮€鍒嗘瀽鏄剧ず锛?
+- 绯荤粺鎻愮ず浼氭寔缁凯浠?- 鏌愪簺鈥滅儹淇鎸囦护鈥濅細琚复鏃跺姞鍏?- 鏈変簺琛屼负鍏堢敤 prompt 鐑ˉ涓佷慨锛屽啀鍦ㄥ悗璁粌闃舵鍚告敹杩涘幓
 
-Key context: Claude runs on **three different hardware platforms** (AWS Trainium, NVIDIA GPUs, Google TPUs), each with different failure modes, compilers, and precision behaviors. Your request might hit different hardware on different days.
+渚嬪锛?
+- Claude 3.7 鐨?system prompt 涓湁澶氭潯閽堝甯歌 LLM 鍧戠偣鐨?hot-fix 鎸囦护
+- 鍒?Claude 4.0锛岃繖浜涙寚浠よ绉婚櫎锛岃鏄庣浉鍏宠涓哄凡缁忚縼绉诲埌浜嗗悗璁粌灞?
+### 鍚庤缁冨眰鐨勫彉鍖?
+瀵圭敤鎴锋潵璇达紝鍘傚晢瀹屽叏鍙兘锛?
+- 涓嶆敼鍩虹妯″瀷鏉冮噸
+- 浣嗘洿鏂板井璋冦€佸亸濂藉榻愭垨瀹夊叏杈圭晫
+
+浠庢妧鏈〃杩颁笂璁诧紝鍘傚晢渚濈劧鍙互璇粹€滄ā鍨嬫病鍙樷€濓紱浣嗕粠鐢ㄦ埛琛屼负浣撻獙鐪嬶紝妯″瀷纭疄浼氬彉銆?
+---
+
+## 宸茶瘉瀹炵殑鍘熷洜鍥涳細闈欓粯鍒囨崲妯″瀷鎴栧埆鍚?
+涓氱晫涔熷彂鐢熻繃澶氭鈥滈潤榛樻ā鍨嬪垏鎹⑩€濓細
+
+- 妯″瀷閫夋嫨鍣ㄤ竴澶滀箣闂寸Щ闄?- 榛樿浠?GPT-4o 鍒囧埌 GPT-5
+- 鏃фā鍨嬪彉鎴愰殣钘忛€夐」
+- autoswitcher bug 鎶婄敤鎴烽敊璺敱鍒板叾浠栨ā鍨?
+杩欒鏄庝袱浠朵簨锛?
+1. **闈欓粯鍒囨崲鏄湡瀹炲瓨鍦ㄧ殑浜у搧瀹炶返**
+2. **鐢ㄦ埛鎰熺煡鍒扳€滀粖澶╀笉涓€鏍封€濆苟涓嶄竴瀹氭槸閿欒**
 
 ---
 
-## Proven Causes: MoE Routing Variance
+## 鍏朵粬閲嶈鍥犵礌
 
-Modern large models often use a **Mixture-of-Experts (MoE)** architecture, where only a subset of the model's parameters ("experts") activate for each input. A learned router decides which experts to use.
+### 閲忓寲绮惧害鍙樺寲
 
-Scale AI's research revealed a critical finding:
+涓轰簡鏇翠究瀹滃湴鏈嶅姟澶ч噺璇锋眰锛屾帹鐞嗘湇鍔″彲鑳戒娇鐢ㄩ噺鍖栫増鏈細
 
-> "The combination of Sparse MoE and batched inference creates unpredictable results because the composition of a batch can determine which expert your query gets routed to, and the mix of queries from other users in the same batch is not deterministic."
+- FP16
+- INT8
+- INT4
 
-### Measured Day-to-Day Variance Across Providers
+閲忓寲浼氬噺灏戞樉瀛樹笌鎺ㄧ悊鎴愭湰锛屼絾閫氬父涔熶細甯︽潵缁嗗井璐ㄩ噺鎹熷け銆?
+### 鎺ㄦ祴瑙ｇ爜
 
-| Provider | Day-to-Day Score Variance |
-|----------|--------------------------|
-| OpenAI (GPT-4 variants) | ±10–12% |
-| Anthropic (Claude variants) | ±8–11% |
-| Google (Gemini variants) | ±9–14% |
+鐜颁唬鏈嶅姟鏍堜細鍏堣涓€涓洿灏忕殑鑽夌妯″瀷鐚滃涓?token锛屽啀鐢变富妯″瀷楠岃瘉銆?
+鐞嗚涓婅繖涓嶅簲鏀瑰彉鏈€缁堝垎甯冿紱浣嗗湪瀹為檯宸ョ▼閲岋紝涓嶅悓棰嗗煙銆佷笉鍚屼笂涓嬫枃闀垮害涓嬬殑琛ㄧ幇浼氭湁宸紓銆?
+### 涓婁笅鏂囨薄鏌?
+杩欐槸 Claude Code 鐢ㄦ埛鏈€瀹规槗浜茶韩鎰熷彈鍒扮殑涓€鐐癸細
 
-Concrete example: the same model scored **77% on jailbreak resistance one day and 63% the next**. Same model, same weights, same test — 14 percentage points of swing from infrastructure alone.
-
-This means even with zero bugs and zero changes, the same model can produce noticeably different quality outputs on different days purely due to how requests are batched and routed. An A/B test cannot reliably detect a 5% quality signal when the day-to-day noise is 10–15%.
-
----
-
-## Proven Causes: System Prompt & Post-Training Updates
-
-### System Prompt Changes
-
-The model weights don't change, but the **system prompt** wrapping those weights can be updated at any time. Analysis of Claude's system prompt evolution shows dozens of iterations, with "hot-fixes" — short instructions added to patch undesired behavior — being added and removed regularly.
-
-Claude 3.7's system prompt contained multiple hot-fix instructions targeting common LLM "gotchas." Claude 4.0's system prompt removed all of them, with the behaviors addressed during post-training through reinforcement learning instead.
-
-### The Post-Training Theory
-
-The most plausible theory for unexplained quality shifts: companies can update **fine-tuning and RLHF** (reinforcement learning from human feedback) without changing the base model weights. This would technically make it truthful to say "the model hasn't changed" while still altering behavior through updated safety guardrails and instruction-following adjustments.
+- 瀵硅瘽瓒婇暱锛岄敊璇秺鍙兘琚弽澶嶅甫杩涘悗缁疆娆?- 妯″瀷浼氬湪鑷繁鐨勬棫閿欒涓婄户缁帹鐞?- 浜庢槸鐢ㄦ埛浼氳寰椻€滃畠瓒婃潵瓒婄鈥?
+杩欐椂鏈€鏈夌敤鐨勫姩浣滈€氬父涓嶆槸鎶辨€ㄦā鍨嬶紝鑰屾槸锛?
+- `/compact`
+- 寮€鏂颁細璇?- 鎷嗙煭浠诲姟杈圭晫
 
 ---
 
-## Proven Causes: Silent Model Swaps
+## 缁忓吀鐮旂┒锛氫负浠€涔堝ぇ瀹朵細璇粹€滄ā鍨嬫紓绉烩€?
+Stanford 涓?UC Berkeley 鐨勯偅绡囩粡鍏歌鏂囥€奌ow is ChatGPT's Behavior Changing Over Time?銆嬪父琚嬁鏉ヨ瘉鏄庢ā鍨嬩細鈥滆秺鐢ㄨ秺宸€濄€?
+璁烘枃涓渶鎯婁汉鐨?headline 鏄細
 
-OpenAI has been documented multiple times silently changing which model users interact with:
+> GPT-4 鍦ㄢ€滃垽鏂竴涓暟鏄笉鏄川鏁帮紝骞堕€愭鎬濊€冣€濈殑浠诲姟涓婏紝鍑嗙‘鐜囦粠 97.6% 涓嬮檷鍒颁簡 2.4%銆?
+### 杩欑瘒鐮旂┒鐪熸璇佹槑浜嗕粈涔?
+- 鍚屼竴涓?LLM 鏈嶅姟鐨勮涓轰細鍦ㄧ煭鏃堕棿鍐呮樉钁楀彉鍖?- 涓嶅悓鑳藉姏鍙兘鏈濈浉鍙嶆柟鍚戝彉鍖?- 浠ｇ爜鐢熸垚璐ㄩ噺涔熶細闅忔椂闂磋捣浼?- 鈥淟LM drift鈥?杩欎釜璇嶇敱姝よ繘鍏ュ叕浼楄璁?
+### 浣嗗畠涔熸湁鏄庢樉鏂规硶瀛︿簤璁?
+- 3 鏈堢増鏈敤浜?`temperature=0.0`
+- 6 鏈堢増鏈敤浜?`temperature=1.0`
+- 姣忛」浠诲姟鍙祴浜?500 涓牱鏈?- 鎵€璋撯€滄暟瀛﹁兘鍔涗笅闄嶁€濓紝閮ㄥ垎鍏跺疄鏄?yes/no 鐚滄祴绛栫暐鍙樺寲
 
-- Removing the model picker overnight, forcing users from GPT-4o to GPT-5
-- Making GPT-4o a hidden "legacy model" requiring a manual toggle in settings, with no in-app notification
-- An "autoswitcher" bug routing users to wrong models
-- Plus subscribers reported models switching to a "restricted version" without consent
+鍥犳锛屾洿绋冲Ε鐨勭粨璁烘槸锛?
+- **LLM 琛屼负纭疄浼氬彉**
+- 浣嗗師鍥犳湭蹇呮槸鈥滄ā鍨嬮€€鍖栤€濓紝寰堝鏃跺€欐洿鍍忔槸鏈嶅姟灞傛垨鍚庤缁冨眰鐨勬敼鍙?
+---
 
-Sam Altman acknowledged the rollout was "a little more bumpy than we hoped for." Reddit threads received thousands of upvotes calling the new model a "disaster" and a "downgrade."
+## 蹇冪悊鍥犵礌涔熺‘瀹炲瓨鍦?
+### 纭鍋忓樊
 
-This demonstrates that model swaps **do happen** in the industry — sometimes intentionally (product decisions) and sometimes accidentally (routing bugs).
+涓€鏃︾ぞ浜ゅ钩鍙颁笂寮€濮嬫祦浼犫€淐laude 浠婂ぉ鍙樼浜嗏€濓紝浣犳洿瀹规槗鎶婂綋澶╅亣鍒扮殑姣忎釜閿欒閮借В閲婃垚绯荤粺鎬ч棶棰樸€?
+### 铚滄湀鏁堝簲
+
+鏂版ā鍨嬪垰鍑烘潵鏃讹紝澶у鐨勫叴濂嬫劅浼氭姮楂樹富瑙傝瘎浠凤紱杩囧嚑鍛ㄥ悗锛岀啛鎮変簡瀹冪殑杈圭晫锛岃瘎浠疯嚜鐒朵細鍥炶惤銆?
+### 浠诲姟闅惧害鍙樺寲
+
+浣犳瘡澶╁仛鐨勪换鍔′笉涓€鏍枫€備粖澶╁垰濂藉湪鍋氶毦棰橈紝褰撶劧鏇村鏄撹寰楁ā鍨嬩笉琛屻€?
+### 姒傜巼鎬ц緭鍑烘湰璐?
+LLM 鏈潵灏辨槸姒傜巼妯″瀷銆傚嵆浣挎槸鍚屼竴涓?prompt锛屼篃鍙兘杩炵画鍑犳閮芥娊鍒拌緝宸粨鏋溿€?
+---
+
+## 鏈€缁堢粨璁?
+鐢ㄦ埛鎵€璇寸殑鈥滄ā鍨嬩粖澶╁彉宸簡鈥濊繖浠朵簨锛?*骞朵笉瀹屽叏鏄敊瑙?*锛屼絾缁忓父琚В閲婇敊浜嗐€?
+鏇村噯纭殑璇存硶鏄細
+
+1. **浣犵殑浣撻獙纭疄鍙兘鍦ㄦ煇鍑犲ぉ鍙樺樊**
+2. **浣嗚繖涓嶇瓑浜庡巶鍟嗘晠鎰忓墛寮辨ā鍨?*
+
+鏈€甯歌鐨勭粍鍚堝師鍥犳槸锛?
+1. **鍩虹璁炬柦 bug**
+2. **MoE 璺敱涓庢壒娆℃尝鍔?*
+3. **system prompt 涓庡悗璁粌鏇存柊**
+4. **涓嶅悓纭欢璺緞鐨勫樊寮?*
+5. **闀夸細璇濆鑷翠笂涓嬫枃姹℃煋**
+6. **纭鍋忓樊鏀惧ぇ浜嗗紓甯告劅鐭?*
+7. **姒傜巼鎬ц緭鍑烘湰鏉ュ氨鏈夎嚜鐒舵尝鍔?*
+
+鎵€浠ワ紝鈥滃叏鏄績鐞嗕綔鐢ㄢ€濆拰鈥滀粬浠伔鍋?nerf 浜嗘ā鍨嬧€濊繖涓ょ鏋佺璇存硶锛岄兘澶畝鍗曚簡銆?
+鐜板疄鏇村儚鏄細
+
+- 浣撻獙娉㈠姩纭疄瀛樺湪
+- 鎶€鏈師鍥犲線寰€澶嶆潅涓斿灞?- 涓汉浣撴劅寰堥毦鍗曠嫭璇佹槑鍥犳灉
 
 ---
 
-## Contributing Factors
+## 璧勬枡鏉ユ簮
+
+- [Anthropic: A Postmortem of Three Recent Issues](https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues)
+- [Anthropic Reveals Three Infrastructure Bugs - InfoQ](https://www.infoq.com/news/2025/10/anthropic-infrastructure-bugs/)
+- [How is ChatGPT's Behavior Changing Over Time? - Stanford / UC Berkeley](https://arxiv.org/abs/2307.09009)
+- [The Truth About ChatGPT's Degrading Capabilities - TechTalks](https://bdtechtalks.com/2023/07/24/chatgpt-capabilities-degrading-study/)
+- [LLMs Are Getting Dumber and We Have No Idea Why - Ignorance.ai](https://www.ignorance.ai/p/llms-are-getting-dumber-and-we-have)
+- [When Claude Forgets How to Code - Robert Matsuoka](https://hyperdev.matsuoka.com/p/when-claude-forgets-how-to-code)
+- [Smoothing Out LLM Variance - Scale AI](https://scale.com/blog/smoothing-out-llm-variance)
+- [What We Can Learn from Anthropic's System Prompt Updates - PromptLayer](https://blog.promptlayer.com/what-we-can-learn-from-anthropics-system-prompt-updates/)
+- [Claude's System Prompt Changes Reveal Anthropic's Priorities - Drew Breunig](https://www.dbreunig.com/2025/06/03/comparing-system-prompts-across-claude-versions.html)
+- [Complaints About Secretly Switching Models - OpenAI Forum](https://community.openai.com/t/complaints-about-secretly-switching-models/1360150)
+- [Speculative Decoding - BentoML LLM Inference Handbook](https://bentoml.com/llm/inference-optimization/speculative-decoding)
+- [A Visual Guide to Mixture of Experts - Maarten Grootendorst](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts)
 
-### Quantization Under Load
-
-To serve millions of users cost-effectively, companies may serve **quantized** versions of models — reducing precision from FP16 to INT8 or INT4. This can reduce memory usage by 2–4x and accelerate inference, but introduces subtle quality loss. Whether providers dynamically switch quantization levels under load is debated, but the technical capability exists and is well-documented in serving frameworks like vLLM and TensorRT.
-
-### Speculative Decoding
-
-Modern serving stacks use a smaller "draft" model to predict multiple tokens ahead, then have the real model verify them. Theoretically this preserves the same output distribution, but in practice acceptance rates vary by domain and context. Out-of-the-box draft models may work fine in some cases but often struggle with domain-specific tasks or very long contexts.
-
-### Context Window Pollution
-
-In a long coding session, earlier mistakes accumulate in context. The model sees its own errors and may perpetuate them. This is the most common cause of "Claude got dumber" within a single session — it's not the model degrading, it's context contamination.
-
-**Practical tip**: Use `/compact` or start fresh sessions when quality feels off. This is the single most actionable thing you can do.
-
----
-
-## The Stanford Study — And Why It's Complicated
-
-The landmark 2023 study by Stanford and UC Berkeley (Chen, Zaharia, Zou) — "How is ChatGPT's Behavior Changing Over Time?" — is frequently cited as proof that LLMs degrade. The headline finding:
-
-> GPT-4's accuracy on "Is this number prime? Think step by step" fell from **97.6% to 2.4%** between March and June 2023.
-
-### What the Study Proved
-
-- The behavior of the "same" LLM service **can change substantially** in a short period
-- Different capabilities can move in opposite directions (GPT-4 got worse at math, GPT-3.5 got better)
-- Code generation quality dropped (GPT-4 executable code: 52% → 10%)
-- The study coined the term **"LLM drift"**
-
-### Methodological Critiques
-
-- The March version used **temperature 0.0** while the June version used **temperature 1.0** — a fundamental confounding variable that increases randomness
-- Only **500 queries per task** — too small for definitive statistical claims
-- The "math questions" were actually yes/no questions where the model's guessing pattern changed, not its mathematical ability
-- Changes likely reflected intentional **post-training safety updates**, not degradation
-
-The study proved something important — LLM behavior changes over time — but the mechanism was likely intentional updates, not unintentional degradation.
-
----
-
-## The Psychology
-
-### Confirmation Bias
-
-Once someone tweets "Claude is dumb today," you start noticing every mistake. On days when nobody complains, you brush off the same errors. Social media amplifies this effect.
-
-### The Honeymoon Effect
-
-Users experience an initial honeymoon period with new models, then gradually discover limitations. The model didn't change — expectations adjusted upward faster than capabilities warranted.
-
-### Task Difficulty Variance
-
-Your tasks vary day to day. A day of hard problems feels like the model got worse, even when it hasn't.
-
-### The "Weekend Claude" Myth
-
-Despite many users believing in day-of-week patterns, rigorous analysis found **no consistent evidence** for day-of-week quality patterns. One analysis titled "AI is Dumber on Mondays" came up empty.
-
-### Stochastic Nature of LLMs
-
-LLMs are probabilistic. The same prompt can produce different outputs each time. On a bad luck streak, you might get several poor responses in a row — pure randomness, not degradation.
-
----
-
-## Bottom Line
-
-The phenomenon users describe is **real but misattributed**:
-
-- **Correct**: their experience degraded on certain days
-- **Incorrect**: the model was intentionally "nerfed"
-
-The actual causes are a combination of:
-
-1. **Infrastructure bugs** — proven by Anthropic's postmortem (up to 16% of requests affected)
-2. **MoE routing variance** — ±8-14% quality swing measured by Scale AI, even with zero changes
-3. **System prompt and post-training updates** — documented across providers
-4. **Hardware heterogeneity** — TPU vs GPU vs Trainium, each with different failure modes
-5. **Context pollution** — long sessions degrade within-session quality
-6. **Confirmation bias** — social media amplifies perceived patterns
-7. **Stochastic variance** — same model, same prompt, different output every time
-
-The measurement problem is severe: day-to-day variance of ±8-14% means you cannot distinguish a real 5% quality change from noise. This is why both the "it's all in your head" and "they nerfed it" camps feel confident — the signal-to-noise ratio makes it impossible to tell from individual experience alone.
-
----
-
-## Sources
-
-- [Anthropic: A Postmortem of Three Recent Issues](https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues) — Official postmortem detailing three infrastructure bugs (September 2025)
-- [Anthropic Reveals Three Infrastructure Bugs — InfoQ](https://www.infoq.com/news/2025/10/anthropic-infrastructure-bugs/) — Technical analysis of the postmortem
-- [How is ChatGPT's Behavior Changing Over Time? — Stanford/UC Berkeley](https://arxiv.org/abs/2307.09009) — Landmark study on LLM drift (2023)
-- [The Truth About ChatGPT's Degrading Capabilities — TechTalks](https://bdtechtalks.com/2023/07/24/chatgpt-capabilities-degrading-study/) — Methodological critique of the Stanford study
-- [LLMs Are Getting Dumber and We Have No Idea Why — Ignorance.ai](https://www.ignorance.ai/p/llms-are-getting-dumber-and-we-have) — Five theories for perceived degradation
-- [When Claude Forgets How to Code — Robert Matsuoka](https://hyperdev.matsuoka.com/p/when-claude-forgets-how-to-code) — Analysis of Claude quality fluctuations and infrastructure causes
-- [Smoothing Out LLM Variance — Scale AI](https://scale.com/blog/smoothing-out-llm-variance) — Measured ±8-14% day-to-day variance across providers
-- [What We Can Learn from Anthropic's System Prompt Updates — PromptLayer](https://blog.promptlayer.com/what-we-can-learn-from-anthropics-system-prompt-updates/) — System prompt evolution analysis
-- [Claude's System Prompt Changes Reveal Anthropic's Priorities — Drew Breunig](https://www.dbreunig.com/2025/06/03/comparing-system-prompts-across-claude-versions.html) — Hot-fix patterns in system prompts
-- [Complaints About Secretly Switching Models — OpenAI Forum](https://community.openai.com/t/complaints-about-secretly-switching-models/1360150) — Documented silent model swaps
-- [Speculative Decoding — BentoML LLM Inference Handbook](https://bentoml.com/llm/inference-optimization/speculative-decoding) — How draft models affect serving
-- [A Visual Guide to Mixture of Experts — Maarten Grootendorst](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) — MoE architecture and routing explained
-
----
----
-
-# 🔥 Codex 5.3 High Reason and Finding
-
-### Report Scope
-
-This section explains why users can experience a short window where Claude output quality drops while Codex 5.3 feels stable or stronger on coding tasks. The focus is not on permanent model quality rankings. The focus is short-horizon production behavior under real serving conditions.
-
-Report date: March 5, 2026.
-
-### Observed Pattern
-
-The reported pattern is:
-
-1. Model quality is acceptable for a period.
-2. Quality appears to degrade for several days.
-3. Quality returns close to prior baseline.
-
-This shape is usually a serving-stack or rollout pattern, not a permanent base-model capability change. Permanent capability decline would not normally recover this quickly without an explicit rollback or fix.
-
-### High Reason: Why Codex 5.3 Can Look Better in a Bad Window
-
-Codex 5.3 can appear clearly stronger during another provider's degraded period for several technical reasons that can all happen at the same time:
-
-1. Product-objective fit. Codex 5.3 is optimized for code-generation and agentic coding workflows, so even equal raw model strength can yield better coding outcomes due to tool orchestration, repository reasoning, and code-centric instruction tuning.
-2. Inference policy differences. Providers tune latency, reasoning depth, and decoding defaults independently. A more conservative policy at one provider can look "smarter" than an aggressive speed-optimized policy at another for the same day.
-3. Serving-path separation. Even if two providers host state-of-the-art models, they run different routing layers, compiler/runtime stacks, and rollout pipelines. An incident in one stack does not imply correlated degradation in the other.
-4. Rollout and rollback timing. If one provider is mid-rollout while another is stable, users can see large temporary quality divergence with no underlying long-term change in model weights.
-5. Session-level contamination effects. In long coding chats, error accumulation can amplify perceived decline. A competing assistant can feel better simply because the failing session was reset or because its tool loop recovered faster.
-
-### Detailed Finding
-
-For a report like "Claude felt very weak for about four days, then came back," the most probable explanation is:
-
-1. A provider-side incident, routing issue, decoding/runtime bug, or rollout regression affected a subset of requests.
-2. The issue persisted long enough to be noticed repeatedly in real workflows.
-3. The issue was fixed or rolled back.
-4. Perceived quality returned quickly.
-
-During that same period, Codex 5.3 could feel substantially better because it did not share the same incident path and because coding-task optimization magnified the gap in practical outcomes.
-
-### Hypothesis Ranking for This Pattern
-
-| Hypothesis | Likelihood | Rationale |
-|------------|------------|-----------|
-| Provider incident plus rollback | High | Best match for multi-day dip followed by fast recovery |
-| Serving configuration change (sampling/latency/reasoning budget) | High | Common source of sudden behavior shifts without model retraining |
-| Silent alias or snapshot movement | Medium-High | Can change behavior with no visible user action |
-| Prompt drift and context contamination only | Medium | Can degrade sessions, but less likely to explain broad multi-day reports alone |
-| Permanent base-model degradation | Low | Inconsistent with fast return to previous quality |
-
-### What Would Confirm or Falsify This Finding
-
-To turn this from high-confidence inference into hard proof, collect request-level telemetry for the same task set across days:
-
-1. Exact model identifier and snapshot/alias at request time.
-2. Any backend fingerprint or release marker exposed by the provider.
-3. Decoding parameters (temperature, top_p, top_k, max tokens).
-4. Latency, timeout, and error-rate traces.
-5. Structured quality scores on a fixed coding benchmark prompt set.
-6. Session length and token-context depth at failure points.
-
-If quality drops correlate with an incident window, a config change, or a backend fingerprint shift, the incident/config hypothesis is confirmed. If no such shifts exist and degradation is only in long sessions, context contamination becomes the primary explanation.
-
-### Practical Engineering Guidance
-
-To reduce day-to-day variance in production:
-
-1. Pin model snapshots when available instead of using floating aliases.
-2. Store request metadata (model ID, parameters, latency, errors, response quality label).
-3. Run a fixed daily canary suite for coding tasks and alert on regression.
-4. Reset or compact long-running sessions after several failed turns.
-5. Keep a fallback provider/model path for incident windows.
-6. Separate "model quality" from "serving reliability" in internal dashboards.
-
-### Final Conclusion
-
-Codex 5.3 looking better during a short Claude degradation window is a technically plausible and expected outcome in modern LLM operations. The strongest explanation is not permanent model collapse. The strongest explanation is temporary serving-path degradation at one provider, combined with coding-specific optimization and stable operation at the other provider during the same period.

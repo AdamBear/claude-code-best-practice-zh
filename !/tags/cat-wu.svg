@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="45" height="20" role="img" aria-label="Cat">
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="45" height="20" role="img" aria-label="Cat">
   <title>Cat</title>
   <linearGradient id="s" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
@@ -18,3 +18,4 @@
     <text x="31" y="14">Cat</text>
   </g>
 </svg>
+

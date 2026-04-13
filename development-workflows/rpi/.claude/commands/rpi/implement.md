@@ -1,634 +1,103 @@
 ---
-description: Execute phased implementation with validation gates
+description: 执行带验证闸门的分阶段实施
 argument-hint: "<feature-slug> [--phase N] [--validate-only]"
 ---
 
-## User Input
+## 用户输入
 
 ```text
 $ARGUMENTS
 ```
 
-You **MUST** parse the user input to extract the feature slug (the folder name in `rpi/`).
+你 **必须** 解析用户输入，提取 feature slug（`rpi/` 下的文件夹名）。
 
-## Purpose
+## 目的
 
-This command executes phased implementation of features based on planning documentation. It orchestrates specialized agents, enforces validation gates, and ensures constitutional compliance throughout implementation.
+该命令根据规划文档分阶段执行功能实现。它会编排专门代理、执行验证闸门，并确保整个实施过程持续符合项目宪章。
 
-**Prerequisites**:
-- Feature folder exists at `rpi/{feature-slug}/`
-- Planning completed (`rpi/{feature-slug}/plan/PLAN.md` exists)
+**前置条件**：
+- 功能目录存在于 `rpi/{feature-slug}/`
+- 规划已完成（`rpi/{feature-slug}/plan/PLAN.md` 存在）
 
-**Output Location**: `rpi/{feature-slug}/implement/`
+**输出位置**：`rpi/{feature-slug}/implement/`
 
-**This is Step 4 of the RPI Workflow** (final step - actual implementation).
+**这是 RPI 工作流第 4 步**（真正执行实现的最后一步）。
 
-## Flags
+## 标志
 
-- `--phase N`: Execute specific phase number (1-8), if omitted starts from phase 1
-- `--validate-only`: Only validate current phase, don't implement
-- `--skip-validation`: Skip validation gate and proceed (use with caution)
+- `--phase N`：执行指定阶段（1-8），省略时从第 1 阶段开始
+- `--validate-only`：只验证当前阶段，不执行实现
+- `--skip-validation`：跳过验证闸门继续执行（谨慎使用）
 
-## Available Agents
+## 可用代理
 
-All agents use **Opus model** for maximum quality.
+### 实现代理
+- `senior-software-engineer`：负责所有实现任务
 
-### Implementation Agent
+### 支持代理
+- `Explore`：实现前探索代码
+- `code-reviewer`：做代码审查和质量验证
+- `constitutional-validator`：按项目宪章做一致性校验
+- `documentation-analyst-writer`：生成或更新文档
 
-| Agent | Type | When to Use |
-|-------|------|-------------|
-| `senior-software-engineer` | Custom | All implementation tasks |
+## 阶段循环
 
-### Support Agents
+每个阶段都遵循以下顺序：
+1. 代码发现（Explore）
+2. 实现（senior-software-engineer）
+3. 自我验证
+4. 代码审查（code-reviewer）
+5. 用户验证闸门
+6. 更新文档
 
-| Agent | Type | Purpose |
-|-------|------|---------|
-| `Explore` | Built-in | Pre-implementation code exploration |
-| `code-reviewer` | Custom | Code review and quality validation |
-| `constitutional-validator` | Custom | Validate against project constitution |
-| `documentation-analyst-writer` | Built-in | Documentation generation |
+## 实施要求
 
-### Agent Routing
+- 修改前先理解现有代码模式
+- 遵守项目宪章与领域规则
+- 为新增功能补测试
+- 做好日志与错误处理
+- 每个阶段结束后更新状态
 
-All implementation tasks are handled by the `senior-software-engineer` agent.
+## 用户验证闸门
 
----
+该步骤 **必须暂停并等待用户决定**。
 
-## Phase 0: Load Context and Rules
+用户可给出：
+- **PASS**：进入下一阶段
+- **CONDITIONAL PASS**：记录问题后继续
+- **FAIL**：修复后重新验证
 
-**Prerequisites**: Feature slug parsed from user input
+## 质量闸门
 
-**Process**:
+每个阶段完成前必须满足：
+- 所有交付物已实现
+- Lint 通过
+- 测试通过
+- 构建成功
+- 代码审查通过
+- 获得用户验证
+- 文档已更新
 
-### 0.1 Load Project Constitution
-
-1. Check for a constitution or principles document in the repository
-2. If exists, extract:
-   - Technical constraints (type safety, testing, component isolation)
-   - Business principles (quality standards, workflow)
-   - Architectural boundaries
-3. Store constraints for enforcement during implementation
-
-### 0.2 Load Domain-Specific Guidelines
-
-Based on files to be modified, load relevant project guidelines:
-- Check for component-specific README files
-- Check for coding style guides
-- Check for testing requirements documentation
-
-### 0.3 Analyze Implementation Scope
-
-1. Read `rpi/{feature-slug}/plan/PLAN.md`
-2. Identify all files to be modified
-3. Map files to implementation agent
-
-**Outputs**:
-- Constitutional context summary
-- Domain rules loaded
-- File-to-agent mapping
-- Phase execution plan
-
-**Validation**:
-- [ ] Constitution loaded (if exists)
-- [ ] Domain rules loaded for affected files
-- [ ] All files mapped to agents
-- [ ] Execution plan understood
-
----
-
-## Phased Implementation Workflow
-
-### Phase Implementation Loop
-
-For each phase in PLAN.md:
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ Phase N: [Phase Name]                                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  1. Code Discovery (Explore Agent)                              │
-│     └─→ Understand existing code before changing it             │
-│                                                                  │
-│  2. Implementation (senior-software-engineer)                   │
-│     └─→ Implement phase deliverables                            │
-│                                                                  │
-│  3. Self-Validation                                             │
-│     └─→ Engineer validates against phase checklist              │
-│                                                                  │
-│  4. Code Review (code-reviewer Agent)                           │
-│     └─→ Security, correctness, maintainability                  │
-│                                                                  │
-│  5. User Validation Gate                                        │
-│     └─→ STOP and request user approval                          │
-│         ├─→ PASS: Proceed to next phase                         │
-│         ├─→ CONDITIONAL PASS: Note issues, proceed              │
-│         └─→ FAIL: Fix issues, re-validate                       │
-│                                                                  │
-│  6. Documentation Update                                        │
-│     └─→ Update phase status in PLAN.md                          │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Step 1: Code Discovery (Per Phase)
-
-**Agent**: Explore (Built-in, via Task tool)
-
-**Purpose**: Ground implementation in code reality before making changes.
-
-**Process**:
-1. Launch Explore agent via Task tool with `subagent_type="Explore"`
-2. Request analysis of files affected by current phase
-3. Understand existing patterns, integration points, constraints
-
-**Explore Agent Prompt**:
-```
-Analyze the codebase to prepare for implementing Phase N of [feature-name].
-
-Files to be modified in this phase:
-[List files from PLAN.md]
-
-Investigate and document:
-
-1. **Current Implementation**
-   - How do these files currently work?
-   - What patterns are used?
-   - What functions/classes will be affected?
-
-2. **Integration Points**
-   - What other files import or use these modules?
-   - What APIs or interfaces will change?
-   - What tests cover this code?
-
-3. **Dependencies**
-   - What libraries are used?
-   - What internal utilities are available?
-   - What constraints exist from current code?
-
-4. **Patterns to Follow**
-   - What coding style is used in these files?
-   - What naming conventions are followed?
-   - What error handling patterns exist?
-
-5. **Risks and Considerations**
-   - What could break if we change this?
-   - What edge cases exist?
-   - What backward compatibility concerns?
-
-Provide a discovery summary to inform implementation.
-```
-
-**Output**: Discovery summary for implementation agent
-
----
-
-## Step 2: Implementation (Per Phase)
-
-**Agent**: senior-software-engineer
-
-**Process**:
-1. Use senior-software-engineer agent
-2. Provide discovery context from Step 1
-3. Implement all deliverables for the phase
-4. Follow constitutional constraints and project rules
-
-**Implementation Agent Prompt Template**:
-```
-Acting as the [agent-name] agent, implement Phase N deliverables for [feature-name].
-
-## Context
-- Constitutional Constraints: [from Phase 0]
-- Domain Rules: [from Phase 0]
-- Discovery Summary: [from Step 1]
-
-## Phase N Deliverables
-[List from PLAN.md]
-
-## Files to Modify
-[List files with specific changes from PLAN.md]
-
-## Implementation Requirements
-1. Follow existing code patterns identified in discovery
-2. Honor constitutional constraints (type safety, testing, etc.)
-3. Follow project-specific rules (if applicable)
-4. Write tests for new functionality
-5. Include appropriate logging
-6. Handle errors gracefully
-
-## Quality Checklist
-- [ ] Code follows existing patterns
-- [ ] Type annotations present where applicable
-- [ ] Tests written and passing
-- [ ] No breaking changes to existing functionality
-- [ ] Logging added for observability
-- [ ] Error handling comprehensive
-
-Implement all deliverables and report what was done.
-```
-
----
-
-## Step 3: Self-Validation
-
-**Agent**: senior-software-engineer (same as Step 2)
-
-**Process**:
-1. Agent validates implementation against phase checklist
-2. Run linting (use project's configured linter)
-3. Run tests relevant to changes
-4. Verify build succeeds
-
-**Validation Commands** (adjust to your project):
-
-```bash
-# Run linter
-[your-linter-command]
-
-# Run tests
-[your-test-command]
-
-# Build/compile
-[your-build-command]
-```
-
-**Self-Validation Checklist**:
-- [ ] All deliverables implemented
-- [ ] Linting passes
-- [ ] Tests pass
-- [ ] Build succeeds
-- [ ] No regressions in existing tests
-- [ ] Constitutional constraints honored
-- [ ] Domain rules followed
-
----
-
-## Step 4: Code Review
-
-**Agent**: code-reviewer (Custom, auto-invoked)
-
-**Process**:
-1. Invoke code-reviewer agent to review changes
-2. Focus on correctness, security, maintainability
-3. Address blockers before proceeding
-
-**Code Review Agent Prompt**:
-```
-Acting as the code-reviewer agent, review the Phase N implementation for [feature-name].
-
-## Files Changed
-[List modified files]
-
-## Changes Made
-[Summary of implementation]
-
-## Review Focus
-- Correctness & tests
-- Security & dependency hygiene
-- Architectural boundaries
-- Clarity over cleverness
-
-## Constitutional Constraints
-[From Phase 0]
-
-Provide review using standard output format.
-```
-
-**Review Verdicts**:
-- **APPROVED**: Proceed to user validation
-- **APPROVED WITH SUGGESTIONS**: Note suggestions, proceed
-- **NEEDS REVISION**: Fix issues, re-review
-
----
-
-## Step 5: User Validation Gate
-
-**CRITICAL**: This step REQUIRES user interaction. DO NOT proceed automatically.
-
-**Process**:
-1. Present phase deliverables checklist
-2. Show what was implemented (files changed, features added)
-3. Present validation criteria from PLAN.md
-4. Show code review results
-5. **STOP and wait for user decision**
-
-**Validation Request Format**:
-```
-## Phase N Validation Request
-
-### Deliverables Completed
-- [x] [Deliverable 1] - [implementation summary]
-- [x] [Deliverable 2] - [implementation summary]
-- ...
-
-### Files Changed
-| File | Change Type | Lines |
-|------|-------------|-------|
-| [file] | [add/modify] | [±N] |
-
-### Tests
-- [x] Unit tests: PASS
-- [x] Integration tests: PASS
-- [x] Build: SUCCESS
-
-### Code Review
-- Verdict: [APPROVED / APPROVED WITH SUGGESTIONS]
-- Issues: [None / List]
-
-### Validation Criteria (from PLAN.md)
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
-- ...
-
----
-
-**Please validate Phase N:**
-- **PASS**: Phase complete, proceed to Phase N+1
-- **CONDITIONAL PASS**: Note issues below, proceed with caution
-- **FAIL**: Specify issues to fix before proceeding
-```
-
-**User Decisions**:
-- **PASS**: Proceed to next phase
-- **CONDITIONAL PASS**: Document issues, proceed to next phase
-- **FAIL**: Fix issues, re-run Steps 2-5
-
----
-
-## Step 6: Documentation Update
-
-**Process**:
-1. Update `rpi/{feature-slug}/plan/PLAN.md` with phase status
-2. Update `rpi/{feature-slug}/implement/IMPLEMENT.md` with validation results
-3. Append each phase's validation to IMPLEMENT.md
-
-### Phase Status Tracking
-
-Update checkboxes in PLAN.md:
-```markdown
-- [ ] Phase N: Not Started
-- [~] Phase N: In Progress
-- [x] Phase N: Validated (PASS)
-- [!] Phase N: Conditional Pass (with notes)
-- [-] Phase N: Failed Validation (needs rework)
-```
-
-### IMPLEMENT.md Template
-
-```markdown
-# Implementation Record
-
-**Feature**: [feature-slug]
-**Started**: [Date]
-**Status**: [IN_PROGRESS / COMPLETED]
-
----
-
-## Phase 1: [Phase Name]
-
-**Date**: [Date]
-**Verdict**: [PASS / CONDITIONAL PASS / FAIL]
-
-### Deliverables
-- [x] [Deliverable 1]
-- [x] [Deliverable 2]
-
-### Files Changed
-[List with line counts]
-
-### Test Results
-[Test output summary]
-
-### Code Review
-[Review verdict and notes]
-
-### Notes
-[Any additional notes]
-
----
-
-## Phase 2: [Phase Name]
-[Same structure as Phase 1...]
-
----
-
-## Summary
-
-**Phases Completed**: [N] of [N]
-**Final Status**: [COMPLETED / IN_PROGRESS]
-```
-
----
-
-## Error Handling
-
-### Implementation Failures
-
-**If implementation fails**:
-1. Document the specific failure
-2. Analyze root cause
-3. Try alternative approach (max 2 attempts)
-4. If still failing, STOP and ask user for guidance
-5. Do NOT proceed to next phase with broken implementation
-
-**Message**: "Implementation failed: [error]. Attempted [N] approaches. User guidance needed."
-
-### Test Failures
-
-**If tests fail**:
-1. Analyze failure cause (code bug vs test bug)
-2. Fix the issue
-3. Re-run tests
-4. If persistent, document and ask user
-5. Do NOT mark phase complete with failing tests
-
-**Message**: "Tests failing: [failures]. Fix attempted but unsuccessful. User review needed."
-
-### Build Failures
-
-**If build fails**:
-1. Check for type errors
-2. Check for missing imports
-3. Check for syntax errors
-4. Fix and rebuild
-5. If persistent, escalate to user
-
-**Message**: "Build failing: [error]. Unable to resolve automatically."
-
-### Agent Failures
-
-**If agent fails or times out**:
-1. Retry once with same inputs
-2. If still failing, proceed without that agent's contribution
-3. Document gap in validation request
-
-**Message**: "Agent [name] failed. Proceeding without contribution."
-
----
-
-## Completion Report
-
-On successful completion of all phases:
-
-```markdown
-## Implementation Complete
-
-### Feature Summary
-- **Feature**: [feature-name]
-- **Phases Completed**: [N] of [N]
-
-### Phases Executed
-| Phase | Status | Notes |
-|-------|--------|-------|
-| Phase 1 | PASS | [summary] |
-| Phase 2 | PASS | [summary] |
-| ... | ... | ... |
-
-### Files Modified
-| File | Change Type | Lines |
-|------|-------------|-------|
-| [file] | [type] | [±N] |
-
-### Tests Added
-- [test files]
-
-### Code Review Summary
-- Blockers Fixed: [N]
-- Suggestions Addressed: [N]
-
-### Constitutional Compliance
-- [ ] Type safety maintained
-- [ ] Tests written
-- [ ] Component isolation respected
-- [ ] No breaking changes
-
-### Artifacts Created
-- `rpi/{feature-slug}/plan/PLAN.md` (updated with phase status)
-- `rpi/{feature-slug}/implement/IMPLEMENT.md` (all phase validations)
-
-### Next Steps
-1. Create PR with changes
-2. Request final human review
-3. Deploy to staging
-4. Verify in staging environment
-5. Deploy to production
-
-### PR Notes
-
-**Title**: [{feature-slug}] [Brief description]
-
-**Summary**:
-[What was implemented]
-
-**Changes**:
-- [List key changes]
-
-**Testing**:
-- [How tested]
-
-**Rollout**:
-- [Deployment steps]
-
-**Rollback**:
-- [Rollback procedure if issues]
-```
-
----
-
-## Quality Gates
-
-### Per-Phase Quality Gate
-
-Before marking any phase complete:
-
-- [ ] All deliverables implemented
-- [ ] Linting passes
-- [ ] Tests pass
-- [ ] Build succeeds
-- [ ] Code review passed
-- [ ] User validation received
-- [ ] Documentation updated
-
-### Final Quality Gate
-
-Before marking implementation complete:
-
-- [ ] All phases validated
-- [ ] No failing tests
-- [ ] Build succeeds in full
-- [ ] Constitutional compliance verified
-- [ ] Domain rules followed
-- [ ] PR notes generated
-
----
-
-## Notes
-
-### When to Use This Command
-
-- After `/rpi:plan` generates PLAN.md
-- When phased implementation with validation gates is needed
-- For features requiring structured implementation
-
-### When NOT to Use This Command
-
-- Bug fixes (too heavy, just fix directly)
-- Very simple changes (<30 minutes work)
-- Exploratory prototyping
-- Documentation-only changes
-
-### Best Practices
-
-1. **Review PLAN.md first**: Understand what you're implementing
-2. **Trust code discovery**: Let Explore agent inform implementation
-3. **Follow existing patterns**: Let code discovery inform implementation
-4. **Don't skip validation**: Gates exist to catch issues early
-5. **Document as you go**: Update status after each phase
-6. **Ask when stuck**: Better to ask than to proceed incorrectly
-
-### Part of RPI Workflow
-
-Step 4 of 4 (Describe → Research → Plan → **Implement**)
-
----
-
-## Command Examples
-
-### Execute all phases
+## 命令示例
 
 ```bash
 /rpi:implement "my-feature"
-```
-
-### Execute specific phase
-
-```bash
 /rpi:implement "my-feature" --phase 3
-```
-
-### Validate only (no implementation)
-
-```bash
 /rpi:implement "my-feature" --phase 2 --validate-only
 ```
 
----
+## 备注
 
-## Post-Completion Action
+- Bug 修复或很小的改动不适合使用该命令
+- 不要跳过验证闸门
+- 卡住时应升级给用户，而不是带着不确定性继续
 
-**IMPORTANT**: After completing implementation (all phases or significant progress), ALWAYS prompt the user to compact the conversation:
+## 完成后动作
 
-> **Context Management**: This implementation workflow consumed significant context. To preserve progress and free up space, please run:
->
-> ```
-> /compact
-> ```
->
-> This will summarize the conversation and preserve implementation status while reducing token usage for future work.
+在完成实现后，始终提示用户运行：
 
-**When to prompt for compact**:
-- After all phases are complete
-- After completing each major phase (if multi-session implementation)
-- If context is running low during implementation
+```text
+/compact
+```
+
+以压缩对话并保留实施状态。

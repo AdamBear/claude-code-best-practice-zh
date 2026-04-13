@@ -1,158 +1,160 @@
-# Understanding Claude Skills Discovery in Large Monorepos
+# 大型 Monorepo 中 Claude 技能发现机制解析
 
-When working with Claude Code in a monorepo, understanding how skills are discovered and loaded into context is crucial for organizing your project-specific capabilities effectively.
+当你在 monorepo 中使用 Claude Code 时，理解技能是如何被发现、以及如何加载进上下文，对高效组织项目专属能力非常关键。
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">返回 Claude Code 最佳实践</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
-## Important Difference from CLAUDE.md
+## 与 CLAUDE.md 的一个重要区别
 
-**Skills do NOT have the same loading behavior as CLAUDE.md files.** While CLAUDE.md files walk UP the directory tree (ancestor loading), skills use a different discovery mechanism focused on nested directories within your project.
+**技能的加载行为和 CLAUDE.md 不一样。** CLAUDE.md 会沿目录树**向上**查找祖先目录，而技能采用的是另一套发现机制，更关注项目内部嵌套目录中的技能位置。
 
-## How Skills Are Discovered
+## 技能是如何被发现的
 
-### 1. Standard Skill Locations
+### 1. 标准技能位置
 
-Skills are loaded from these fixed locations based on scope:
+技能会按作用域从以下固定位置加载：
 
-| Location | Path | Applies to |
+| 位置 | 路径 | 作用范围 |
 |----------|------|------------|
-| Enterprise | Managed settings | All users in organization |
-| Personal | `~/.claude/skills/<skill-name>/SKILL.md` | All your projects |
-| Project | `.claude/skills/<skill-name>/SKILL.md` | This project only |
-| Plugin | `<plugin>/skills/<skill-name>/SKILL.md` | Where plugin is enabled |
+| Enterprise | Managed settings | 组织内所有用户 |
+| Personal | `~/.claude/skills/<skill-name>/SKILL.md` | 你的所有项目 |
+| Project | `.claude/skills/<skill-name>/SKILL.md` | 仅当前项目 |
+| Plugin | `<plugin>/skills/<skill-name>/SKILL.md` | 该 plugin 启用的位置 |
 
-### 2. Automatic Discovery from Nested Directories
+### 2. 从嵌套目录自动发现
 
-When you work with files in subdirectories, Claude Code automatically discovers skills from nested `.claude/skills/` directories. For example, if you're editing a file in `packages/frontend/`, Claude Code also looks for skills in `packages/frontend/.claude/skills/`.
+当你处理子目录中的文件时，Claude Code 还会自动从嵌套的 `.claude/skills/` 目录里发现技能。比如，当你编辑 `packages/frontend/` 下的文件时，Claude Code 也会去查找 `packages/frontend/.claude/skills/`。
 
-This supports monorepo setups where packages have their own skills.
+这对 monorepo 很有用，因为不同 package 可以拥有各自的技能。
 
-## Example Monorepo Structure
+## Monorepo 结构示例
 
-Consider a typical monorepo with separate packages:
+下面是一个典型的多 package monorepo：
 
 ```
 /mymonorepo/
 ├── .claude/
 │   └── skills/
-│       └── shared-conventions/SKILL.md    # Project-level skill
+│       └── shared-conventions/SKILL.md    # 项目级技能
 ├── packages/
 │   ├── frontend/
 │   │   ├── .claude/
 │   │   │   └── skills/
-│   │   │       └── react-patterns/SKILL.md  # Frontend-specific skill
+│   │   │       └── react-patterns/SKILL.md  # 前端专属技能
 │   │   └── src/
 │   │       └── App.tsx
 │   ├── backend/
 │   │   ├── .claude/
 │   │   │   └── skills/
-│   │   │       └── api-design/SKILL.md      # Backend-specific skill
+│   │   │       └── api-design/SKILL.md      # 后端专属技能
 │   │   └── src/
 │   └── shared/
 │       ├── .claude/
 │       │   └── skills/
-│       │       └── utils-patterns/SKILL.md  # Shared utilities skill
+│       │       └── utils-patterns/SKILL.md  # 共享工具技能
 │       └── src/
 ```
 
-## Scenario 1: Just Started Claude at Root (No Files Edited Yet)
+## 场景 1：刚在仓库根目录启动 Claude（还没编辑任何文件）
 
-When you run Claude Code from `/mymonorepo/` and haven't edited any files yet:
+当你在 `/mymonorepo/` 下运行 Claude Code，并且还没让它处理任何文件时：
 
 ```bash
 cd /mymonorepo
 claude
-# Just started - no files edited yet
+# 刚启动，还没有编辑任何文件
 ```
 
-| Skill | In Context? | Reason |
+| 技能 | 是否进入上下文？ | 原因 |
 |-------|-------------|--------|
-| `shared-conventions` | **Yes** | Project-level skill in root `.claude/skills/` |
-| `react-patterns` | **No** | Not discovered - haven't worked with files in `packages/frontend/` |
-| `api-design` | **No** | Not discovered - haven't worked with files in `packages/backend/` |
-| `utils-patterns` | **No** | Not discovered - haven't worked with files in `packages/shared/` |
+| `shared-conventions` | **是** | 位于根目录 `.claude/skills/` 中的项目级技能 |
+| `react-patterns` | **否** | 还没处理 `packages/frontend/` 下的文件，因此不会被发现 |
+| `api-design` | **否** | 还没处理 `packages/backend/` 下的文件，因此不会被发现 |
+| `utils-patterns` | **否** | 还没处理 `packages/shared/` 下的文件，因此不会被发现 |
 
-## Scenario 2: After Editing Files in a Package
+## 场景 2：处理某个 package 下的文件之后
 
-After you ask Claude to edit `packages/frontend/src/App.tsx`:
+如果你让 Claude 去编辑 `packages/frontend/src/App.tsx`：
 
-| Skill | In Context? | Reason |
+| 技能 | 是否进入上下文？ | 原因 |
 |-------|-------------|--------|
-| `shared-conventions` | **Yes** | Project-level skill in root `.claude/skills/` |
-| `react-patterns` | **Yes** | Discovered when editing files in `packages/frontend/` |
-| `api-design` | **No** | Still not discovered - haven't worked with files in `packages/backend/` |
-| `utils-patterns` | **No** | Still not discovered - haven't worked with files in `packages/shared/` |
+| `shared-conventions` | **是** | 位于根目录 `.claude/skills/` 中的项目级技能 |
+| `react-patterns` | **是** | 在处理 `packages/frontend/` 文件时被自动发现 |
+| `api-design` | **否** | 还没处理 `packages/backend/` 下的文件 |
+| `utils-patterns` | **否** | 还没处理 `packages/shared/` 下的文件 |
 
-**Key insight**: Nested skills are discovered **on-demand** when you work with files in those directories. They are not preloaded at session start.
+**关键点**：嵌套技能是在你处理对应目录文件时，才会**按需发现**的。它们不会在会话启动时预加载。
 
-## Key Behavior: Description vs Full Content
+## 关键行为：描述 vs 完整内容
 
-Skill descriptions are loaded into context so Claude knows what's available, but **full skill content only loads when invoked**. This is an important optimization:
+技能描述会被加载进上下文，让 Claude 知道有哪些技能可用；但**完整技能内容只有在真正调用时才会加载**。这是一个重要优化：
 
-- **Descriptions**: Always in context (within character budget)
-- **Full content**: Loaded on-demand when skill is invoked
+- **Descriptions**：始终会进入上下文（受字符预算限制）
+- **Full content**：只有在技能被调用时才按需加载
 
-> Note: Subagents with preloaded skills work differently - the full skill content is injected at startup.
+> 注意：预加载了技能的子代理行为不同，完整技能内容会在子代理启动时直接注入。
 
-## Priority Order (When Skills Share Names)
+## 优先级顺序（当技能同名时）
 
-When skills share the same name across levels, higher-priority locations win:
+如果不同层级存在同名技能，优先级更高的位置会胜出：
 
-| Priority | Location | Scope |
+| 优先级 | 位置 | 作用域 |
 |----------|----------|-------|
-| 1 (highest) | Enterprise | Organization-wide |
-| 2 | Personal (`~/.claude/skills/`) | All your projects |
-| 3 (lowest) | Project (`.claude/skills/`) | This project only |
+| 1（最高） | Enterprise | 全组织 |
+| 2 | Personal（`~/.claude/skills/`） | 你的所有项目 |
+| 3（最低） | Project（`.claude/skills/`） | 当前项目 |
 
-Plugin skills use a `plugin-name:skill-name` namespace, so they cannot conflict with other levels.
+Plugin 技能会使用 `plugin-name:skill-name` 命名空间，因此不会与其他层级冲突。
 
-## Why This Design Works for Monorepos
+## 为什么这种设计适合 Monorepo
 
-- **Package-specific skills stay isolated** - Frontend developers working in `packages/frontend/` get frontend-specific skills without backend skills cluttering context.
+- **按 package 隔离技能**：在 `packages/frontend/` 工作的前端开发者，只会获得前端相关技能，而不会让后端技能污染上下文。
+- **自动发现减少配置负担**：不用显式注册 package 级技能，只要开始处理对应目录的文件，就会自动发现。
+- **上下文更节省**：初始只加载技能描述，嵌套技能也按需发现。
+- **团队可各自维护技能**：每个 package 团队都能维护自己的领域技能，而不必和其他团队集中协调。
 
-- **Automatic discovery reduces configuration** - No need to explicitly register package-level skills; they're discovered when you work in those directories.
+## 字符预算注意事项
 
-- **Context is optimized** - Only skill descriptions load initially, and nested skills are discovered on-demand.
+技能描述会在字符预算范围内加载进上下文（默认 15,000 字符）。如果 monorepo 中 package 和技能很多，就可能碰到这个上限。
 
-- **Teams can maintain their own skills** - Each package team can define skills specific to their domain without coordinating with other teams.
+- 运行 `/context`，查看是否有技能因超出预算而被排除的警告
+- 通过设置环境变量 `SLASH_COMMAND_TOOL_CHAR_BUDGET` 来提高上限
 
-## Character Budget Considerations
+## 最佳实践
 
-Skill descriptions are loaded into context up to a character budget (default 15,000 characters). In large monorepos with many packages and skills, you may hit this limit.
+1. **把共享工作流放在根目录 `.claude/skills/`**
+   适合仓库级约定、提交工作流和通用模式。
 
-- Run `/context` to check for warnings about excluded skills
-- Set `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable to increase the limit
+2. **把 package 专属技能放在各 package 的 `.claude/skills/`**
+   适合框架专属模式、组件约定、某个 package 独有的测试工具。
 
-## Best Practices
+3. **对高风险技能使用 `disable-model-invocation: true`**
+   例如部署类或破坏性技能，应强制要求用户显式触发。
 
-1. **Put shared workflows in root `.claude/skills/`** - Repository-wide conventions, commit workflows, and shared patterns.
+4. **保持技能描述简洁**
+   描述始终会进入上下文（直到字符预算上限），太长的描述会浪费上下文空间。
 
-2. **Put package-specific skills in package `.claude/skills/`** - Framework-specific patterns, component conventions, testing utilities unique to that package.
+5. **在技能命名中做命名空间区分**
+   可以考虑带上 package 前缀，例如 `frontend-review`、`backend-deploy`，避免歧义。
 
-3. **Use `disable-model-invocation: true` for dangerous skills** - Deployment or destructive skills should require explicit user invocation.
+## 对比：Skills 与 CLAUDE.md 的加载方式
 
-4. **Keep skill descriptions concise** - Descriptions are always in context (up to the character budget), so verbose descriptions waste context space.
-
-5. **Use namespacing in skill names** - Consider prefixing with package names (e.g., `frontend-review`, `backend-deploy`) to avoid confusion.
-
-## Comparison: Skills vs CLAUDE.md Loading
-
-| Behavior | CLAUDE.md | Skills |
+| 行为 | CLAUDE.md | Skills |
 |----------|-----------|--------|
-| Ancestor loading (UP directory tree) | Yes | No |
-| Nested/descendant discovery (DOWN directory tree) | Yes (lazy) | Yes (automatic discovery) |
-| Global location | `~/.claude/CLAUDE.md` | `~/.claude/skills/` |
-| Project location | `.claude/` or repo root | `.claude/skills/` |
-| Content loading | Full content | Description only (full on invocation) |
+| 祖先加载（沿目录树向上） | 是 | 否 |
+| 嵌套/子目录发现（沿目录树向下） | 是（惰性） | 是（自动发现） |
+| 全局位置 | `~/.claude/CLAUDE.md` | `~/.claude/skills/` |
+| 项目位置 | `.claude/` 或仓库根目录 | `.claude/skills/` |
+| 内容加载方式 | 完整内容 | 仅描述（调用时再加载完整内容） |
 
 ---
 
-## Sources
+## 资料来源
 
 - [Claude Code Documentation - Extend Claude with Skills](https://code.claude.com/docs/en/skills)
 - [Claude Code Documentation - Automatic Discovery from Nested Directories](https://code.claude.com/docs/en/skills#automatic-discovery-from-nested-directories)

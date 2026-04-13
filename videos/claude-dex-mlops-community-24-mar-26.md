@@ -1,191 +1,109 @@
-# Everything We Got Wrong About Research-Plan-Implement — MLOps Community
+﻿# 鎴戜滑鍦?Research-Plan-Implement 涓婄姱杩囩殑鎵€鏈夐敊璇?鈥?MLOps Community
 
-Transcript of the talk by Dexter Horthy ([@daborhey](https://x.com/daborhey)), co-founder of HumanLayer, at MLOps Community, published March 24, 2026.
-
+杩欐槸 HumanLayer 鑱斿悎鍒涘浜?Dexter Horthy锛圼@daborhey](https://x.com/daborhey)锛夊湪 MLOps Community 涓婄殑婕旇閫愬瓧绋匡紝鍙戝竷浜?2026 骞?3 鏈?24 鏃ャ€?
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">鈫?杩斿洖 Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-## Video Details
+## 瑙嗛淇℃伅
 
-- **Speaker:** Dexter Horthy (Co-founder, HumanLayer)
-- **Host:** Demetrios (MLOps Community)
-- **Published:** March 24, 2026
-- **YouTube:** [Watch on YouTube](https://youtu.be/YwZR6tc7qYg)
+- **婕旇鑰咃細** Dexter Horthy锛圚umanLayer 鑱斿悎鍒涘浜猴級
+- **涓绘寔浜猴細** Demetrios锛圡LOps Community锛?- **鍙戝竷鏃堕棿锛?* 2026 骞?3 鏈?24 鏃?- **YouTube锛?* [Watch on YouTube](https://youtu.be/YwZR6tc7qYg)
 
 ---
 
-## Transcript
+## 閫愬瓧绋?
+[`0:04`](https://youtu.be/YwZR6tc7qYg?t=4) 濂界殑锛屽湪璇?Dex 涓婂彴涔嬪墠锛屾垜寰楀厛璇翠竴涓嬫垜浠婂ぉ璁よ瘑浜?James銆侸ames锛屼綘鑳戒笉鑳藉揩閫熺珯璧锋潵涓€涓嬶紵James 浠婂ぉ鏃╀笂鍛婅瘔鎴戯紝浠栦粖鏅氫細缁勭粐涓€鍦烘櫄椁愶紝鑰屼笖鎵€鏈変汉閮藉彈閭€鍙傚姞銆傚垰鎵嶆垜浠湅涓嶅埌浜岀淮鐮侊紝浣犲緱鎶婂畠璋冨嚭鏉ャ€傛墍浠ワ紝濡傛灉浣犳兂鍘伙紝鐜板湪灏辫刀绱ф壂閭ｄ釜浜岀淮鐮侊紝鍘诲拰 James 涓€璧风帺銆傝繖澶浜嗐€傝繖灏辨槸鎴戜滑鏉ヨ繖閲屾兂瑕佽惀閫犵殑姘涘洿锛岀湡鐨勫緢濂姐€?
+[`0:33`](https://youtu.be/YwZR6tc7qYg?t=33) 澶浜嗭紝鍏勫紵锛屾垜鍠滄锛屾垜鐪熺殑涔熷緢鍠滄銆傚ソ锛屾帴涓嬫潵鎴戣璇?Dex 涓婃潵銆傚垰鎵嶆湁浜鸿鎴戜滑搴旇鎼炰釜灏忚儭瀛愭瘮璧涳紝鎴戣寰楄繖浜嬪ぇ姒備笉浼氬彂鐢燂紝浣嗘垜瑕佽鐨勬槸锛屼粬浠婂ぉ甯︽潵浜?200 椤靛够鐏墖鍑嗗璁层€?
+[`0:48`](https://youtu.be/YwZR6tc7qYg?t=48) 绛夌瓑锛屼笉鏄?200锛屾槸 158銆?58銆傛垜浠細鐩潃鏃堕棿锛岄槻姝粬瓒呮椂銆傚ソ锛岀幇鍦ㄥ紑濮嬪惂锛屽悇浣嶃€?
+[`0:57`](https://youtu.be/YwZR6tc7qYg?t=57) 鏉ュ惂銆傚ぇ瀹跺ソ锛屾垜鏄?Dex銆傝繖涓紨璁茬殑鏍囬寰堥暱锛屼絾鍥犱负鏃堕棿绱э紝鎴戝氨涓嶅康浜嗐€傛垜宸茬粡鑱?coding agents 寰堜箙浜嗭紝宸笉澶氫粠鍘诲勾 8 鏈堝紑濮嬨€?1 鏈堟椂鎴戜滑鍋氳繃涓€娆″緢闀跨殑鍒嗕韩銆傛垜浠竴鐩村弽澶嶅湪璁蹭竴涓柟娉曡锛屽彨 research plan implement銆傚湪 Hacker News 涓婃湁寰堝鐐硅禐锛屽ぇ姒傛湁 1 涓囦汉鍘绘垜浠殑寮€婧愰」鐩嬁浜嗘彁绀鸿瘝锛岀劧鍚庡湪鑷繁鐨勫叕鍙稿唴閮ㄤ娇鐢紝浠庡皬鍨嬪垱涓氬叕鍙稿埌澶у瀷浼佷笟閮芥湁銆?
+[`1:29`](https://youtu.be/YwZR6tc7qYg?t=89) 杩欎竴鍒囨渶鏃╁叾瀹炴槸浠庤繖涓汉寮€濮嬬殑銆傛湁浜虹湅杩囪繖涓紨璁插悧锛熷ソ锛岀湅杩囥€侲igor 鎻愬嚭鐨勮鐐规槸锛氭垜浠姳浜嗗緢澶?token銆佽姳浜嗗緢澶氶挶锛屽幓鎹㈠彇 AI 甯︽潵鐨勫紑鍙戣€呯敓浜у姏銆備絾浠栧彂鐜帮紝缁撴灉寰€寰€鏄ぇ閲忚繑宸ャ€備綘涔熻澶氫氦浠樹簡 50%锛屼絾鍏朵腑鏈変竴鍗婇兘鍙槸娓呯悊涓婂懆鐣欎笅鏉ョ殑 slop銆傝繕鏈変竴涓粨璁烘槸锛岃繖閲岀敤鐨勬槸鍘诲勾鐨勬暟鎹紝鎵€浠ヨ繕娌℃妸 Opus 4.5 绠楄繘鍘伙紝浠婂ぉ鐨勬暟鎹ぇ姒備細鏇村じ寮犱竴浜涳細瀹冮潪甯搁€傚悎浣庡鏉傚害鐨?greenfield 浠诲姟锛屼絾涓嶅お閫傚悎楂樺鏉傚害鐨?brownfield 浠诲姟銆?
+[`2:02`](https://youtu.be/YwZR6tc7qYg?t=122) 鎵€浠ユ垜褰撶劧涔熷彲浠ョ粰浣犱滑璁蹭竴鍦哄叧浜?RPI 涓轰粈涔堝緢妫掔殑婕旇锛屼絾閭ｅお鏃犺亰浜嗭紝鑰屼笖宸茬粡鏈夊埆鐨勬紨璁茶杩囦簡銆傚鏋滀綘浠繕娌＄湅锛屽缓璁幓鐪嬶紝浼氭洿鏈夎儗鏅€備粖澶╂垜鎯宠鐨勬槸锛氭垜浠湪 RPI 涓婂埌搴曠姱浜嗗摢浜涢敊銆傛垜浠綋鏃朵互涓鸿嚜宸卞凡缁忔妸杩欏 AI 鏂规硶鎼炴槑鐧戒簡锛岃€屾垜鑷冲皯杩樿冻澶熻唉閫婏紝鎰挎剰鎵胯鑷繁閿欎簡銆?
+[`2:22`](https://youtu.be/YwZR6tc7qYg?t=142) 鎴戜滑纭疄鎼為敊浜嗗嚑浠朵簨銆備粖澶╁湪 Twitter 涓婂挨鍏剁浉鍏崇殑涓€鐐规槸锛氭垜涓嶈涓衡€滀笉璇讳唬鐮佲€濇槸鍙互鎺ュ彈鐨勩€傛垜涔熶笉璁や负浣犲簲璇ュ幓璇荤壒鍒暱鐨勮鍒掓枃浠躲€傝繖涓や欢浜嬪叾瀹炴槸鐩稿叧鐨勩€傝€屼笖锛屽鏋滀綘鍐欑殑鏄敓浜т唬鐮併€佺敤鎴风湡鐨勫湪鐢ㄣ€佸潖浜嗕綘鍗婂 3 鐐逛細琚?call 鐨勯偅绉嶄唬鐮侊紝閭ｅ氨涓嶈兘鎺ュ彈 slop銆傜幇鍦ㄥ凡缁忔槸 2026 骞翠簡锛屽埆鍐嶈 slop 浜嗐€?
+[`2:46`](https://youtu.be/YwZR6tc7qYg?t=166) 鎴戜滑鎵€鏈変汉閮藉湪杩欐潯璺笂鎽哥储锛屽ぇ瀹朵竴鐩村湪鐘敊銆傛垜浠篃纭疄鍋氬浜嗕竴浜涗簨銆傛瘮濡傦紝娌℃湁浠€涔?magic prompt銆備笉瑕佹妸鎬濊€冨鍖呭嚭鍘汇€傚伐绋嬪笀鏈汉浠嶇劧鏄繖涓繃绋嬮噷闈炲父閲嶈鐨勪竴閮ㄥ垎銆備綘搴旇杩芥眰 leverage銆傜幇鍦ㄤ唬鐮佸啓寰楄秺鏉ヨ秺澶氾紝鎵€浠ヤ綘瑕佹兂鍔炴硶鍦ㄤ笉鎶婃墍鏈変唬鐮佸叏璇讳竴閬嶃€佷篃涓嶄簨鍚庡弽澶嶉噸瀹氬悜鐨勬儏鍐典笅锛屼粛鐒朵繚璇佸畠鏄纭殑銆?
+[`3:05`](https://youtu.be/YwZR6tc7qYg?t=185) 寰堝浜鸿偗瀹氶兘鍚繃 research plan implement銆傜湡鐨勬湁浜鸿窇杩囬偅涓?`claude` 鍛戒护鍚楋紵灏辨槸 Research codebase锛熷ソ锛屾湁銆傞偅濡傛灉浣犳槸杩欎箞璺戠殑锛氱洿鎺ヨ鈥滃憡璇夋垜杩欎釜绯荤粺鎬庝箞宸ヤ綔鈥濓紝鏈変汉杩欐牱骞茶繃鍚楋紵鎴栬€呰鈥滄垜瑕佸仛杩欎釜涓滆タ锛屼綘鍘诲仛 research鈥濄€傜敋鑷冲彧鏄涪缁欏畠涓€涓?ticket銆傝繕鏈変汉鐢ㄨ繃 create plan prompt 鍚楋紵濂斤紝涔熸湁鍑犲彧鎵嬨€?
+[`3:28`](https://youtu.be/YwZR6tc7qYg?t=208) 閭ｆ湁澶氬皯浜烘槸杩欐牱鐢ㄧ殑锛氭垜浠鍋氳繖涓笢瑗匡紝鏉ュ惂锛岀洿鎺ュ共銆傝繕鏈変汉浼氳繖鏍疯锛氣€滃厛鏍规嵁浣犵殑 open questions 鍜?outline 鍜屾垜鏉ュ洖璁ㄨ锛屽啀寮€濮嬪啓璁″垝銆傗€?濂斤紝鏈変簺浜烘壘鍒颁簡閭ｅ嚑涓€渕agic words鈥濓紝浣嗗緢澶氫汉娌℃湁銆傜◢鍚庢垜浼氳В閲婁负浠€涔堣繖鏄釜闂銆?
+[`3:44`](https://youtu.be/YwZR6tc7qYg?t=224) 浠庡幓骞?10 鏈堝紑濮嬶紝鎴戜滑鍩烘湰鍜屾垚鍗冧笂涓囧悕宸ョ▼甯堜竴璧峰伐浣滆繃锛屼粠灏忓垱涓氬叕鍙稿埌 Fortune 500銆傛垜浠弽澶嶅彂鐜帮紝鍚屾牱鐨勫伐鍏蜂氦缁欎笓瀹剁敤鏃舵晥鏋滃緢濂姐€備粬浠細涓€鍛ㄥ拰 Claude 瀵硅瘽 70 涓皬鏃讹紝鐒跺悗寮€濮嬬柉鐙備氦浠樸€備絾褰撲粬浠妸鍚屼竴濂椾笢瑗跨粰鏁翠釜鍥㈤槦鍚庯紝缁撴灉寰€寰€灏辨病閭ｄ箞濂戒簡銆?
+[`4:03`](https://youtu.be/YwZR6tc7qYg?t=243) 褰撳ぇ瀹舵晥鏋滀笉濂芥椂锛屾垜浠氨璺熺潃鐢ㄦ埛涓€璧蜂笅鍒版垬澹曢噷锛岃瘯鍥炬悶娓呮闂鍑哄湪鍝€傜涓€涓棶棰樻槸锛氬ぇ瀹跺仛涓嶅嚭楂樿川閲忕殑 research銆傝繖涓垜浠湪 11 鏈堟彁杩囷紝杩欐槸鎴戜粖澶╁皯鏁颁細澶嶇敤鐨勫够鐏墖涔嬩竴銆備綘浼氬厛閫夊畾浠ｇ爜搴撲腑鐨勪竴涓尯鍩燂紝璇达細鈥滄垜浠帴涓嬫潵瑕佸湪杩欓噷鏋勫缓鏌愭牱涓滆タ銆傗€?鐒跺悗浣犱細鍚姩涓€涓?coding agent session锛岃涓€鍫嗗瓙浠ｇ悊娌跨潃娣卞瀭鐩村垏鐗囧幓鎵唬鐮佸簱锛屾妸鍜屽嵆灏嗘瀯寤虹殑鍐呭鏈夊叧鐨勪簨瀹炴€т笂涓嬫枃鍘嬬缉鍑烘潵銆?
+[`4:32`](https://youtu.be/YwZR6tc7qYg?t=272) 鎴戜滑褰撴椂璇达紝淇濇寔瀹㈣锛屽帇鍒惰鐐癸紝涓嶈鎶婂疄鐜扮粏鑺傚啓杩涘幓銆備綘鐪熸鎯冲仛鐨勶紝鏄帇缂┾€滀簨瀹炩€濄€備粖澶╄繖濂椾唬鐮佸埌搴曟槸濡備綍宸ヤ綔鐨勶紵涓€涓啛缁冨伐绋嬪笀寰堟搮闀挎妸鈥滆繖鏄垜鐨?ticket鈥濇媶瑙ｆ垚涓€缁勯棶棰橈紝寮曞妯″瀷鍘昏Е杈句唬鐮佸簱閲岀湡姝ｉ噸瑕佺殑閮ㄥ垎銆傛瘮濡傦紝濡傛灉闇€姹傛槸鈥滅粰璺ㄧ鎴风殑 reticulate splines 澧炲姞涓€涓柊 endpoint鈥濓紝鎴戜滑鍙兘浼氶棶锛氱幇鍦?endpoint 鏄€庝箞宸ヤ綔鐨勶紵鎵€鏈夊拰 splines 鐩稿叧鐨勯€昏緫娴佹槸浠€涔堬紵璐熻矗鍋?reticulation 鐨?worker 鍦ㄥ摢閲岋紵
+
+[`5:03`](https://youtu.be/YwZR6tc7qYg?t=303) 浣嗗鏋滅洿鎺ユ妸 ticket 鎵旇繘鍘伙紝寰堝浜轰細杩欐牱璺戯細鈥淗ey, research codebase. Here's what I'm building.鈥?闂鍦ㄤ簬锛屽ソ research 搴旇鍏ㄦ槸浜嬪疄锛涗絾濡傛灉浣犳妸浣犺鍋氫粈涔堝厛鍛婅瘔妯″瀷锛屽畠灏变細寮€濮嬬粰鍑鸿鐐广€傝€屾垜浠箣鍚庝細璁诧紝涓轰粈涔堟ā鍨嬩笉搴旇杩囨棭鎸佹湁瑙傜偣銆傝繖鍙堝洖鍒?Jake 鍦?Netflix 鎻愬嚭鐨勯偅涓師鍒欙細涓嶈鎶婃€濊€冨鍖呭嚭鍘汇€?
+[`5:22`](https://youtu.be/YwZR6tc7qYg?t=322) 鍙︿竴涓嚭闂鐨勫湴鏂规槸锛屽ぇ瀹舵嬁鍒扮殑璁″垝璐ㄩ噺涔熶笉澶熷ソ銆傛牴鏈師鍥犳槸锛氶偅涓?planning prompt 鏄竴涓法澶х殑鍗曚綋鎻愮ず璇嶏紝閲岄潰鏈?85 鏉＄敋鑷虫洿澶氭寚浠ゃ€傞噷闈㈡湰鏉ヨ璁′簡寰堝姝ラ锛屾瘮濡傚厛鍚戠敤鎴峰睍绀鸿璁￠€夐」锛屽湪鐪熸鍐欒鍒掍箣鍓嶅厛鎷垮埌瀵圭粨鏋勭殑鍙嶉銆?
+[`5:43`](https://youtu.be/YwZR6tc7qYg?t=343) 鐞嗘兂涓殑 planning session 鏈鏄繖鏍风殑锛氫綘鏈?Claude 鐨?system tools 鍜?prompt锛岀劧鍚庤 hey create plan锛屾ā鍨嬪姞杞?skill锛岀湅 ticket锛岀湅 research doc锛屽啀鍚姩涓€鍫嗗瓙浠ｇ悊锛屽幓纭浠ｇ爜搴撻噷鍝簺涓滆タ鏄湡瀹炲瓨鍦ㄧ殑锛屼篃琛ヨ冻 research 閲屽彲鑳芥病瑕嗙洊鍒扮殑浜嬪疄銆傞『渚胯锛岃繖涓€鍒囧叾瀹為兘杩樺湪鍚屼竴涓笂涓嬫枃绐楀彛閲屻€傚钩鏃舵垜鐨勮繖浜涘垪涓€鑸唬琛ㄤ笉鍚?context window锛屼絾浠婂ぉ鍏ㄦ槸鍦ㄤ竴涓?session 閲岋紝鍙槸鍥犱负骞荤伅鐗囨槸妯潃鎺掔殑锛屾垜鎵嶇敾鎴愬苟鎺掋€?
+[`6:11`](https://youtu.be/YwZR6tc7qYg?t=371) 鐒跺悗浠ｇ悊鏈潵搴旇鏉ラ棶浣犻棶棰橈細杩欐槸绗竴涓棶棰樼殑閫夐」銆傜敤鎴烽€変竴涓紝鍐嶉€変竴涓€傛渶鍚庡畠璇达細鈥滃ソ锛岃繖鏄垜浠噯澶囨墽琛岃繖浜涗簨鎯呯殑椤哄簭銆備綘鎬庝箞鐪嬶紵鈥?鐢ㄦ埛涔熻浼氬洖绛旓細鈥滄垜浠緱鍏堝姞涓€涓祴璇曟楠わ紝鎴戣繕鎯虫妸绗笁闃舵鍜岀鍥涢樁娈佃皟鎹竴涓嬨€傗€?鍔╂墜浜庢槸缁欏嚭鏂扮殑闃舵澶х翰銆傜瓑鐢ㄦ埛鎵瑰噯鍚庯紝鎴戜滑鎵嶇湡姝ｅ幓鍐欒鍒掓枃浠躲€?
+[`6:33`](https://youtu.be/YwZR6tc7qYg?t=393) 杩欐湰鏉ユ槸涓€涓浉褰撳鏉傘€佷絾鐢ㄤ簬鍜岀敤鎴峰榻愯鏋勫缓浠€涔堢殑杩囩▼銆備絾瀵瑰ぇ绾?50% 鐨勪汉鏉ヨ锛岀敋鑷冲彲鑳芥洿澶氾紝濡傛灉浣犳病鏈夊湪鎻愮ず璇嶉噷鍔犱笂閭ｅ彞鈥渨ork back and forth with me 鈥︹€濓紝鎴栬€呭彧鏄宸ч偅涓€灏忔椂 Opus 鐘舵€佷笉澶ソ锛屽畠灏变細鐩存帴鎷跨潃鏉愭枡鍘绘妸璁″垝鍐欏嚭鏉ャ€備簬鏄綘寰楀埌鐨勬槸锛氣€滃ソ锛屾垜鍐欏畬璁″垝浜嗐€傛病闂垜浠讳綍闂锛屾墍鏈夊喅瀹氶兘鏇挎垜鍋氫簡銆傗€?杩欏氨寰堢碂绯曘€?
+[`6:58`](https://youtu.be/YwZR6tc7qYg?t=418) 鎵€浠ユ垜浠妸宸ュ叿缁欎簡澶у锛屾湁浜涗汉鏁堟灉寰堝ソ锛屾湁浜涗汉涓嶈銆傛垜浠氨鍘绘繁鎸栵細鈥滃樊鍒埌搴曞湪鍝紵鈥?缁撴灉鐪熺殑鏈変汉鐩存帴瀵规垜璇达細鈥滀綘寰楄 magic words銆傗€?鎴戣繕璁板緱鑷繁绔欏湪涓€缇ゅぇ浼佷笟宸ョ▼甯堥潰鍓嶈锛氣€滃悇浣嶏紝杩欒蒋浠跺綋鐒跺湪杩欓噷锛屼絾鍒繕浜嗚 magic words銆傗€?璇村疄璇濓紝閭ｄ竴鍒绘垜鑷繁閮借寰楀緢灏村艾銆?
+[`7:16`](https://youtu.be/YwZR6tc7qYg?t=436) 浣嗗鏋滀綘鐪熺殑璇翠簡閭ｅ彞锛氣€滃厛鏍规嵁浣犵殑 open questions 鍜?outline 鍜屾垜鏉ュ洖璁ㄨ锛屽啀寮€濮嬪啓璁″垝鈥濓紝浠ｇ悊灏变細鏉ユ彁闂€傝€岃繖涓嶅簲璇ユ槸鐢ㄦ埛鐨勮矗浠汇€傚鏋滀綘鍋氫簡涓€涓伐鍏凤紝鍗撮渶瑕佷汉浠姳寰堝寰堝灏忔椂璁粌鍜岄噸澶嶇粌涔狅紝鎵嶈兘绋冲畾寰楀埌濂界粨鏋滐紝閭ｄ綘灏辫鍘讳慨宸ュ叿鏈韩銆傛帴涓嬫潵鎴戜細璁叉垜浠槸鎬庝箞淇殑銆?
+[`7:35`](https://youtu.be/YwZR6tc7qYg?t=455) 涓轰粈涔堣繖浜涙楠や細琚烦杩囷紵鎴戜粖澶╂渶鎯充紶杈剧殑涓€涓?takeaway 鏄細浣犳湁涓€涓?instruction budget銆傛垜鐨勮仈鍚堝垱濮嬩汉 Kyle 鍦ㄩ偅杈癸紝浠栧幓骞?12 鏈堣繕鏄?11 鏈堝啓杩囦竴绡囧緢濂界殑鍗氭枃锛屽紩鐢ㄤ簡涓€绡囪鏂囥€傝櫧鐒堕偅鏄幓骞寸殑鏁版嵁锛屾墍浠ヤ粖澶╄繖涓暟澶ф鐜囨洿楂樹竴鐐癸紝浣嗗綋鏃?frontier LLM 鑳界ǔ瀹氶伒寰殑鎸囦护鏁板ぇ姒傚彧鏈?150 鍒?200 鏉°€傚啀澶氾紝瀹冨氨浼氬紑濮嬧€滃钩鍧囧垎蹇冣€濓紝绛変簬鏄湪鎺烽瀛愩€?
+[`8:04`](https://youtu.be/YwZR6tc7qYg?t=484) 鎵€浠ワ紝濡傛灉浣犳湁涓€涓惈 85 鏉℃寚浠ょ殑 prompt锛屽啀鍔犱笂浣犵殑 `CLAUDE.md`銆乻ystem prompt銆乼ools銆丮CP锛岄偅妯″瀷澶ф鐜囦笉鍙兘瀹屾暣閬靛惊鏁村宸ヤ綔娴併€傚悗闈㈡垜浼氳鎴戜滑鎬庝箞淇繖涓棶棰樸€?
+[`8:16`](https://youtu.be/YwZR6tc7qYg?t=496) 杩樻湁涓€涓垜瑙夊緱瀵瑰ぇ瀹朵篃涓嶅お濂忔晥鐨勭偣锛屾槸鎴戜滑浠ュ墠榧撳姳澶у鍘婚槄璇荤敓鎴愬嚭鏉ョ殑 plan銆傛垜鑷繁鍘诲勾 11 鏈堝氨鍦ㄥ彴涓婂憡璇夊ぇ瀹讹細浣犲繀椤昏 plan锛屼笉鐒跺畠涓嶄細璧蜂綔鐢ㄣ€傜敋鑷虫湁浜轰細鎶?plan 褰撴垚 PR 鏉ュ仛 code review銆備絾涓€涓竴鍗冭鐨?plan锛屾渶缁堥€氬父瀵瑰簲鐫€澶х害涓€鍗冭鐨勪唬鐮侊紝鍓嶅悗涓嶄細宸お澶氥€傝€?plan 閲岃繕浼氳棌鐫€鎯婂枩銆?
+[`8:38`](https://youtu.be/YwZR6tc7qYg?t=518) 浣犲厛鑺辨椂闂?review 璁″垝锛岀劧鍚庡啀鍘诲啓浠ｇ爜锛屾渶鍚庡彂鐜颁唬鐮佸拰 plan 涓嶄竴鏍枫€備綘绛変簬璁╁悓浜嬪厛鑺变竴涓皬鏃惰璁″垝锛屽憡璇変綘鍝噷涓嶅锛涚劧鍚庝綘鍘诲疄鐜帮紝缁撴灉瀹炵幇鍙堝彉浜嗭紱鎺ョ潃瀵规柟杩樺緱鍐嶈涓€閬嶄唬鐮侊紝鐪嬬湅鍒板簳鍙戠敓浜嗕粈涔堝彉鍖栥€佸摢鍎垮嚭鐜颁簡鎯婂枩銆傝繖涓繃绋嬫牴鏈笉鍙?leverage銆傛墍璋?leverage锛屽簲璇ユ槸灏戝仛涓€浜涘伐浣滐紝鎹㈡潵鏇村浜у嚭銆?
+[`9:01`](https://youtu.be/YwZR6tc7qYg?t=541) 鎵€浠ユ柊鐨勫缓璁槸锛氬埆璇?plan锛岃鍘昏浠ｇ爜銆傚洜涓烘€诲伐浣滈噺宸笉澶氾紝鐪熸鐨?leverage 瑕佸幓鍒殑鍦版柟鎵俱€傚悗闈㈡垜浼氳鎴戜滑鍒板簳鏄湪浠€涔堝湴鏂规壘鍒颁簡鏇村ソ鐨?leverage銆?
+[`9:10`](https://youtu.be/YwZR6tc7qYg?t=550) 浣犲彲鑳戒細璇达細鈥淒ex锛屼綘鍦?8 鏈堢殑鏃跺€欒繕璇村埆璇讳唬鐮侊紝璇?plan 灏卞浜嗭紝璁?Claude 鑷繁鍘诲共銆傗€?鎴戦敊浜嗐€傛垜鎰挎剰鎵胯鑷繁閿欎簡銆傝€屼笖鐜板湪杩欏叾瀹炲凡缁忔槸涓€涓緢澶х殑璁ㄨ锛氳璇讳唬鐮侊紝鐪熺殑璇疯浠ｇ爜銆傛垜浠浘缁忚瘯鐫€鍏釜鏈堜笉璇讳唬鐮侊紝缁撴灉闈炲父绯燂紝鎴戜滑涓嶅緱涓嶆妸绯荤粺閲屽緢澶т竴閮ㄥ垎鎷嗘帀閲嶆潵銆?
+[`9:32`](https://youtu.be/YwZR6tc7qYg?t=572) 浣犱篃璁歌繕浼氳锛氣€滀絾鏈変簺浜轰笉璇讳唬鐮佸晩銆傗€?姣斿涓€浜?OSS 椤圭洰宸茬粡 30 涓囪浜嗭紝鎹鏍规湰娌′汉閫氳杩囥€侽penClaw 閭ｈ竟鍙兘浼氳锛氣€滄垜鐭ラ亾缁撴瀯銆佺煡閬撻儴浠舵€庝箞缁勫悎锛屼絾鎴戜笉浼氬幓璇绘瘡涓€琛?PR銆傗€?杩欎簺椤圭洰褰撶劧閮介潪甯搁叿锛屾垜涔熼潪甯告暚浣╄繖浜涚淮鎶よ€呭彇寰楃殑鎴愬氨銆傚畠浠殑 stakes 涔熷緢楂橈紝濡傛灉浣犳妸 openclaw 鎼炴寕锛屽緢澶氫汉浼氬緢涓嶇埥銆備絾閭ｅ拰浣犲湪鍙楃洃绠¤涓氶噷鍐欑敓浜?SaaS 浠ｇ爜浠嶇劧涓嶄竴鏍枫€傛墍浠ュ鏋滄湁浜虹湡鐨勪緷璧栦綘鐨勪唬鐮侊紝璇蜂綘璇诲畠锛屾眰浣犱簡锛岃瀹冨惂銆傛垜浠繖闂ㄨ亴涓氳繕寰楀畧浣忚嚜宸辩殑鏍囧噯銆?026 鏈鏄€滀笉瑕佸啀鏈?slop鈥濈殑涓€骞淬€?
+[`10:25`](https://youtu.be/YwZR6tc7qYg?t=625) 鐜板湪澶у閮藉湪璋?slop 鍜?craft 鐨勫尯鍒€傝繖涔熸槸涓轰粈涔堟垜瀵归偅浜?agent swarm銆乬as town 涔嬬被鐨勪笢瑗挎湁鐐逛繚鐣欍€備綘杩樻槸寰楃‘淇濊川閲忥紝10 鍊嶉€熷害濡傛灉鎰忓懗鐫€鍏釜鏈堝悗鎶婁笢瑗垮叏鎵旀帀锛岄偅鏍规湰娌℃剰涔夈€?
+[`10:40`](https://youtu.be/YwZR6tc7qYg?t=640) 鎵€浠ワ紝鐩爣瀹氬湪 2 鍒?3 鍊嶅氨寰堝ソ銆傚叾瀹炩€滄€庢牱琛￠噺杩欎欢浜嬨€佹€庢牱鍦ㄦ帴杩戜汉绫昏川閲忕殑鎯呭喌涓嬬湡姝ｅ仛鍒拌繖鐐光€濇湰韬張鏄彟涓€鍦烘紨璁层€備粖澶╂垜涓昏鎯宠鐨勬槸锛氬鏋滀綘鐪熸兂鍋氬埌杩欎欢浜嬶紝灏辫鏈夐珮 leverage 鐨?planning锛屼笉瑕佹妸鎬濊€冨鍖呭嚭鍘伙紝瑕佽浠ｇ爜骞跺浠ｇ爜璐熻矗锛屾渶濂借繕鑳芥憜鑴卞 magic words 鐨勪緷璧栥€?
+[`11:02`](https://youtu.be/YwZR6tc7qYg?t=662) 鎵€浠ワ紝鎴戜滑鏈€鍚庤幏寰椾簡鏇村ソ鐨?research銆佹洿濂界殑 plan锛屼篃鑾峰緱浜嗘洿濂界殑 leverage銆傛帴涓嬫潵鎴戜細渚濇璁叉瘡涓€閮ㄥ垎锛氫竴閮ㄥ垎鏄垜浠叿浣撴€庝箞鍋氱殑锛屽彟涓€閮ㄥ垎鏄洿涓€鑸€х殑鎬濊矾锛岄€傜敤浜庝换浣曞洿缁?coding agent 鏋勫缓宸ヤ綔娴佸拰绯荤粺鐨勪汉銆?
+[`11:15`](https://youtu.be/YwZR6tc7qYg?t=675) 鎴戜滑鍒氭墠璇磋繃锛屼竴涓啛缁冨伐绋嬪笀鑳芥妸 ticket 鎷嗘垚闂锛屽啀璁?research 灏介噺瀹㈣銆傛垜浠渶鍚庣殑鍋氭硶鍏跺疄寰堢畝鍗曪細鎶?ticket 浠庡仛 research 鐨勯偅涓笂涓嬫枃绐楀彛閲岃棌璧锋潵锛屽苟涓旂敤纭畾鎬ф柟寮忓畬鎴愩€傚叿浣撴潵璇达紝灏辨槸鍏堝湪涓€涓?context window 閲岀敓鎴愰棶棰橈紝鐒跺悗鍐嶇敤涓€涓叏鏂扮殑銆佷笉鐭ラ亾浣犲埌搴曡鏋勫缓浠€涔堢殑 context window 鍘荤敓鎴?research doc銆?
+[`11:38`](https://youtu.be/YwZR6tc7qYg?t=698) 濡傛灉浣犵啛鎮?query planning锛岃繖鍏跺疄涓嶉毦鐞嗚В銆傛蹇典笂瀹冨拰 query planning 寰堝儚锛屽彧涓嶈繃瀵硅薄鍙樻垚浜?LLM 鍦ㄤ唬鐮佸簱閲岃涓滆タ銆?
+[`11:48`](https://youtu.be/YwZR6tc7qYg?t=708) 鎴戣嚜宸卞叾瀹炴姌鑵?agent 寰堜箙浜嗐€傚湪鎴戜滑鍋?coding agent 涔嬪墠锛屾垜杩樺啓杩囦竴绡囧彨 12 factor agents 鐨勬枃绔狅紝鎹绠楁槸姣旇緝鏃╃郴缁熻璁?context engineering 鐨勪竴鎵规潗鏂欍€傚ぇ澶氭暟浜虹悊瑙?context engineering 鐨勬柟寮忔槸锛氬線涓婁笅鏂囬噷濉炴洿澶氫俊鎭€備絾鎴戣寰楁洿鏈夋剰鎬濈殑鐞嗚В鍏跺疄鏄細鏇村ソ鐨勬寚浠ゃ€佹洿绠€鍗曠殑浠诲姟銆佹洿灏忕殑 context window銆?
+[`12:22`](https://youtu.be/YwZR6tc7qYg?t=742) 鐜板湪澶у閮借璇?Jeff 浜嗭紝鎴戝凡缁忎笉鐢ㄥ啀浠嬬粛浠栥€備互鍓嶆垜鍋氬垎浜椂杩樺緱鍏堣В閲?Jeff 鏄皝銆傛垜浠妸 context window 鐨勯棶棰樼О涓?dumb zone锛氱悊璁轰笂浣犲彲鑳芥湁 168k銆?00k token 鐨勪笂涓嬫枃锛屼絾鍏朵腑涓€閮ㄥ垎杩樿鐣欑粰杈撳嚭銆傝€屽湪涓嶅悓浠诲姟涓嬶紝闅忕潃鐢ㄦ埛娑堟伅銆佹枃浠跺拰宸ュ叿璇存槑閫愭笎鍗犳弧涓婁笅鏂囷紝浣犲ぇ姒傚湪 40% 宸﹀彸鐨勫崰鐢ㄦ椂锛屽氨浼氬紑濮嬬湅鍒版晥鏋滀笅闄嶃€?
+[`12:48`](https://youtu.be/YwZR6tc7qYg?t=768) 褰撶劧锛屾湁鏃跺€?60% 鍗犵敤浣犺繕鏄兘鎷垮埌鈥滃鐢ㄢ€濈殑缁撴灉锛屼絾涓€鑸潵璇达紝涓婁笅鏂囧崰鐢ㄨ秺浣庯紝缁撴灉瓒婂ソ銆侱atabricks 鐨勬湅鍙嬫渶杩戜篃鍦ㄨ锛氫綘瑁呬簡澶 MCP锛屾暣涓?context window 閮借宸ュ叿浣跨敤璇存槑濉炴弧浜嗭紝鍒颁綘鐪熸寮€濮嬪啓浠ｇ爜鏃讹紝妯″瀷鍙嶈€屽凡缁忎笉澶細閬靛惊浣犵殑鏍稿績鎸囦护浜嗐€傛墍浠ラ棶棰樹笉鍙槸鈥滀俊鎭お澶氣€濓紝杩樺彲鑳芥槸鈥滄寚浠ゅお澶氣€濄€?
+[`13:12`](https://youtu.be/YwZR6tc7qYg?t=792) 鎴戜滑褰撴椂鐨勬€濊矾鏄細浠ュ墠寰堝浜虹敤 prompt 鍋氭帶鍒舵祦銆傛瘮濡傚鎴锋敮鎸佸満鏅噷锛屼綘浼氬啓鈥滃鏋滄槸鎶曡瘔锛岃蛋杩欐潯璺紱濡傛灉鏄骇鍝佸弽棣堬紝璧板彟涓€鏉¤矾锛涘鏋滄槸璁¤垂闂锛屽啀璧扮涓夋潯璺€傗€?
+[`13:27`](https://youtu.be/YwZR6tc7qYg?t=807) 鍏跺疄鏇村ソ鐨勫仛娉曪紝鏄厛鎶婅緭鍏ュ垎绫伙紝鐒跺悗鍠傜粰涓€绯诲垪鏇村皬銆佹洿鑱氱劍鐨?prompt銆傝繖浜?prompt 鐨勬寚浠ゆ洿灏戙€佸彲閫夊姩浣滄洿灏戙€傚仛杩?pipeline 浼樺寲鐨勪汉搴旇閮界敤杩囩被浼兼柟娉曘€?
+[`13:43`](https://youtu.be/YwZR6tc7qYg?t=823) 鎴戜滑涔嬪墠閭ｄ竴鐗堝氨鏄竴涓?85 鏉℃寚浠ょ殑瓒呯骇澶?prompt銆傚鏋滆繍姘斿ソ锛屾ā鍨嬭兘鎸夐『搴忚蛋瀹屾墍鏈夐樁娈碉紱浣嗗彧瑕佹湁涓€灏忛儴鍒嗘寚浠ゆ病璺熶笂锛岄偅浜涚湡姝ｅ甫鏉?leverage 鐨勫叧閿楠ゅ氨浼氳璺宠繃鍘汇€?
+[`13:54`](https://youtu.be/YwZR6tc7qYg?t=834) 鎵€浠ユ垜浠妸瀹冩媶鎴愪簡鍑犱釜 prompt銆備互鍓嶆槸 research銆乸lan銆乮mplement锛岀幇鍦ㄥ彉鎴愪簡 questions銆乺esearch銆乨esign銆乻tructure銆乸lan銆亀ork銆乮mplement銆丳R銆備粖澶╂病鏃堕棿璁?implement 閭ｄ竴渚э紝浣嗗湪 planning 杩欒竟锛屾垜浠妸鍘熸潵鐨勪竴涓ぇ planning prompt锛屾媶鎴愪簡 design discussion銆乷utline 鍜岀湡姝ｇ殑 plan銆備互鍓?85 鏉℃寚浠わ紝鐜板湪姣忎釜 prompt 閮藉皯浜?40 鏉★紝鑰屼笖鎴戣寰楁湁浜涚敋鑷宠繕鑳藉啀缁х画鎷嗗皬锛屾垜浠繕鍦ㄦ寔缁凯浠ｃ€?
+[`14:18`](https://youtu.be/YwZR6tc7qYg?t=858) 鏁欒灏辨槸锛氬鏋滆兘鐢ㄧ湡姝ｇ殑鎺у埗娴侊紝灏卞埆鍐嶇敤 prompt 妯℃嫙鎺у埗娴佷簡銆俙if` 璇彞鏈潵灏遍潪甯稿己锛岃€?LLM 鍦ㄥ仛鍒嗙被杩欎欢浜嬩笂涔熺壒鍒搮闀裤€傝繖涓嶅彧閫傜敤浜?coding agent锛岃€屾槸閫傜敤浜庝綘鏋勫缓鐨勪换浣曞熀浜?LLM 鐨勭郴缁熴€?
+[`14:31`](https://youtu.be/YwZR6tc7qYg?t=871) 鏇村ソ绗戠殑鏄紝鎴戜滑鏄庢槑鑷繁鏇剧粡鍦ㄥ彴涓婅杩囷細full fat agent 涓嶈锛屼笉瑕佸彧鏄湪宸ュ叿閲屽惊鐜皟鐢紝瑕佸仛 context engineering锛岃鍋?workflow銆乬raph銆乵icro-agent銆傜粨鏋滃埌浜?8 鏈堬紝鎴戜滑鑷繁鍙堣浆澶村啓浜嗕竴涓法澶х殑鍗曚綋 prompt锛岀敤鍦?Claude Code 涓娿€傛墍浠ユ渶鍚庢垜浠剰璇嗗埌锛屾槸鏃跺€欒嚜宸辨妸鑷繁杩欑 Kool-Aid 鍠濅笅鍘讳簡銆備綘鐪熺殑寰楀皧閲嶄綘鐨?instruction budget銆?
+[`14:56`](https://youtu.be/YwZR6tc7qYg?t=896) 閭ｆ€庝箞鑾峰緱鏇村ソ鐨?leverage 鍛紵鎷?prompt 褰撶劧鑳芥彁楂?instruction following锛屼絾瀹冭繕棰濆缁欎簡鎴戜滑 leverage銆備负浠€涔堬紵鍥犱负鍗充究鏈€缁堢殑 plan 鏈変竴鍗冭銆佷唬鐮佷篃鏈変竴鍗冭锛屼綘鐨?design discussion 鍙兘鍙湁 200 琛屻€傝€岃繖 200 琛屾伆濂界粰浜嗕綘澶ч噺鏈轰細鍘讳腑閫旂籂鍋忋€?
+[`15:12`](https://youtu.be/YwZR6tc7qYg?t=912) 杩欎釜 design discussion 鐪嬭捣鏉ュぇ姒傛槸杩欐牱锛氭垜浠鍘诲摢閲岋紵鏈€缁堣В鍐虫柟妗堝簲璇ラ暱浠€涔堟牱锛熷畠浼氬寘鍚幇鐘躲€佺洰鏍囩粓鎬併€佽閬靛惊鐨勬ā寮忋€備綘鏈夋病鏈夋妸 coding agent 鏀惧嚭鍘讳箣鍚庯紝瀹冨湪浠ｇ爜搴撻噷鎵惧埌浜嗛敊璇ā寮忥紝鐒跺悗涓€璺部鐫€閿欒妯″紡寰€涓嬪啓锛熻繖鏃跺€欎綘灏辫兘璇诲畠鎵惧埌鐨勬ā寮忥紝鐒跺悗鍛婅瘔瀹冿細鈥滀笉锛屾垜浠繖閲屼笉鏄繖鏍峰仛 atomic SQL update 鐨勩€傞偅鏄煇涓凡缁忕鑱屽伐绋嬪笀鐣欎笅鏉ョ殑鐤媯鍋氭硶锛屾墍鏈変汉閮借鍘屻€傚幓閭ｈ竟鎵剧湡姝ｆ纭殑鍋氭硶銆傗€?
+[`15:40`](https://youtu.be/YwZR6tc7qYg?t=940) 瀹冭繕浼氳褰曞凡缁忚В鍐虫帀鐨勮璁″喅绛栵紝涔熶細鍒楀嚭寮€鏀鹃棶棰樸€備綘鍙互鎶婅繖鐞嗚В涓猴細鎶?Claude Code 鐨?plan mode 鍜?ask user question 鏈哄埗鍏ㄩ儴鑴戝唴杞偍鍒颁竴涓彲浠ヤ氦浜掋€佸彲濉戝舰鐨勬枃妗ｉ噷銆?
+[`15:54`](https://youtu.be/YwZR6tc7qYg?t=954) Matt Pocock 鏈変釜姒傚康鍙?design concept锛屽ぇ姒傛剰鎬濇槸锛氶偅涓閿佸湪 context window 閲屻€佷綘鍜屼唬鐞嗕箣闂村鈥滃埌搴曞湪鏋勫缓浠€涔堛€佹€庝箞鏋勫缓鈥濈殑鍏变韩鐞嗚В銆傛垜浠渶鍚庢槸鎶婅繖涓滆タ鍙樻垚浜嗕竴浠藉ぇ绾?200 琛岀殑 markdown 宸ヤ欢銆?
+[`16:07`](https://youtu.be/YwZR6tc7qYg?t=967) 浜庢槸鎴戜滑灏卞緱鍒颁簡 human-agent alignment銆傚畠鐨勬牳蹇冩槸锛氬己杩唬鐞嗘妸瀹冨彂鐜扮殑浜嬪疄銆佸畠鎯冲仛鐨勪簨銆佸畠浠ヤ负浣犳兂瑕佺殑浜嬪叏閮藉€掑嚭鏉ワ紝骞朵笖鎶婂畠涓嶇煡閬撶殑鍦版柟涓诲姩闂嚭鏉ャ€傝繖鏍蜂綘灏辫兘鍦ㄧ湡姝ｅ啓鍑?2000 琛屼唬鐮佷箣鍓嶏紝鍏堝浠ｇ悊鍋氫竴娆♀€滆剳澶栫鎵嬫湳鈥濄€?
+[`16:24`](https://youtu.be/YwZR6tc7qYg?t=984) 杩欎欢浜嬫湰璐ㄤ笂灏辨槸锛氫笉瑕佹妸鎬濊€冨鍖呭嚭鍘汇€備綘搴旇灏藉彲鑳界粰浠ｇ悊鏈轰細锛岃瀹冨湪鐪熸寮€濮嬪ぇ瑙勬ā鍐欎唬鐮佷箣鍓嶏紝鎶婅嚜宸卞彲鑳介敊鐨勫湴鏂瑰叏閮芥毚闇插嚭鏉ャ€?
+[`16:35`](https://youtu.be/YwZR6tc7qYg?t=995) 鎵€浠ワ紝鐢?200 琛岃€屼笉鏄?1000 琛岋紝灏卞凡缁忚幏寰椾簡涓€鐐?leverage銆傝繘涓€姝ョ殑 leverage 鏉ヨ嚜 outline銆俤esign 瑙ｅ喅鐨勬槸鈥滄垜浠鍘诲摢鈥濓紝鑰?structure outline 瑙ｅ喅鐨勬槸鈥滄垜浠€庝箞鍒伴偅鈥濄€傚鏋滀綘鏄偅绉嶈鍚勭浼氳鎶樼（寰楀緢鎯ㄧ殑宸ョ▼甯堬紝浣犲彲浠ユ妸瀹冪悊瑙ｄ负锛歞esign discussion 鍍?architecture review锛岃€?structure outline 鏇村儚 sprint planning锛屼篃灏辨槸鈥滄垜浠鍋氫粈涔堛€佸啀鎬庝箞鎷嗘垚闃舵鍜屼换鍔♀€濄€?
+[`16:56`](https://youtu.be/YwZR6tc7qYg?t=1016) 鎴戜滑浼氭妸 design銆乼icket 鍜?research 涓€璧疯杩涗竴涓柊涓婁笅鏂囩獥鍙ｏ紝鐒跺悗鐢熸垚 structure outline銆傚畠鍩烘湰灏辨槸楂樺眰娆＄殑闃舵姒傝锛氫笉鏄€愯浠ｇ爜璁″垝锛岃€屾槸澶ф璇存槑鏀瑰姩椤哄簭銆佸悇闃舵搴旇闀夸粈涔堟牱锛屼互鍙婂湪杩囩▼涓噯澶囨€庝箞娴嬭瘯銆?
+[`17:12`](https://youtu.be/YwZR6tc7qYg?t=1032) 鎴戝苟涓嶄細瀵规瘡涓笢瑗块兘鍦ㄦ瘡涓樁娈典箣闂村仛娴嬭瘯锛屼絾濡傛灉浠诲姟鏁忔劅銆佸洶闅炬垨澶嶆潅锛屾垜灏卞笇鏈涜兘鍦ㄥ畠涓€璺啓瀹屾暣娈典唬鐮佷箣鍓嶅厛鎴綇闂銆傛垜鎯崇‘淇濇瘡涓€鍧?200銆?00銆?00 琛岀殑浠ｇ爜閮藉厛鏄鐨勩€?
+[`17:23`](https://youtu.be/YwZR6tc7qYg?t=1043) 杩欎簺鏂囨。杩樿兘璁?review 鍙樿交銆備綘涓嶇敤 review 閭ｄ釜瓒呴暱 plan锛岃€屾槸 review 杩欎簺鏇寸煭鐨勮璁℃枃妗ｃ€傚悓鏍蜂竴涓姛鑳斤紝plan 鍙兘鏈?8 椤碉紝浣?structure outline 鍙兘鍙湁涓ら〉澶氫竴鐐癸紝鐭緢澶氥€?
+[`17:33`](https://youtu.be/YwZR6tc7qYg?t=1053) 鎴戝枩娆㈡妸瀹冪被姣旀垚 C 鐨?`.h` 澶存枃浠躲€傚鏋?plan 鏄疄鐜版湰韬紝閭ｄ箞 outline 灏辨槸澶存枃浠讹細鍛婅瘔浣犳湁鍝簺绛惧悕銆佹湁鍝簺绫诲瀷琚慨鏀逛簡锛屼俊鎭噺鍒氬ソ瓒冲浣犵悊瑙ｄ唬鐞嗗湪鎯充粈涔堬紝骞跺湪瀹冩兂閿欐椂鍙婃椂绾犳銆?
+[`17:50`](https://youtu.be/YwZR6tc7qYg?t=1070) 鎴戜滑涔嬫墍浠ヨ杩欎箞鍋氾紝鏄洜涓轰笉绠℃崲浜嗗灏戞ā鍨嬨€佹€庝箞鏀?prompt銆佹€庝箞鎷煎懡鍋?eval锛屾垜浠氨鏄病娉曡妯″瀷褰诲簳鍋滄鍘诲啓 horizontal plans銆傛墍璋?horizontal plan锛屽氨鏄ā鍨嬬壒鍒枩娆㈠厛鎶婃暟鎹簱灞傚叏鍋氫簡锛屽啀鍋?service 灞傦紝鍐嶅仛 API锛屽啀鍋氬墠绔€傜瓑浣犲洖杩囩鏃讹紝瀹冨凡缁忓啓浜?1200 琛屼唬鐮侊紝鑰屾暣涓郴缁熻繕娌¤窇璧锋潵锛屼綘涔熶笉鐭ラ亾鍒板簳鍝竴灞傚潖浜嗭紝鍥犱负杩囩▼涓病鏈変换浣曞彲楠岃瘉鐨?checkpoint銆?
+[`18:24`](https://youtu.be/YwZR6tc7qYg?t=1104) 涓嶇鏈€鍚庢槸妯″瀷鑷繁鍦ㄩ獙璇侊紝杩樻槸浣犺繖涓汉绫昏烦杩涙潵妫€鏌ワ紝鎴戜滑鍙戠幇鐪熸瀵瑰悇绉嶈妯″洟闃熼兘鏈夋晥鐨勬槸 vertical plans銆傛崲鍙ヨ瘽璇达紝鍦?AI 涔嬪墠锛屾垜鏋勫缓涓滆タ鏃堕€氬父浼氬厛 mock 涓€涓?API endpoint锛岃瀹冨厛鍦ㄥ墠绔窇璧锋潵锛屽啀鍘婚€愭鎺?service 灞傘€佹暟鎹簱杩佺Щ锛屾渶鍚庢嫾瀹屾暣涓郴缁熴€?
+[`18:46`](https://youtu.be/YwZR6tc7qYg?t=1126) 杩欐牱涓€鏉ワ紝铏界劧浠ｇ爜鎬婚噺娌″彉锛屼絾浣犱細澶氬嚭寰堝涓棿妫€鏌ョ偣銆傜郴缁熶竴鏃︿笉宸ヤ綔锛屼綘鍙互鍋滀笅鏉ヤ慨锛岃€屼笉鏄竴鐩村線涓嬪啓鍒板簳銆傝繖浜?outline 鏈川涓婁篃鍙槸 markdown 鏂囨。锛屾墍浠ヤ綘瀹屽叏搴旇缁х画杩介棶銆佽姹傛洿澶氱粏鑺傘€傚畠浠竴寮€濮嬩細淇濇寔楂樺眰娆★紝浣嗗鏋滀綘瑙夊緱鈥滄垜涓嶇浉淇′綘杩欎竴姝ヨ兘鍐欏鈥濓紝浣犲氨鍙互瑕佹眰瀹冩妸鎯虫硶缁嗗寲鍑烘潵锛岀被鍨嬨€佺鍚嶃€佽璁″叏閮芥憡寮€銆?
+[`19:04`](https://youtu.be/YwZR6tc7qYg?t=1144) 鑷充簬鐪熸鐨?plan锛屾湰璐ㄤ笂鎴戜滑杩樻槸寤剁画鍚屾牱鐨勫仛娉曪細鎶婂墠闈㈢殑宸ヤ欢缁х画鍠傝繘鍘伙紝鏈€鍚庣敓鎴?plan銆傚畠鍜屼綘鐩存帴鐢?create plan 寰楀埌鐨勬ā鏉挎槸涓€鏍风殑锛屽悓鏍风殑 setup銆佸悓鏍风殑 prompt銆備絾瀹冪幇鍦ㄥ彉鎴愪簡涓€浠界粰浠ｇ悊鑷繁鐪嬬殑鎴樻湳鏂囨。銆傚洜涓烘垜浠墠闈㈠凡缁忓仛杩囪冻澶熷鐨勪汉鏈哄榻愶紝鎵€浠ユ垜鍙渶瑕?spot check 涓€涓嬶紝鑰岀湡姝ｆ繁搴︾殑 review 浼氫繚鐣欑粰鏈€缁堜唬鐮併€?
+[`19:28`](https://youtu.be/YwZR6tc7qYg?t=1168) 鎵€浠ワ紝濡傛灉浣犱互鍓嶇敤杩?RPI 璁″垝鏂囦欢锛屽畠浠ぇ鑷村氨鏄€滃樋锛岃繖鏄垜瑕佹敼鐨勫唴瀹光€濄€備絾杩欓噷鏈€閲嶈鐨?leverage 鍏跺疄涓嶅彧鏄綘鍜屼唬鐞嗕箣闂寸殑浜嬨€俬uman-agent alignment 寰堥噸瑕侊紝鐭ラ亾浠ｇ悊瑕佸仛浠€涔堛€佸強鏃剁籂鍋忓綋鐒朵篃寰堝ソ銆備絾濡傛灉浣犲湪涓€涓伐绋嬪洟闃熼噷宸ヤ綔锛屾垜浠彂鐜帮紝鎶?design discussion 鍜?structure outline 杩欑被鐭枃妗ｆ嬁鏉ュ洟闃?review 鐨勪环鍊奸潪甯搁珮銆?
+[`19:57`](https://youtu.be/YwZR6tc7qYg?t=1197) 鍦?HumanLayer锛屾垜骞朵笉鏄ぇ閮ㄥ垎浠ｇ爜鐨?code owner锛屾垜鐨勮仈鍚堝垱濮嬩汉鎵嶆槸銆傛墍浠ユ垜浼氭湁鎰忚瘑鍦版妸杩欎簺 design discussion 鍙戠粰浠栥€傝櫧鐒惰繖涓嶆槸纭€ц姹傦紝浣嗘垜鎯崇‘淇濈瓑鐪熸鍒?code review 鏃讹紝寰楀埌鐨勫弽棣堝彧鏄細鈥滃锛岃繖姝ｆ槸鎴戞兂瑕佺殑銆傗€?杩欐牱锛屾垜閭ｄ簺绯熺硶鍐崇瓥浼氬湪 200 琛屾枃妗ｉ樁娈靛氨琚尅浣忥紝鑰屼笉鏄瓑鎴戝凡缁忔妸浠ｇ爜鍐欏嚭鏉ャ€佽窇閫氫簡銆佸瀹冩湁鎰熸儏浜嗘墠杩斿伐銆傝繖涓€鐐圭湡鐨勫緢鏈夊姏閲忋€?
+[`20:22`](https://youtu.be/YwZR6tc7qYg?t=1222) 鍦?AI 鍑虹幇涔嬪墠锛屼綘浼氳寰椾竴涓€滀袱澶╃殑鍔熻兘鈥濋噷锛岀湡姝ｅ啓浠ｇ爜鍙兘鍙崰涓ゅ埌鍥涘皬鏃躲€傚鏋滀綘鍙槸鎷胯捣 Claude Code 鍘诲府浣犲啓浠ｇ爜锛岀‘瀹炰細鍙樺揩锛屽洜涓虹紪鐮佹椂闂翠細浠庡嚑灏忔椂鍘嬪埌浜屽崄鍒嗛挓銆備絾杩欎釜鍔熻兘渚濇棫杩樻槸鈥滀袱澶╃殑鍔熻兘鈥濓紝鍥犱负浣犱粛鐒惰鍜屽洟闃熷榻愩€佹嬁 code review銆佷慨闂锛屽彲鑳借繕寰楄法浠撳簱锛岃繕寰楁祴璇曞拰楠岃瘉銆?
+[`20:47`](https://youtu.be/YwZR6tc7qYg?t=1247) 浣嗗鏋滀綘鎶?AI 鐢ㄥ埌 planning 鍜?alignment 涓婏紝浣犲湪杩欎簺鐜妭涔熶細鐪佷笅寰堝鏃堕棿銆傝€屼笖浣犱細寰楀埌鏇村ソ鐨勫榻愶紝鍥犳 code review 鍜岃繑宸ラ兘浼氭洿鐭紝鍥犱负鍥㈤槦鏃╁氨鐭ラ亾瑕佸彂鐢熶粈涔堬紝涔熸彁鍓嶇粰杩囩籂鍋忔満浼氥€傜湡姝ｅソ鐨勫洟闃熷叾瀹炴棭灏辫繖鏍峰仛浜嗭紝鍙槸浠ュ墠瀹冨彨 architecture review锛屼篃灏辨槸鍏堝喅瀹氾細杩欎欢浜嬬殑鎶€鏈璁″埌搴曟槸浠€涔堛€?
+[`21:12`](https://youtu.be/YwZR6tc7qYg?t=1272) 鑷充簬娴嬭瘯鍜岄獙璇侊紝鎶辨瓑锛屾垜浠婂ぉ娌℃硶缁欎竴涓畬鏁寸瓟妗堬紝鍥犱负閭ｆ湰韬張鏄竴鏁村満婕旇銆傚鏋滀綘鍒氭墠鍘绘ゼ涓嬪惉浜?Drew 鐨?talk锛屾紨璁茬粨鏉熷悗鍘绘壘 Drew Brun锛屼粬浼氬憡璇変綘鍏充簬 testing 鍜?verifying 鐨勪竴鍒囥€?
+[`21:21`](https://youtu.be/YwZR6tc7qYg?t=1281) 鏈€鍚庢妸杩欎竴鍒囨嫾璧锋潵銆傛垜浠幇鍦ㄦ湁浜斾釜鐮旂┒涓庤鍒掗樁娈点€傛祦绋嬪ぇ姒傛槸锛歲uestions銆乺esearch銆乨esign銆乻tructure outline銆乸lan銆亀orktree銆乮mplement锛屾渶鍚庡啀鍒?PR銆傝繖涓祦绋嬪疄鍦ㄥお闀夸簡锛岀缉鍐欎笉濂藉惉锛屾墍浠ユ垜浠寫浜嗗嚑涓瓧锛岀瀹冨彨 crispy锛屼篃灏辨槸浠?RPI 璧板悜 crispy銆?
+[`21:43`](https://youtu.be/YwZR6tc7qYg?t=1303) 鎺ヤ笅鏉ヤ細鍙戠敓浠€涔堬紝浠ュ強浠婂ぉ娌℃潵寰楀強璁茬殑鏄粈涔堬紵棣栧厛锛屽師鏉ヤ笁姝ュ氨宸茬粡璁╁緢澶氫汉瑙夊緱闅惧浜嗭紝鐜板湪鍙樻垚涓冩銆傛垜浠師鏈笉鏄瑕佽杩欎欢浜嬫洿瀹规槗琚洟闃熷涔犲拰閲囩撼鍚楋紵杩欏氨鏄垜浠幇鍦ㄥ湪鎬濊€冪殑闂銆?
+[`21:57`](https://youtu.be/YwZR6tc7qYg?t=1317) 鍏舵锛屽浣曡　閲忚繖濂楁柟娉曞湪宸ョ▼鍥㈤槦閲岀殑瀹為檯褰卞搷锛熻瀹炶瘽锛屾垜浠汉绫诲凡缁忚瘯鐫€琛￠噺寮€鍙戣€呯敓浜у姏 50 骞翠簡锛屽埌鐜板湪閮借繕娌＄壒鍒悶鏄庣櫧銆?
+[`22:06`](https://youtu.be/YwZR6tc7qYg?t=1326) 鍙﹀锛屽鏋滀綘鏄竴涓钩鍙板洟闃燂紝姝ｅ湪鎶婅繖绉嶆彁绀鸿瘝鍜屽伐绋嬬郴缁熸帹鍚戞暣涓粍缁囷紝閭ｄ綘鎬庝箞鎸佺画浼樺寲瀹冿紵鎬庝箞鍦ㄤ笉鐮村潖鏌愪簺鍥㈤槦宸ヤ綔娴併€佷笉璁╁叾浠栧洟闃熸晥鏋滃€掗€€鐨勬儏鍐典笅锛岃鎵€鏈変汉閮藉彈鐩婏紵姣斿鎴戜滑鍒氭墠灏辨彁鍒帮紝鐜板湪鍑犱箮姣忎釜鍥㈤槦閮芥湁鑷繁鐨?skill锛屾垜浠兂鎶婅繖浜涚粡楠屾眹鎬汇€佸叡浜紝璁╁ぇ瀹堕兘浠庡郊姝ょ殑缁忛獙閲岃幏鐩娿€?
+[`22:31`](https://youtu.be/YwZR6tc7qYg?t=1351) 濡傛灉浣犱篃鍦ㄥ仛鍏抽敭绯荤粺锛屽苟涓斿湪鏃ч噾灞憋紝鎯充竴璧风爺绌舵€庝箞璁?coding agent 鐪熸鎵挎媴鏇村宸ヤ綔锛屾杩庢潵鑱娿€傛垜浠篃鍦ㄦ嫑浜恒€傛棤璁哄浣曪紝閮藉彲浠ュ啓淇＄粰鎴戜滑锛欶ounders@humanlayer.dev銆?
+[`22:43`](https://youtu.be/YwZR6tc7qYg?t=1363) 鎴戜滑姝ｅ湪鏋勫缓涓€涓?IDE锛屽府浣犺嚜鍔ㄧ紪鎺掕繖涓€鏁村娴佺▼銆備綘涓嶄竴瀹氶潪寰楃敤瀹冩墠鑳藉緱鍒拌繖浜涗环鍊硷紝浣嗚繖灏辨槸鎴戜滑鐩墠鍦ㄥ仛鐨勪簨銆?
+[`22:52`](https://youtu.be/YwZR6tc7qYg?t=1372) 濡傛灉浣犳兂涓€璧风帺锛屾湰鍛ㄥ叚鎴戜細鍔炰竴涓?sandbox research hackathon銆傛垜浠細鎵句竴缇?builder 涓€璧锋祴璇曞悇绉?sandbox provider锛岀湅璋佹渶濂斤紝鐒跺悗鎶婄粨鏋滃垎浜嚭鏉ャ€傛垜涔熶細鍘?Daytona Compute Conference銆傚鏋滀綘鎯冲幓杩堥樋瀵嗭紝AI Engineer Miami 搴旇涔熶細寰堟湁瓒ｃ€傚眾鏃舵垜浼氳杩欎釜涓婚鐨勬洿鏂扮増鏈紝鎶婁粖澶╂病璁插埌鐨勯儴鍒嗚ˉ涓娿€?
+[`23:15`](https://youtu.be/YwZR6tc7qYg?t=1395) 闈炲父鎰熻阿澶у浠婂ぉ鐨勮兘閲忥紝涔熸劅璋?Demetrios 鍜屾暣涓粍缁囧洟闃熴€傜澶у濂借繍銆?
+[`23:22`](https://youtu.be/YwZR6tc7qYg?t=1402) 濂斤紝鎻愰棶鏃堕棿銆傝皝鏈夐棶棰橈紵杩欎釜鑺傚鐪熷揩锛屾垜鍠滄銆傛垜鏈潵杩樻尯鎬€鐤戜綘鑳戒笉鑳借瀹岋紝浣嗕綘灞呯劧鐪熺殑璁插畬浜嗐€?
+[`23:32`](https://youtu.be/YwZR6tc7qYg?t=1412) 鎴戠殑闂鏄叧浜庘€滆浠ｇ爜鈥濄€傝繖浠朵簨鏈韩骞朵笉鍙墿灞曪紝瀵瑰惂锛熷叚涓湀鍚庝綘杩樹細璇村悓鏍风殑璇濆悧锛?
+[`23:32`](https://youtu.be/YwZR6tc7qYg?t=1412) 鍏釜鏈堝墠鎴戣繕鍦ㄨ鈥滀笉瑕佽浠ｇ爜鈥濓紝缁撴灉鐜板湪灏辨帹缈讳簡銆傛墍浠ユ垜瑙夊緱锛屼换浣曠幇鍦ㄨ繕鍦ㄨ鈥滀笉瑕佽浠ｇ爜鈥濈殑浜猴紝鍏釜鏈堝悗澶ф鐜囬兘浼氬洖鏉ユ壙璁わ細鈥滃锛屾垜浠悗鏉ヤ篃鎶婅繖鏉℃挙鎺変簡銆傗€?鐪熺浉搴旇鍦ㄤ腑闂存煇涓綅缃€傛垜浠幇鍦ㄥ氨鏄湪浜屽垎鎼滅储锛屽埌搴曡璇诲灏戜唬鐮佹墠鍚堥€傘€?
+[`23:55`](https://youtu.be/YwZR6tc7qYg?t=1435) 鎴戠洰鍓嶇殑鐪嬫硶鏄細鍗充究浣犲潥鎸佽浠ｇ爜锛屼綘渚濈劧鍙互鑾峰緱 2 鍒?3 鍊嶇殑閫熷害鎻愬崌銆傝€岃繖鍦ㄥ晢涓氱粨鏋滀笂锛屽叾瀹炴瘮 10 鍊嶉€熷害浣嗕竴璺?shipping slop銆佹渶鍚庡瘎甯屾湜浜?GPT-7 甯綘鍏滃簳锛岃濂藉緱澶氥€?
+[`24:12`](https://youtu.be/YwZR6tc7qYg?t=1452) 寰堟鐨勬紨璁层€傛垜鎯抽棶浣犲 software factory 鐨勭湅娉曘€傛湁浜涗汉锛屾瘮濡?strong DM锛屼富寮犲畬鍏ㄤ笉瑕佽浜虹被璇讳唬鐮佹垨瑙勬牸锛岃€屾槸杩涗竴姝ヤ緷璧?eval銆備綘鎬庝箞鐪嬶紵
+
+[`24:35`](https://youtu.be/YwZR6tc7qYg?t=1475) 杩欓噷闈㈠叾瀹炴湁涓€鏁翠釜鍏斿瓙娲烇紝鍍?formal verification銆乀LA+ 涔嬬被銆傜敋鑷虫垜杩樿杩囨湁浜哄湪鍋?TLA++锛屼篃灏辨槸缁х画杩介棶锛氬鏋滄垜浠湡鐨勪笉璇讳唬鐮侊紝閭ｆ€庢牱鐢ㄥ舰寮忓寲鏂规硶璇佹槑涓€鍒囬兘姝ｇ‘锛熸垜瑙夊緱杩欐潯璺笂杩樻湁寰堝涓滆タ鍙互寤恒€備絾涓庢鍚屾椂锛岀幇鍦ㄦ湁寰堝浜洪渶瑕佹洿蹇湴鎶婁唬鐮佸彂甯冨埌鐢熶骇绯荤粺閲屻€備篃璁告湭鏉ヤ細鏈夋洿绾舰寮忓寲鐨勫姙娉曪紝浣嗚嚦灏戞垜浠ュ墠寰堝枩娆㈠紩鐢?Sean Grove 鐨勪竴涓鐐癸細鍙繚鐣欒鏍兼枃妗ｏ紝鎶婁唬鐮佸綋鎴愭眹缂栦竴鏍峰畬鍏ㄤ笉璇汇€傜幇鍦ㄦ垜瑕佹槑纭湴璇达紝鎴戜笉璁ゅ悓杩欑鍋氭硶銆?
+[`25:17`](https://youtu.be/YwZR6tc7qYg?t=1517) 鎴戜滑鍐嶆帴鏈€鍚庝竴涓棶棰樸€備綘涔嬪墠鏈夊紶骞荤伅鐗囪鍒?context window 鍜?dumb zone銆備綘鍚庢潵鏈夋病鏈夐噸鏂扮爺绌惰繃锛屽挨鍏舵槸鑰冭檻鍒?auto-compaction 绛夋柊鎶€鏈箣鍚庯紝瀹冨埌搴曡繕鎴愮珛鍒颁粈涔堢▼搴︼紵
+
+[`25:41`](https://youtu.be/YwZR6tc7qYg?t=1541) 濡傛灉浣犲凡缁忕敤浜?AI coding agent 鍏埌涔濅釜鏈堬紝鑰屼笖姣忓懆鐢ㄥ叚鍗佷釜灏忔椂锛岄偅 dumb zone 杩欎釜姒傚康瀵逛綘鏉ヨ鍙兘宸茬粡娌′粈涔堢敤銆傛垜鑷繁缁忓父浼氫笂鍒?60锛屼篃缁忓父浼氱壒鍒Н鏋佸湴鎶婂畠鍘嬪湪 30 浠ヤ笅銆傝繖鍙栧喅浜庝换鍔″鏉傚害锛屼篃鍙栧喅浜庝笂涓嬫枃閲屽埌搴曟槸淇℃伅澶氳繕鏄寚浠ゅ銆?
+[`26:06`](https://youtu.be/YwZR6tc7qYg?t=1566) 鎵€浠ョ瓟妗堜粛鐒舵槸锛氬洜浜鸿€屽紓銆傚鏋滀綘鏄涓€娆＄敤 coding agent锛屾垜浠暀浜虹殑鏂瑰紡灏辨槸锛屽鏋滀綘杩樻病鏈夊舰鎴愮洿瑙夛紝閭ｅ氨灏介噺鎶婂畠鎺у埗鍦?40 浠ヤ笅锛涘鏋滃埌浜?60锛屽氨璇ュ紑濮嬫兂鍔炴硶鏀跺熬浜嗐€?
+[`26:15`](https://youtu.be/YwZR6tc7qYg?t=1575) 鍙﹀杩樻湁涓€鐐瑰緢鏂逛究锛氫綘瀹屽叏鍙互鎸佺画鍦ㄥ悓涓€涓枃妗ｄ笂杩唬銆傚洜涓烘垜浠病鏈変娇鐢ㄥ唴寤?compaction锛屾墍鏈夌湡姝ｉ噸瑕佺殑涓滆タ閮借鏀捐繘浜嗛潤鎬佸伐浠堕噷锛屾墍浠ヤ綘鎬昏兘浠庝笂娆″仠涓嬫潵鐨勫湴鏂圭户缁紝鑰屼笉蹇呮媴蹇?auto-compact 鎴?manual compact 鐨勮川閲忋€?
+[`26:32`](https://youtu.be/YwZR6tc7qYg?t=1592) 澶簿褰╀簡锛孌ex銆傚共寰楁紓浜€傝阿璋€傚ぇ瀹剁粰浠栦竴鐐规帉澹般€?
+---
+
+## 鏉ユ簮
+
+- [我们在 Research-Plan-Implement 上犯过的所有错误 鈥?MLOps Community 鈥?YouTube](https://youtu.be/YwZR6tc7qYg)
 
-[`0:04`](https://youtu.be/YwZR6tc7qYg?t=4) All right. Before I bring up Dex, I gotta say I met James. And James Yeah. Can you stand up real fast? James told me this morning that he is going — We can't see the QR code. You got to hit it up. He's going to be having dinner tonight and everybody's invited. So, if you want to go, just scan that QR code real fast and go hang out with James. That's awesome. And that's what we're going for here. That is great.
-
-[`0:33`](https://youtu.be/YwZR6tc7qYg?t=33) Yeah, you rock. Yeah, that's I like it. I like it, too. Okay, so I'm gonna bring up Dex. Uh earlier somebody said we need to have a mustache competition. I don't think that's going to happen, but I will say that he gave us 200 slides that he's about to present.
-
-[`0:48`](https://youtu.be/YwZR6tc7qYg?t=48) Whoa, whoa. 158. 158. We're going to keep him honest on the timing. All right, so let it start now everybody.
-
-[`0:57`](https://youtu.be/YwZR6tc7qYg?t=57) Let's do it. What's up everybody? I am Dex. Uh this is a talk with a very long title that I'm not going to read because we're on the clock now. Uh I have been talking about coding agents for quite a while. Basically since like August um we did a long talk in November. Um there's this methodology that we've been talking about a lot uh called research plan implement. Um a lot of up votes on hackernews. There's probably 10,000 people who have gone to our open source and grabbed our prompts and are using them internally from small startups up to the enterprise.
-
-[`1:29`](https://youtu.be/YwZR6tc7qYg?t=89) Um it all started with this guy. Um this guy has anyone seen this talk? Yes. Okay. So Eigor went in and he said like okay cool we're using a lot of tokens we're spending a lot of money to get AI developer productivity. But what he found was that it actually tends to lead to a lot of rework. Like you are shipping 50% more but half of that is just cleaning up the slop from last week. And the other thing they found, and these are last year's numbers, so this does not account for opus 4.5. So I would inflate this a little bit, but like it's great for low complexity green field tasks, not great for high complexity brownfield tasks.
-
-[`2:02`](https://youtu.be/YwZR6tc7qYg?t=122) Um, and so I could give you a talk about RPI and why it's great. Uh, but that would be boring. And there's other talks, so if you haven't seen them, go watch them. It'll give more context. But, uh, I'm going to tell you everything we got wrong about RPI today. Um, we thought we had this AI thing figured out. I, uh, am humble enough to admit when I was wrong.
-
-[`2:22`](https://youtu.be/YwZR6tc7qYg?t=142) Uh, so we got a couple things wrong. Uh, one thing that's very relevant if you've been on Twitter today is, uh, I don't think it's okay to not read the code. Uh, I also don't think you should read really long plan files. Uh, those two are related. Uh, and no, Cloud should not be allowed to — if you're writing production code that is used by users and you're going to get paged at 3 a.m. if it's broken. Uh, no slop. This is the year 2026. No more slop.
-
-[`2:46`](https://youtu.be/YwZR6tc7qYg?t=166) So, we're all on this journey. We're all figuring this out. We all are wrong all the time. We did get a couple things right. Uh there is no magic prompt. Uh do not outsource the thinking. You the engineer are an important part of this process and seek leverage. There's a lot of code being written. Find ways to make sure it's correct without having to read all of it and resteer after the fact.
-
-[`3:05`](https://youtu.be/YwZR6tc7qYg?t=185) Um so, lots of people I'm sure have heard of research plan implement. Has anyone actually run this claude command? Research codebase? Okay, cool. Leave your hand up if you've run it like this. Tell me how this system works. Has anyone run it like this of like, "Hey, I want to build this thing. Go do the research." Okay. Um or maybe go fetch a ticket or something. What about the create plan prompt? Okay. Couple hands.
-
-[`3:28`](https://youtu.be/YwZR6tc7qYg?t=208) Uh how many of you run it like that? Hey, we got to go build this thing. Yes. Has anyone run it like this? Work back and forth with me starting with your open questions and outline before writing the plan. Okay. Some of you found out about the magic words. A lot of people didn't though. Uh we'll get into why that's a problem.
-
-[`3:44`](https://youtu.be/YwZR6tc7qYg?t=224) Um so since October we've basically worked with thousands of engineers from tiny startups all the way up to Fortune 500s. Um and we would find over and over again we would give these tools to an expert uh and they would get great results. They would go sit and talk to Cloud for 70 hours a week and they would start shipping like crazy. Uh and then they would go give it to their team and the results were not always so good.
-
-[`4:03`](https://youtu.be/YwZR6tc7qYg?t=243) Um and so people weren't getting good results. And so we got in the trenches with our users and we went to go figure out what was going wrong. And the first thing that was going wrong was people were not getting good research. Um, so we talked about this in November. This is uh one of the only slides I'm reusing, but you would pick a zone of your codebase. You would say, "We're going to build something over here." And then you would launch a coding agent session to go send these sub agents through these deep vertical slices through the codebase for just the context, compressed context about what is the thing we're about to go build, right?
-
-[`4:32`](https://youtu.be/YwZR6tc7qYg?t=272) And we said keep things objective, discourage opinions, don't actually put any implementation details in there. You just want to compress the truth. What is true about how the code works today? And a skilled engineer was really good at taking, okay, here's my ticket. Let me write some questions that will cause the model to go touch all the parts of the codebase that matter. So if it was, you know, add a new endpoint to reticulate splines across tenants. We would say something like, okay, tell me how endpoints work and trace the logic flow for everything that touches splines and go find the workers that do all the reticulation.
-
-[`5:03`](https://youtu.be/YwZR6tc7qYg?t=303) Uh, so if this is your ticket, a lot of people would run it like this. They would just say, "Hey, research codebase. Here's what I'm building." Um, and the problem is that good research is all facts. But if you tell the model what you're building, then you get opinions. And we don't, we'll get into why the model shouldn't have opinions later. Comes back to this thing that Jake from Netflix came up with, which is do not outsource the thinking.
-
-[`5:22`](https://youtu.be/YwZR6tc7qYg?t=322) Um, the other thing that wasn't working is people were getting not great plans. Um, and basically there were these steps built into this planning prompt uh that was this single giant like monolithic thing with 85 or more instructions. And it had these steps in it of like cool present design options to the user uh get feedback on the structure uh before you actually go write the plan.
-
-[`5:43`](https://youtu.be/YwZR6tc7qYg?t=343) And so a good planning session would look something like you know you have your claude system tools and your prompt and then you say hey create plan loads the skill looks at your ticket loads your research doc launches a bunch of sub agents to go find a bunch of things that are true about the codebase just confirms some stuff that wasn't maybe in the research. This is all one big context window by the way. Usually I'll use these columns to mean separate context windows, but today this is all one session. I just — slides are sideways, so I had to put them on next to each other.
-
-[`6:11`](https://youtu.be/YwZR6tc7qYg?t=371) Um, but the agent would come and ask questions. So, okay, here's our options for question one. User would pick an option. User would pick an option. And then eventually it would say, cool, here's the order we're going to do the things. Um, what do you think? And the user could say, well, we need to add a testing step up front, and I want to swap phases three and four. Assistant would give the new outline of the phases. Then the user would approve it and only then would we write our plan file.
-
-[`6:33`](https://youtu.be/YwZR6tc7qYg?t=393) Um complex process of aligning with the user on what was going to be built. Um but for about 50% of people maybe more if you didn't prompt it with this work back and forth with me or Opus was just feeling dumb for that particular hour of the day. Um it would just take the stuff and it would just immediately go and write the plan out. And so you would get this and it would be like cool. I wrote the plan, didn't ask me any questions, made all the decisions for me. Yikes.
-
-[`6:58`](https://youtu.be/YwZR6tc7qYg?t=418) So we gave the tools to people and some people got good results and some people didn't. And we dug in and we were like, "What's the difference?" Uh, and people would literally say this to me like, "Well, you have to say the magic words." And I found myself in workshops full of enterprise engineers saying, "Well, guys, guys, guys, yeah, here's the software, but don't forget to say the magic words." It was, quite frankly, it was embarrassing.
-
-[`7:16`](https://youtu.be/YwZR6tc7qYg?t=436) But if you said this, work back and forth with me starting with your open questions and outline before writing the plan. Then the agent would ask you the questions. And this isn't the user's fault. If you built a tool that requires hours and hours of training and reps to get like good results from, go fix the tool. And so I'll talk about how we did that.
-
-[`7:35`](https://youtu.be/YwZR6tc7qYg?t=455) Um, but why these steps were getting skipped, one of the big takeaways I'll give you today is like you have an instruction budget. Uh, my co-founder Kyle is somewhere over here. He wrote this really good blog post in December or November I guess technically um that basically cited this archive paper which again this is from last year so the number is probably a little bit higher now but that frontier LLMs could only follow about 150 to 200 instructions with like good consistency anything more than that and it's kind of half attending to all of them and you're rolling the dice.
-
-[`8:04`](https://youtu.be/YwZR6tc7qYg?t=484) So if you have a prompt with 85 instructions and your cloud MD and your system prompt and your tools and your MCP um yeah you're not likely to get full adherence to the workflow. So, more on how we fix this later.
-
-[`8:16`](https://youtu.be/YwZR6tc7qYg?t=496) The other thing that I think really wasn't working for people was like we advocated for reading the plans that were output. This is me on stage in November telling people you have to read the plan otherwise it won't work. Um some people even would PR their plans and code review them together. But a thousand line plan tends to be about a thousand lines of code within 10% or so. And plans can have surprises.
-
-[`8:38`](https://youtu.be/YwZR6tc7qYg?t=518) So you would go and you would review the plan and then you would go write the code and it would be different. And so you're telling — you're asking one of your co-workers like, "Okay, go spend an hour reading this and tell me what's wrong with it." And then you would go implement it. It would be different. They have to go read the code again and see what the surprises were and what changed. Um, and so this isn't leverage. Leverage is about like do less work to get more output.
-
-[`9:01`](https://youtu.be/YwZR6tc7qYg?t=541) So the new advice, uh, don't read the plans. Please read the code. Uh, just because it's the same amount of work and like look for leverage elsewhere. And I'll talk about how we found better leverage.
-
-[`9:10`](https://youtu.be/YwZR6tc7qYg?t=550) Um, and you may say, "Hey, Dex, in August you said don't read the code." You said the plans are enough. Just don't — just go just ship and let Cloud do its thing. I was wrong. I am humble enough to admit when I was wrong. Uh, this is actually a very big conversation right now. Please please read the code. We tried not reading the code for like six months. Uh, it did not end well. We had to rip out and replace large parts of that system.
-
-[`9:32`](https://youtu.be/YwZR6tc7qYg?t=572) Um, and you may say, "Hey, Dex, but other people don't read the code." Beads, 300,000 lines and counting. Uh, no one's read that code allegedly. Uh, OpenClaw Pete's like, "Okay, you know, I know the structure and the pieces and how they fit together, but I don't read every line of every PR." Um, these are OSS projects. They don't charge money.
-
-[`9:58`](https://youtu.be/YwZR6tc7qYg?t=598) They are very very cool projects. I am humbled, deeply humbled by the accomplishments of the maintainers and the stakes are still high. Like if you break openclaw, a lot of people are going to be upset but they are different than if you're say working in a regulated industry shipping production SAS code. Um so if you have people who depend on your code, please I'm begging you please read it. Please read it. We have a profession to uphold. 2026 is supposed to be the year of no more slop.
-
-[`10:25`](https://youtu.be/YwZR6tc7qYg?t=625) Uh, literally everyone is talking about the difference between slop and craft. Uh, this is why I'm a little mid on agent swarms and the whole gas town thing because you still need to be able to ensure quality and like going 10 times faster doesn't matter if you're going to throw it all away in 6 months.
-
-[`10:40`](https://youtu.be/YwZR6tc7qYg?t=640) So, shoot for 2 to 3x. That's actually another talk of like how you measure this and how you actually get there and maintain like a near human level of quality. Um, but I'll talk about the goals and like what you should think about if you want to get there is you should have high leverage planning. You should not outsource the thinking, read and own the code and ideally we will avoid uh magic words.
-
-[`11:02`](https://youtu.be/YwZR6tc7qYg?t=662) So uh we got better research, we got better plans, we got better leverage. I'm going to talk about each of those um as far as like in general what we and like in specifically what we did and also some general concepts as you're building workflows and systems around coding agents what you can do.
-
-[`11:15`](https://youtu.be/YwZR6tc7qYg?t=675) So we talked about how a skilled engineer could detangle the ticket to the questions to the research uh and then the research would be very objective. Um basically we just hide the ticket from the context window that's doing research and we do it deterministically. So basically you have one context window to generate questions and then a fresh context window with no knowledge of what we're building to go make your research doc.
-
-[`11:38`](https://youtu.be/YwZR6tc7qYg?t=698) Um this is pretty trivial if you're familiar with the concept of query planning. Um it's similar in concept but for you know LLMs reading through codebases.
-
-[`11:48`](https://youtu.be/YwZR6tc7qYg?t=708) Um so I've been hacking on agents for a while and before we did the coding agent stuff I wrote this paper called 12 factor agents which was uh allegedly the first time anyone was like talking a lot about context engineering. Uh there's two ways to read context engineering and most people jumped in. Is anyone building like rag pipelines? Raise your hand if you built a rag pipeline? Okay. Some people are feeling uh not like not raising their hands today.
-
-[`12:10`](https://youtu.be/YwZR6tc7qYg?t=730) Um, but it's like, okay, put more information. You put too much information in, the model can't make sense of it. I actually think the more interesting read of context engineering is like better instructions and simpler tasks and smaller context windows.
-
-[`12:22`](https://youtu.be/YwZR6tc7qYg?t=742) Of course, we all know Jeff now. I don't have to introduce him anymore. I used to have to tell people who Jeff was when I was talking. Um, we talked about this like context window thing as the idea of the dumb zone, which is, you know, you have about 168,000 tokens and 200,000, but some of them are reserved for output. You have various things that they're for and around like 40% on average depending on what you're doing and how much of your context is user messages versus files and all of this stuff you hit this point where you have degrading results.
-
-[`12:48`](https://youtu.be/YwZR6tc7qYg?t=768) And obviously sometimes you can still get good enough for you results at 60% but the less of the context window you use the better results you will get. Um our friends at Databricks were just talking about you have too many MCPs the whole context window is full of instructions about how to use a bunch of tools that you don't care about and then by the time you're writing code the model is like not good at following your instructions. So you're not just giving the model too much information, you're also probably giving it too many instructions.
-
-[`13:12`](https://youtu.be/YwZR6tc7qYg?t=792) And so the idea of what we were doing was this thing like makes a lot of sense. Use prompts for control flow. This is a customer support example, but you know, if it's a complaint, go do this. If it's product feedback, go do this. If it's a billing issue, go do this.
-
-[`13:27`](https://youtu.be/YwZR6tc7qYg?t=807) Um, and what you can do instead is you can instead of using prompts for control flow, you can kind of classify the input and then feed it to a series of smaller, more focused prompts where there are far fewer instructions and far fewer actions to choose from. I'm sure many of us have already done things like this to improve the performance of pipelines.
-
-[`13:43`](https://youtu.be/YwZR6tc7qYg?t=823) Um, so this was a single mega prompt with 85 instructions. Um, and if you did it right, you would go through all these different steps. All these different phases were part of that. And if any of the instructions didn't get followed, you would skip the things that made this really high leverage.
-
-[`13:54`](https://youtu.be/YwZR6tc7qYg?t=834) Um, so we split it across several prompts and so like before it was research, plan, implement. Now it's questions, research, design, structure, plan, work, implement, PR. We're actually not going to have time to talk about the implement side of the thing today, but um, we split up the planning into a design discussion and outline and a plan. And before it was 85 instructions, now they're all less than 40, which is really exciting. And I think some of them could actually be even smaller. We're still iterating on them.
-
-[`14:18`](https://youtu.be/YwZR6tc7qYg?t=858) The lesson is don't use prompts for control flow if you can use control flow for control flow. Like the if statement is really really powerful and LLMs are really good at classifying things. This is not just true for coding agents. This is any AI LLM based system you're building.
-
-[`14:31`](https://youtu.be/YwZR6tc7qYg?t=871) Um and it's really funny because we were writing all this stuff and we got on stage we said like full fat agents don't work. Don't just call tools in a loop. Do context engineering and build workflows and graphs and micro agents. We told everybody don't do this. And then we turned around in August and we're like all right but this Cloud Code thing is pretty good. And we turned around and we wrote this giant monolithic prompt. So, we figured it was time to actually go drink our own Kool-Aid. Um, mind your instruction budget.
-
-[`14:56`](https://youtu.be/YwZR6tc7qYg?t=896) How do we get better leverage? So, we split things up to get better instruction following, right? These three different phases. But we also got more leverage. I'm going to talk about why. Because even if the plan is a thousand lines and the code is 1,000 lines, your design discussion might only be 200 lines. And you get a lot of opportunities to resteer in that moment.
-
-[`15:12`](https://youtu.be/YwZR6tc7qYg?t=912) And so, what this looks like is basically where are we going? What does the final solution look like? And it has, you know, the current state, the desired end state, it has the patterns to follow. How many of you ever like sent off a coding agent and it like found the wrong way to do a thing in your codebase and it followed the bad patterns? Yes. Right.
-
-[`15:29`](https://youtu.be/YwZR6tc7qYg?t=929) This is your chance to go read all the patterns it found that it thinks are relevant and be like, "Nope, that's not how we do atomic SQL updates. That's some engineer that doesn't work here anymore and it's crazy and everyone hates it. Go find the way we do it over there."
-
-[`15:40`](https://youtu.be/YwZR6tc7qYg?t=940) Um, it'll keep track of resolved design decisions that we've made. It will ask open questions. This is sort of like taking Cloud Code plan mode and the ask user question tool and just brain dumping it all to a single document that you can interact with that's like moldable and flexible.
-
-[`15:54`](https://youtu.be/YwZR6tc7qYg?t=954) Um Matt PCO has this idea, he calls it the design concept and it's this idea of like the thing that is locked up in this context window that is the shared understanding between you and the agent of what's being built and how. Uh so we put it in a 200-line markdown artifact.
-
-[`16:07`](https://youtu.be/YwZR6tc7qYg?t=967) Um, and so we now have human agent alignment. And the idea here is like you're forcing the agent to brain dump out all the things it found, all the things it wants to do, all the things it thinks you want, and ask you questions about things it doesn't know. So you can do brain surgery on the agent before you proceed downstream.
-
-[`16:24`](https://youtu.be/YwZR6tc7qYg?t=984) And it's all about do not outsource the thinking. You want to give the agent every single opportunity to show you what it's wrong about before you go write 2,000 lines of code.
-
-[`16:35`](https://youtu.be/YwZR6tc7qYg?t=995) So uh, 200 lines instead of a thousand, a little bit more leverage. We also get better leverage from the outline. So if design is like where are we going the structure outline is how do we get there or if you're an engineer who is miserable because of sitting in meetings all day there's the like architecture review and then there's the sprint planning meeting — what are we going to build and then how do we break it down into tasks.
-
-[`16:56`](https://youtu.be/YwZR6tc7qYg?t=1016) And so we take our design and we take it to ticket and the research we build up a new context window and we create the structure outline and this is basically high-level overview of the phases not the exact code we're going to write but just kind of what it's going to look like what order we're going to do the changes in and how we're going to test it along the way.
-
-[`17:12`](https://youtu.be/YwZR6tc7qYg?t=1032) Now, I don't actually test in between every phase, everything I'm building, but if it's sensitive or if it's hard or if it's complex, I want to be able to catch it before it goes and writes all the code. I want to make sure each two, three, 400 line block is correct.
-
-[`17:23`](https://youtu.be/YwZR6tc7qYg?t=1043) Um, and these docs mean lighter reviews. Instead of reviewing the plan, this is two things for the same feature. Plan, eight pages, structure outline, two-ish pages, much shorter.
-
-[`17:33`](https://youtu.be/YwZR6tc7qYg?t=1053) Um, I like to think of this, has anyone ever written a C header file, .h file? Yeah. Okay, so if the plan is the implementation, the outline is the C header files. Just here's the signatures and the new types that we're changing enough again for you to see what the agent is thinking and correct it if it's wrong.
-
-[`17:50`](https://youtu.be/YwZR6tc7qYg?t=1070) Um, and the reason why we do this is despite like every single model and trying to prompt this out and eval the hell out of this, we cannot get models to stop writing horizontal plans or — it like this is the best way to fix their need to write horizontal plans. And when I say horizontal plans, I basically mean you start with — models love to like we're going to do all the database and then we're going to do all the services and then we're going to do all the API and then we're going to do all the front end and before you know it, you're on the other side of 1,200 lines of code and it's not working and now you have to go figure out which part is broken because there was nothing really to test along the way.
-
-[`18:24`](https://youtu.be/YwZR6tc7qYg?t=1104) Whether the model is verifying it or whether you the human are jumping in and checking it's correct. And so what we've seen work really really well across orgs of all sizes um is what I call vertical plans. This is how I build when I'm like before AI I would like make a mock API endpoint and then get it working in the front end and then wire that and then mock out the services layer and then do the database migration and then put everything together.
-
-[`18:46`](https://youtu.be/YwZR6tc7qYg?t=1126) And so even though it's the same amount of code you have these like checkpoints where you can see if it's working and if it's not you can pause and fix it before you go try to do the rest of it. So these are just markdown docs too. Like you can and should ask for more detail. They start high level, but like here's an example of like I don't think you're going to get this right. Tell me what you're thinking. And it like dumped out the types and the signatures.
-
-[`19:04`](https://youtu.be/YwZR6tc7qYg?t=1144) Um and then getting better leverage from the plan itself. I mean again like usual like we've been doing. We just take that artifact, we build it up with all the previous artifacts and then we can go build the plan. Um and it is the same if you use create plan. It's the exact same template, exact same setup, exact same prompt, but this is a tactical doc for the agent. We've already done enough aligning that like I'm just going to spot check this and then we save the deep review for the actual code.
-
-[`19:28`](https://youtu.be/YwZR6tc7qYg?t=1168) And so if you've used any of the RPI plans, they look like this. It's the model saying, "Hey, here's all the changes I'm going to make."
-
-[`19:35`](https://youtu.be/YwZR6tc7qYg?t=1175) Um, the most important part of this leverage is not just about you and the agent, though. Like human agent alignment is important and knowing what the agent's going to do and correcting that is good but it's also you know if you're working with a team of engineers we've found a lot of value from taking these design discussions these structure outlines and review — I said don't review the plans but these shorter docs are really really good.
-
-[`19:57`](https://youtu.be/YwZR6tc7qYg?t=1197) Uh I am not the code owner of most of our code at HumanLayer my uh co-founder is and I send him my design discussions on purpose we don't have a required step but I want to — I want to know that when we get code review, it's just going to be like, "Yep, that's what I wanted. That's it. That's it." So any of my bad decisions are headed off on a 200-line doc before I've gone and written the code and gotten it working and I'm attached to it. And so this is really really powerful.
-
-[`20:22`](https://youtu.be/YwZR6tc7qYg?t=1222) Um before AI, we would basically — the way another way to think about this is like time savings. You would say, "Okay, it's a two-day feature. I got to do all this stuff. The coding is probably two to four hours." If you just pick up Cloud Code and use it to ship for you, you do get some speed up because now the coding takes 20 minutes. It's still a two-day feature because I still have to like align with my team on what we're going to do. I still have to get a code review and fix stuff. Maybe I'm working across repos that I don't personally own and then we still have to verify and test it.
-
-[`20:47`](https://youtu.be/YwZR6tc7qYg?t=1247) But if you use AI to help you with your planning and alignment, then you also save time there. And I think you get much better alignment. Um, and so your code review and rework is also much shorter because you already know what's coming. The team that's reviewing it already kind of like had their chance to resteer you. And really good teams do this. It's they have a meeting that's called architecture review where we decide, you know, what's our technical design doc on how we're going to build this.
-
-[`21:12`](https://youtu.be/YwZR6tc7qYg?t=1272) So, um, as far as testing and verifying, sorry, I don't have a good answer for you. It's a whole other talk. If you went to Drew's talk downstairs, go find Drew Brun after this. He will tell you all about testing and verifying.
-
-[`21:21`](https://youtu.be/YwZR6tc7qYg?t=1281) Um, let's put this all together. So, we have these five stages of research and planning. Um, the process is basically questions, research, design, structure, outline, plan, work tree, implement. Finally, the poll request. Uh, that didn't make a very good acronym though, so we just picked the ones we liked. And, uh, we're calling this crispy. Uh, so RPI to crispy. That's the — There you go.
-
-[`21:43`](https://youtu.be/YwZR6tc7qYg?t=1303) Um, what's next and what did I not have time to talk about today? Um, three steps was already a lot for some people to learn and now there are seven. I thought we were supposed to make this easier for teams to learn this and adopt it. We can talk about how we're like thinking about that.
-
-[`21:57`](https://youtu.be/YwZR6tc7qYg?t=1317) Um the idea of how do you measure the impact of doing this um in engineering teams I think is like we've been trying to measure developer productivity for 50 years and we still don't know how to do it very well.
-
-[`22:06`](https://youtu.be/YwZR6tc7qYg?t=1326) Um and then it's like if you're a central kind of platform team rolling out changes to everybody in your org, how do you make these prompts better? How do you make this engineering system better? I mean, um, we were just talking about like, oh, every team has a skill now, and we want to consolidate and make that shared and let people benefit from each other's learnings. How do you make that stuff better without like breaking somebody's workflow or regressing it for some team?
-
-[`22:31`](https://youtu.be/YwZR6tc7qYg?t=1351) Uh, if you want to help us, if you're in San Francisco and you're working on critical systems and you want to like figure out how to get coding agents to do more, uh, let's chat. We're also hiring. Um, send us a note either way. Founders@humanlayer.dev.
-
-[`22:43`](https://youtu.be/YwZR6tc7qYg?t=1363) Uh we're building an IDE that orchestrates this stuff for you. Uh you don't need this to get this value out of this, but this is the kind of stuff we're working on.
-
-[`22:52`](https://youtu.be/YwZR6tc7qYg?t=1372) Uh if you want to hang out, I'm doing a sandbox research hackathon on Saturday. We're going to just get together with a bunch of cool builders, test all of the sandbox providers together, uh and see which one's the best and then share our learnings. I'll also be at the Daytona Compute Conference. Uh and if you feel like coming to Miami, uh AI Engineer Miami is going to be really fun. Will be giving uh the updated version of this talk with more stuff that I didn't have time to get to today.
-
-[`23:15`](https://youtu.be/YwZR6tc7qYg?t=1395) Um, thank you so much to all of you for your energy to Demetrios and the entire organizing squad. Good luck.
-
-[`23:22`](https://youtu.be/YwZR6tc7qYg?t=1402) Questions. Who's got a question for Dex? That was super fast. I like it. I was very doubtful that you were going to get through it, but I like it.
-
-[`23:32`](https://youtu.be/YwZR6tc7qYg?t=1412) All right. I'm curious about reading the code. Like, it's not scalable, right? Like, are you going to be saying the same thing in six months? I mean, six months ago, I said not to read it. Uh, and it was — I think everyone who is saying don't read the code now is going to be in six months being like, "Yeah, we had to throw that out." There's something there's something in the middle, right? We're binary searching through the space uh of how much of the code should you read.
-
-[`23:55`](https://youtu.be/YwZR6tc7qYg?t=1435) Um, I think, yeah, the idea is if you still read the code, you can still get two to three x speed up. And that's actually better business outcomes than uh than going 10x faster and shipping a bunch of slop and hoping that you know GPT7 will fix it for you.
-
-[`24:12`](https://youtu.be/YwZR6tc7qYg?t=1452) Yeah, I hit things. Uh awesome talk. Um curious your thoughts on like the software factory. I think it's like strong DM that's saying the opposite which is like never have a human read either side of it. And I think that pushes us further into eval. So what is your thinking on that?
-
-[`24:35`](https://youtu.be/YwZR6tc7qYg?t=1475) Yeah, there is a whole class of like there's a whole rabbit hole you can go down with like formal verification and TLA plus or — I talked to a guy who's building a new TLA plus that is TLA++ that is like okay what if we don't read the code? How can we actually like formally verify everything that's working?
-
-[`24:52`](https://youtu.be/YwZR6tc7qYg?t=1492) Uh, I think there's a lot more to be built and I think there's a lot of people right now who need to ship like code to production systems faster. So like maybe someday, but like I used to cite Sean Gro's talk where he was like it's just the spec. Just write the document that explains the desired behavior and you treat the code like it's assembly and you never read it anymore. Um, I do not endorse that. Let's put it that way.
-
-[`25:17`](https://youtu.be/YwZR6tc7qYg?t=1517) We got one more. All right, last one. Uh I know you mentioned one of the slides about the like context window and uh the the dumb zone, right? Uh I know you researched that like heavily a few — like have you gone back to look at that again to see how true that still is after certain like context window especially with like all the autocompaction they have now and other methods for that.
-
-[`25:41`](https://youtu.be/YwZR6tc7qYg?t=1541) I mean, I think like for if you have been using AI coding agents for six to nine months and you use them for 60 hours a week, like the dumb zone is not a useful concept to you. I will regularly go up to 60. I will regularly like aggressively keep it below 30. It depends on the complexity of your task, the amount of instructions versus information.
-
-[`26:06`](https://youtu.be/YwZR6tc7qYg?t=1566) So like your mileage may vary. If you are using coding agents for the first time, this is what we teach people is like if you don't know what to do and you haven't developed that intuition, then like shoot to keep it under 40 and if you get up to 60, like think about wrapping it up.
-
-[`26:15`](https://youtu.be/YwZR6tc7qYg?t=1575) And like you can keep iterating on the same doc. That's what's also nice about these is like we don't use the built-in compaction because everything that matters is going into static assets and so you can always resume from where you left off without having to worry about the quality of an autocompact or a manual compact.
-
-[`26:32`](https://youtu.be/YwZR6tc7qYg?t=1592) Brilliant, Dex. Well done, dude. Thank you. Let's give it up for him.

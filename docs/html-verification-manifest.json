@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "file": "presentation/index.html",
+      "hero_selectors": [
+        "div.slide.active.title-slide h1",
+        "div.slide.active.title-slide p.subtitle"
+      ],
+      "cta_selectors": [
+        "button#prevBtn",
+        "button#nextBtn",
+        "div.keyboard-hint"
+      ],
+      "required_text_selectors": [
+        "title",
+        "span#journeyLevelLabel",
+        "div.slide-counter",
+        "div.keyboard-hint"
+      ]
+    },
+    {
+      "file": "!/video-presentation-transcript/1-video-workflow.html",
+      "hero_selectors": [
+        "div.slide.active.title-slide h1",
+        "div.slide.active.title-slide p.subtitle",
+        "div.slide.active.title-slide p.shimmer-text"
+      ],
+      "cta_selectors": [
+        "button#prevBtn",
+        "button#nextBtn",
+        "div.keyboard-hint"
+      ],
+      "required_text_selectors": [
+        "title",
+        "span#journeyLevelLabel",
+        "div.slide-counter",
+        "div.keyboard-hint"
+      ]
+    },
+    {
+      "file": "!/thumbnail/daily-workflows.html",
+      "hero_selectors": [
+        "div.pixel-title",
+        "p.subtitle",
+        "p.project-line"
+      ],
+      "cta_selectors": [
+        "div.trending-badge",
+        "p.footer"
+      ],
+      "required_text_selectors": [
+        "title",
+        "div.repo-name",
+        "div.repo-tagline",
+        "p.footer"
+      ]
+    }
+  ]
+}

@@ -1,165 +1,165 @@
-# 12 Ways to Customize Claude Code — Tips from Boris Cherny
+# Claude Code 的 12 种自定义方式：来自 Boris Cherny 的技巧
 
-A summary of customization tips shared by Boris Cherny ([@bcherny](https://x.com/bcherny)), creator of Claude Code, on February 12, 2026.
+这是 Boris Cherny（[@bcherny](https://x.com/bcherny)），Claude Code 的创造者，于 2026 年 2 月 12 日分享的自定义技巧摘要。
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">← 返回 Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-## Context
+## 背景
 
-Boris Cherny highlighted that customizability is one of the things engineers love most about Claude Code — hooks, plugins, LSPs, MCPs, skills, effort, custom agents, status lines, output styles, and more. He shared 12 practical ways developers and teams are customizing their setups.
+Boris Cherny 提到，可定制性是工程师最喜欢 Claude Code 的原因之一：钩子、插件、LSP、MCP、技能、effort、自定义代理、状态栏、输出风格等等。他分享了开发者和团队在实际使用中采用的 12 种实用定制方式。
 
-<a href="https://x.com/bcherny/status/2021699851499798911"><img src="assets/boris-12-feb-26/0.webp" alt="Boris Cherny intro tweet" width="50%" /></a>
-
----
-
-## 1/ Configure Your Terminal
-
-Set up your terminal for the best Claude Code experience:
-
-- **Theme**: Run `/config` to set light/dark mode
-- **Notifications**: Enable notifications for iTerm2, or use a custom notification hook
-- **Newlines**: If using Claude Code in an IDE terminal, Apple Terminal, Warp, or Alacritty, run `/terminal-setup` to enable shift+enter for newlines (so you don't need to type `\`)
-- **Vim mode**: Run `/vim`
-
-<a href="https://x.com/bcherny/status/2021699859359883608"><img src="assets/boris-12-feb-26/1.webp" alt="Configure your terminal" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2021699851499798911"><img src="assets/boris-12-feb-26/0.webp" alt="Boris Cherny 介绍推文" width="50%" /></a>
 
 ---
 
-## 2/ Adjust Effort Level
+## 1/ 配置你的终端
 
-Run `/model` to pick your preferred effort level:
+把终端调整到最适合 Claude Code 的状态：
 
-- **Low** — fewer tokens, faster responses
-- **Medium** — balanced behavior
-- **High** — more tokens, more intelligence
+- **Theme**：运行 `/config` 设置亮色或暗色模式
+- **Notifications**：为 iTerm2 启用通知，或者使用自定义通知钩子
+- **Newlines**：如果你是在 IDE 终端、Apple Terminal、Warp 或 Alacritty 中使用 Claude Code，运行 `/terminal-setup` 启用 `shift+enter` 换行（这样你就不用输入 `\`）
+- **Vim mode**：运行 `/vim`
 
-Boris's preference: High for everything.
-
-<a href="https://x.com/bcherny/status/2021699860869902424"><img src="assets/boris-12-feb-26/2.webp" alt="Adjust effort level" width="50%" /></a>
-
----
-
-## 3/ Install Plugins, MCPs, and Skills
-
-Plugins let you install LSPs (available for every major language), MCPs, skills, agents, and custom hooks.
-
-Install from the official Anthropic plugin marketplace, or create your own marketplace for your company. Check the `settings.json` into your codebase to auto-add the marketplaces for your team.
-
-Run `/plugin` to get started.
-
-<a href="https://x.com/bcherny/status/2021699862522364149"><img src="assets/boris-12-feb-26/3.webp" alt="Install Plugins, MCPs, and Skills" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2021699859359883608"><img src="assets/boris-12-feb-26/1.webp" alt="配置你的终端" width="50%" /></a>
 
 ---
 
-## 4/ Create Custom Agents
+## 2/ 调整 Effort 级别
 
-Drop `.md` files in `.claude/agents` to create custom agents. Each agent can have a custom name, color, tool set, pre-allowed and pre-disallowed tools, permission mode, and model.
+运行 `/model`，选择你偏好的 effort 级别：
 
-You can also set the default agent for the main conversation using the `"agent"` field in `settings.json` or the `--agent` flag.
+- **Low**：更少 token，更快响应
+- **Medium**：平衡型表现
+- **High**：更多 token，更强智能
 
-Run `/agents` to get started.
+Boris 的偏好是：所有事情都用 High。
 
-<a href="https://x.com/bcherny/status/2021700144039903699"><img src="assets/boris-12-feb-26/4.webp" alt="Create custom agents" width="50%" /></a>
-
----
-
-## 5/ Pre-approve Common Permissions
-
-Claude Code uses a permission system combining prompt injection detection, static analysis, sandboxing, and human oversight.
-
-Out of the box, a small set of safe commands are pre-approved. To pre-approve more, run `/permissions` and add to the allow and block lists. Check these into your team's `settings.json`.
-
-Full wildcard syntax is supported — e.g., `Bash(bun run *)` or `Edit(/docs/**)`.
-
-<a href="https://x.com/bcherny/status/2021700332292911228"><img src="assets/boris-12-feb-26/5.webp" alt="Pre-approve common permissions" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2021699860869902424"><img src="assets/boris-12-feb-26/2.webp" alt="调整 effort 级别" width="50%" /></a>
 
 ---
 
-## 6/ Enable Sandboxing
+## 3/ 安装插件、MCP 和技能
 
-Opt into Claude Code's open source sandbox runtime to improve safety while reducing permission prompts.
+插件可以让你安装 LSP（主流语言都支持）、MCP、技能、代理，以及自定义钩子。
 
-Run `/sandbox` to enable it. Sandboxing runs on your machine and supports both file and network isolation.
+你可以从 Anthropic 官方插件市场安装，也可以为自己的公司搭建私有市场。把 `settings.json` 提交进代码库后，团队成员就能自动获得这些 marketplace 配置。
 
-<a href="https://x.com/bcherny/status/2021700506465579443"><img src="assets/boris-12-feb-26/6.webp" alt="Enable sandboxing" width="50%" /></a>
+运行 `/plugin` 开始配置。
 
----
-
-## 7/ Add a Status Line
-
-Custom status lines show up right below the composer, displaying model, directory, remaining context, cost, and anything else you want to see while you work.
-
-Every team member can have a different statusline. Use `/statusline` to have Claude generate one based on your `.bashrc`/`.zshrc`.
-
-<a href="https://x.com/bcherny/status/2021700784019452195"><img src="assets/boris-12-feb-26/7.webp" alt="Add a status line" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2021699862522364149"><img src="assets/boris-12-feb-26/3.webp" alt="安装插件、MCP 和技能" width="50%" /></a>
 
 ---
 
-## 8/ Customize Your Keybindings
+## 4/ 创建自定义代理
 
-Every key binding in Claude Code is customizable. Run `/keybindings` to re-map any key. Settings live reload so you can see how it feels immediately.
+把 `.md` 文件放进 `.claude/agents`，就能创建自定义代理。每个代理都可以拥有自定义名称、颜色、工具集、预先允许和预先禁止的工具、权限模式以及模型。
 
-<a href="https://x.com/bcherny/status/2021700883873165435"><img src="assets/boris-12-feb-26/8.webp" alt="Customize your keybindings" width="50%" /></a>
+你还可以通过 `settings.json` 里的 `"agent"` 字段，或者使用 `--agent` 参数，为主对话设置默认代理。
 
----
+运行 `/agents` 开始配置。
 
-## 9/ Set Up Hooks
-
-Hooks let you deterministically hook into Claude's lifecycle:
-
-- Automatically route permission requests to Slack or Opus
-- Nudge Claude to keep going when it reaches the end of a turn (you can even kick off an agent or use a prompt to decide whether Claude should keep going)
-- Pre-process or post-process tool calls, e.g., to add your own logging
-
-Ask Claude to add a hook to get started.
-
-<a href="https://x.com/bcherny/status/2021701059253874861"><img src="assets/boris-12-feb-26/9.webp" alt="Set up hooks" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2021700144039903699"><img src="assets/boris-12-feb-26/4.webp" alt="创建自定义代理" width="50%" /></a>
 
 ---
 
-## 10/ Customize Your Spinner Verbs
+## 5/ 预先批准常见权限
 
-Customize your spinner verbs to add or replace the default list with your own verbs. Check the `settings.json` into source control to share verbs with your team.
+Claude Code 的权限系统结合了提示词注入检测、静态分析、沙箱以及人工监督。
 
-<a href="https://x.com/bcherny/status/2021701145023197516"><img src="assets/boris-12-feb-26/10.webp" alt="Customize your spinner verbs" width="50%" /></a>
+开箱即用时，会默认预先批准一小部分安全命令。如果想扩展范围，可以运行 `/permissions`，把更多规则加入 allow 和 block 列表。然后把这些规则提交到团队的 `settings.json` 中。
 
----
+支持完整的通配符语法，例如 `Bash(bun run *)` 或 `Edit(/docs/**)`。
 
-## 11/ Use Output Styles
-
-Run `/config` and set an output style to have Claude respond using a different tone or format.
-
-- **Explanatory** — recommended when getting familiar with a new codebase, to have Claude explain frameworks and code patterns as it works
-- **Learning** — to have Claude coach you through making code changes
-- **Custom** — create custom output styles to adjust Claude's voice
-
-<a href="https://x.com/bcherny/status/2021701379409273093"><img src="assets/boris-12-feb-26/11.webp" alt="Use output styles" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2021700332292911228"><img src="assets/boris-12-feb-26/5.webp" alt="预先批准常见权限" width="50%" /></a>
 
 ---
 
-## 12/ Customize All the Things!
+## 6/ 启用沙箱
 
-Claude Code works great out of the box, but when you do customize, check your `settings.json` into git so your team can benefit too. Configuration is supported at multiple levels:
+使用 Claude Code 开源的沙箱运行时，可以在提升安全性的同时减少权限提示。
 
-- For your codebase
-- For a sub-folder
-- For just yourself
-- Via enterprise-wide policies
+运行 `/sandbox` 启用它。沙箱运行在你的本机上，同时支持文件隔离与网络隔离。
 
-With 37 settings and 84 environment variables (use the `"env"` field in your `settings.json` to avoid wrapper scripts), there's a good chance any behavior you want is configurable.
-
-<a href="https://x.com/bcherny/status/2021701636075458648"><img src="assets/boris-12-feb-26/12.webp" alt="Customize all the things" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2021700506465579443"><img src="assets/boris-12-feb-26/6.webp" alt="启用沙箱" width="50%" /></a>
 
 ---
 
-## Sources
+## 7/ 添加状态栏
+
+自定义状态栏会显示在输入框下方，展示模型、目录、剩余上下文、成本，以及你希望在工作时看到的任何信息。
+
+团队中每个人都可以有不同的 statusline。使用 `/statusline`，让 Claude 根据你的 `.bashrc` 或 `.zshrc` 帮你生成一个。
+
+<a href="https://x.com/bcherny/status/2021700784019452195"><img src="assets/boris-12-feb-26/7.webp" alt="添加状态栏" width="50%" /></a>
+
+---
+
+## 8/ 自定义快捷键绑定
+
+Claude Code 中的每一个快捷键都可以自定义。运行 `/keybindings` 重新映射任意按键。设置支持热重载，所以你可以立即体验改动效果。
+
+<a href="https://x.com/bcherny/status/2021700883873165435"><img src="assets/boris-12-feb-26/8.webp" alt="自定义快捷键绑定" width="50%" /></a>
+
+---
+
+## 9/ 设置钩子
+
+钩子可以让你以确定性的方式接入 Claude 的生命周期：
+
+- 自动把权限请求路由到 Slack 或 Opus
+- 当 Claude 一轮结束时，推动它继续执行
+- 在工具调用前后进行预处理或后处理，例如加入自定义日志
+
+直接让 Claude 帮你添加一个钩子即可开始。
+
+<a href="https://x.com/bcherny/status/2021701059253874861"><img src="assets/boris-12-feb-26/9.webp" alt="设置钩子" width="50%" /></a>
+
+---
+
+## 10/ 自定义 Spinner 动词
+
+你可以自定义 spinner verb，新增或替换默认动词列表。把 `settings.json` 提交进版本控制后，团队成员也能共享这些动词配置。
+
+<a href="https://x.com/bcherny/status/2021701145023197516"><img src="assets/boris-12-feb-26/10.webp" alt="自定义 spinner 动词" width="50%" /></a>
+
+---
+
+## 11/ 使用输出风格
+
+运行 `/config` 并设置输出风格，让 Claude 用不同语气或格式回应你。
+
+- **Explanatory**：推荐在熟悉新代码库时使用，让 Claude 在工作过程中解释框架与代码模式
+- **Learning**：让 Claude 以教练方式带你完成代码修改
+- **Custom**：创建自定义输出风格，调整 Claude 的表达声音
+
+<a href="https://x.com/bcherny/status/2021701379409273093"><img src="assets/boris-12-feb-26/11.webp" alt="使用输出风格" width="50%" /></a>
+
+---
+
+## 12/ 把一切都定制起来
+
+Claude Code 开箱即用已经很好，但如果你进行了定制，最好把 `settings.json` 提交到 git，这样团队也能一起受益。配置支持多个层级：
+
+- 针对整个代码库
+- 针对子目录
+- 只针对你自己
+- 通过企业级策略统一下发
+
+目前有 37 个设置项和 84 个环境变量（你可以在 `settings.json` 里使用 `"env"` 字段，避免依赖包装脚本），因此你想要的大多数行为，大概率都能配置出来。
+
+<a href="https://x.com/bcherny/status/2021701636075458648"><img src="assets/boris-12-feb-26/12.webp" alt="把一切都定制起来" width="50%" /></a>
+
+---
+
+## 来源
 
 - [Boris Cherny (@bcherny) on X — February 12, 2026](https://x.com/bcherny)
 - [Claude Code Terminal Setup Docs](https://code.claude.com/docs/en/terminal)

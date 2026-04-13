@@ -1,19 +1,19 @@
-# Power-ups Best Practice
+# Power-ups 最佳实践
 
 ![Last Updated](https://img.shields.io/badge/Last_Updated-Apr%2002%2C%202026-white?style=flat&labelColor=555)
 
-Interactive lessons teaching Claude Code features with animated demos. Each power-up teaches one thing Claude Code can do that most people miss. Introduced in v2.1.90.
+通过带动画演示的交互式课程讲解 Claude Code 的功能。每个 Power-up 都聚焦一项很多人容易忽略、但 Claude Code 实际能做到的事情。该功能在 v2.1.90 引入。
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">← 返回 Claude Code 最佳实践</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-## Usage
+## 用法
 
 ```bash
 claude
@@ -22,45 +22,45 @@ claude
 
 ---
 
-## Power-ups (10)
+## Power-ups（10）
 
 <p align="center">
-  <img src="assets/claude-power-ups/powerup-menu.png" alt="Power-ups menu showing 10 lessons" width="700">
+  <img src="assets/claude-power-ups/powerup-menu.png" alt="展示 10 节课程的 Power-ups 菜单" width="700">
 </p>
 
-| # | Power-up | Topics |
+| # | Power-up | 主题 |
 |---|----------|--------|
-| 1 | Talk to your codebase | `@` files, line refs |
-| 2 | Steer with modes | `shift+tab`, plan, auto |
-| 3 | Undo anything | `/rewind`, `Esc-Esc` |
-| 4 | Run in the background | tasks, `/tasks` |
-| 5 | Teach Claude your rules | `CLAUDE.md`, `/memory` |
-| 6 | Extend with tools | MCP, `/mcp` |
-| 7 | Automate your workflow | skills, hooks |
-| 8 | Multiply yourself | subagents, `/agents` |
-| 9 | Code from anywhere | `/remote-control`, `/teleport` |
-| 10 | Dial the model | `/model`, `/effort` |
+| 1 | Talk to your codebase | `@` 文件、行引用 |
+| 2 | Steer with modes | `shift+tab`、plan、auto |
+| 3 | Undo anything | `/rewind`、`Esc-Esc` |
+| 4 | Run in the background | tasks、`/tasks` |
+| 5 | Teach Claude your rules | `CLAUDE.md`、`/memory` |
+| 6 | Extend with tools | MCP、`/mcp` |
+| 7 | Automate your workflow | 技能、钩子 |
+| 8 | Multiply yourself | 子代理、`/agents` |
+| 9 | Code from anywhere | `/remote-control`、`/teleport` |
+| 10 | Dial the model | `/model`、`/effort` |
 
 ---
 
-## Example: Dial the model
+## 示例：Dial the model
 
-The last power-up teaches model switching and effort control with an animated demo.
+最后一个 Power-up 会通过动画演示模型切换与 effort 控制。
 
 <p align="center">
-  <img src="assets/claude-power-ups/dial-the-model-1.png" alt="Dial the model — demo thinking deeply" width="700">
+  <img src="assets/claude-power-ups/dial-the-model-1.png" alt="Dial the model：演示深度思考" width="700">
 </p>
 
 <p align="center">
-  <img src="assets/claude-power-ups/dial-the-model-2.png" alt="Dial the model — demo showing hypotheses" width="700">
+  <img src="assets/claude-power-ups/dial-the-model-2.png" alt="Dial the model：演示假设展开" width="700">
 </p>
 
 <p align="center">
-  <img src="assets/claude-power-ups/dial-the-model-3.png" alt="Dial the model — demo setting effort to high" width="700">
+  <img src="assets/claude-power-ups/dial-the-model-3.png" alt="Dial the model：将 effort 设为 high" width="700">
 </p>
 
 ---
 
-## Sources
+## 来源
 
-- [Changelog — v2.1.90](https://code.claude.com/docs/en/changelog)
+- [Changelog - v2.1.90](https://code.claude.com/docs/en/changelog)

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="172" height="40" role="img" aria-label="Implemented">
-  <title>Implemented</title>
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="172" height="40" role="img" aria-label="已实现">
+  <title>已实现</title>
   <style>
     @keyframes shimmer {
       0% { transform: translateX(-172px); }
@@ -27,6 +27,6 @@
     <rect class="shine" width="172" height="40" fill="url(#shimmer)"/>
   </g>
   <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="18">
-    <text x="86" y="26">Implemented</text>
+    <text x="86" y="26">已实现</text>
   </g>
 </svg>

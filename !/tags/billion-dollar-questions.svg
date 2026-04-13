@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="44" role="img" aria-label="Billion-Dollar Questions">
-  <title>Billion-Dollar Questions</title>
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="360" height="44" role="img" aria-label="十亿美元问题">
+  <title>十亿美元问题</title>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#b8860b"/>
@@ -59,7 +59,7 @@
   <text class="diamond" x="336" y="29" font-size="16" fill="#fff" fill-opacity=".9" filter="url(#glow)">&#9670;</text>
   <!-- main text with shadow -->
   <g font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" text-anchor="middle">
-    <text x="181" y="29" font-size="19" font-weight="bold" fill="#000" fill-opacity=".3">Billion-Dollar Questions</text>
-    <text x="180" y="28" font-size="19" font-weight="bold" fill="#fff" filter="url(#glow)">Billion-Dollar Questions</text>
+    <text x="181" y="29" font-size="19" font-weight="bold" fill="#000" fill-opacity=".3">十亿美元问题</text>
+    <text x="180" y="28" font-size="19" font-weight="bold" fill="#fff" filter="url(#glow)">十亿美元问题</text>
   </g>
 </svg>

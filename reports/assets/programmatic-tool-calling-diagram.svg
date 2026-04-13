@@ -1,74 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" font-family="Segoe UI, Arial, sans-serif">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" font-family="Segoe UI, Arial, sans-serif">
   <!-- Background -->
   <rect width="1100" height="620" fill="#ffffff" rx="8"/>
 
   <!-- Title -->
-  <text x="550" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Programmatic Tool Calling (PTC)</text>
-  <text x="550" y="58" text-anchor="middle" font-size="13" fill="#888">Claude Opus 4.6 / Sonnet 4.6 — Now Generally Available</text>
+  <text x="550" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">程序化工具调用 (PTC)</text>
+  <text x="550" y="58" text-anchor="middle" font-size="13" fill="#888">Claude Opus 4.6 / Sonnet 4.6：现已正式可用</text>
 
   <!-- Divider -->
   <line x1="550" y1="75" x2="550" y2="600" stroke="#d0d0d0" stroke-width="1.5" stroke-dasharray="6,4"/>
 
   <!-- LEFT SIDE: Traditional -->
-  <text x="275" y="95" text-anchor="middle" font-size="16" font-weight="600" fill="#444">Traditional Tool Calling</text>
-  <text x="275" y="113" text-anchor="middle" font-size="12" fill="#999">3 tools = 3 inference passes</text>
+  <text x="275" y="95" text-anchor="middle" font-size="16" font-weight="600" fill="#444">传统工具调用</text>
+  <text x="275" y="113" text-anchor="middle" font-size="12" fill="#999">3 个工具 = 3 次推理往返</text>
 
   <!-- Round Trip 1 -->
   <rect x="60" y="135" width="110" height="40" rx="6" fill="#FFF3E0" stroke="#F57C00" stroke-width="1.5"/>
   <text x="115" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#E65100">Claude</text>
 
   <line x1="170" y1="148" x2="280" y2="148" stroke="#E53935" stroke-width="1.5" marker-end="url(#arrowRed)"/>
-  <text x="225" y="142" text-anchor="middle" font-size="10" fill="#E53935">Tool call 1</text>
+  <text x="225" y="142" text-anchor="middle" font-size="10" fill="#E53935">调用 1</text>
 
   <rect x="280" y="135" width="110" height="40" rx="6" fill="#FFCDD2" stroke="#E53935" stroke-width="1.5"/>
-  <text x="335" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#B71C1C">Action</text>
+  <text x="335" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#B71C1C">动作</text>
 
   <line x1="280" y1="168" x2="170" y2="168" stroke="#43A047" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
-  <text x="225" y="182" text-anchor="middle" font-size="10" fill="#43A047">Response 1</text>
+  <text x="225" y="182" text-anchor="middle" font-size="10" fill="#43A047">响应 1</text>
 
   <!-- Round Trip 2 -->
   <rect x="60" y="210" width="110" height="40" rx="6" fill="#FFF3E0" stroke="#F57C00" stroke-width="1.5"/>
   <text x="115" y="235" text-anchor="middle" font-size="13" font-weight="600" fill="#E65100">Claude</text>
 
   <line x1="170" y1="223" x2="280" y2="223" stroke="#E53935" stroke-width="1.5" marker-end="url(#arrowRed)"/>
-  <text x="225" y="217" text-anchor="middle" font-size="10" fill="#E53935">Tool call 2</text>
+  <text x="225" y="217" text-anchor="middle" font-size="10" fill="#E53935">调用 2</text>
 
   <rect x="280" y="210" width="110" height="40" rx="6" fill="#C8E6C9" stroke="#43A047" stroke-width="1.5"/>
-  <text x="335" y="235" text-anchor="middle" font-size="13" font-weight="600" fill="#1B5E20">Action</text>
+  <text x="335" y="235" text-anchor="middle" font-size="13" font-weight="600" fill="#1B5E20">动作</text>
 
   <line x1="280" y1="243" x2="170" y2="243" stroke="#43A047" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
-  <text x="225" y="257" text-anchor="middle" font-size="10" fill="#43A047">Response 2</text>
+  <text x="225" y="257" text-anchor="middle" font-size="10" fill="#43A047">响应 2</text>
 
   <!-- Round Trip 3 -->
   <rect x="60" y="285" width="110" height="40" rx="6" fill="#FFF3E0" stroke="#F57C00" stroke-width="1.5"/>
   <text x="115" y="310" text-anchor="middle" font-size="13" font-weight="600" fill="#E65100">Claude</text>
 
   <line x1="170" y1="298" x2="280" y2="298" stroke="#E53935" stroke-width="1.5" marker-end="url(#arrowRed)"/>
-  <text x="225" y="292" text-anchor="middle" font-size="10" fill="#E53935">Tool call 3</text>
+  <text x="225" y="292" text-anchor="middle" font-size="10" fill="#E53935">调用 3</text>
 
   <rect x="280" y="285" width="110" height="40" rx="6" fill="#BBDEFB" stroke="#1E88E5" stroke-width="1.5"/>
-  <text x="335" y="310" text-anchor="middle" font-size="13" font-weight="600" fill="#0D47A1">Action</text>
+  <text x="335" y="310" text-anchor="middle" font-size="13" font-weight="600" fill="#0D47A1">动作</text>
 
   <line x1="280" y1="318" x2="170" y2="318" stroke="#43A047" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
-  <text x="225" y="332" text-anchor="middle" font-size="10" fill="#43A047">Response 3</text>
+  <text x="225" y="332" text-anchor="middle" font-size="10" fill="#43A047">响应 3</text>
 
-  <!-- Final Answer Left -->
+  <!-- 最终回答 Left -->
   <rect x="60" y="360" width="110" height="40" rx="6" fill="#FFF3E0" stroke="#F57C00" stroke-width="1.5"/>
   <text x="115" y="385" text-anchor="middle" font-size="13" font-weight="600" fill="#E65100">Claude</text>
 
   <line x1="170" y1="380" x2="250" y2="380" stroke="#F57C00" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
 
   <rect x="250" y="360" width="140" height="40" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5"/>
-  <text x="320" y="385" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Final Answer</text>
+  <text x="320" y="385" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">最终回答</text>
 
   <!-- Token cost left -->
   <rect x="85" y="425" width="290" height="55" rx="6" fill="#FFF8E1" stroke="#FFC107" stroke-width="1"/>
-  <text x="230" y="447" text-anchor="middle" font-size="12" font-weight="600" fill="#F57F17">Token Cost: HIGH</text>
-  <text x="230" y="465" text-anchor="middle" font-size="11" fill="#795548">All 3 responses enter context window</text>
+  <text x="230" y="447" text-anchor="middle" font-size="12" font-weight="600" fill="#F57F17">Token 成本：高</text>
+  <text x="230" y="465" text-anchor="middle" font-size="11" fill="#795548">3 次工具响应都会进入上下文窗口</text>
 
   <!-- RIGHT SIDE: Programmatic -->
-  <text x="825" y="95" text-anchor="middle" font-size="16" font-weight="600" fill="#444">Programmatic Tool Calling</text>
-  <text x="825" y="113" text-anchor="middle" font-size="12" fill="#999">3 tools = 1 inference pass</text>
+  <text x="825" y="95" text-anchor="middle" font-size="16" font-weight="600" fill="#444">程序化工具调用</text>
+  <text x="825" y="113" text-anchor="middle" font-size="12" fill="#999">3 个工具 = 1 次推理往返</text>
 
   <!-- Claude box -->
   <rect x="590" y="145" width="110" height="50" rx="6" fill="#FFF3E0" stroke="#F57C00" stroke-width="1.5"/>
@@ -80,7 +80,7 @@
 
   <!-- Script container -->
   <rect x="780" y="130" width="260" height="260" rx="8" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5"/>
-  <text x="910" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#424242">Python Script</text>
+  <text x="910" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#424242">Python 脚本</text>
   <line x1="795" y1="165" x2="1025" y2="165" stroke="#BDBDBD" stroke-width="1"/>
 
   <!-- Tool calls inside script -->
@@ -95,14 +95,14 @@
 
   <!-- Processing inside script -->
   <rect x="805" y="305" width="210" height="30" rx="4" fill="#E8EAF6" stroke="#5C6BC0" stroke-width="1"/>
-  <text x="910" y="325" text-anchor="middle" font-size="11" font-weight="500" fill="#283593">filter + aggregate results</text>
+  <text x="910" y="325" text-anchor="middle" font-size="11" font-weight="500" fill="#283593">过滤并聚合结果</text>
 
   <rect x="805" y="345" width="210" height="30" rx="4" fill="#EDE7F6" stroke="#7E57C2" stroke-width="1"/>
-  <text x="910" y="365" text-anchor="middle" font-size="11" font-weight="500" fill="#4527A0">print(summary)</text>
+  <text x="910" y="365" text-anchor="middle" font-size="11" font-weight="500" fill="#4527A0">输出摘要</text>
 
   <!-- Arrow back: only stdout -->
   <line x1="780" y1="350" x2="700" y2="350" stroke="#43A047" stroke-width="2" marker-end="url(#arrowGreen)"/>
-  <text x="740" y="340" text-anchor="middle" font-size="10" font-weight="600" fill="#43A047">stdout only</text>
+  <text x="740" y="340" text-anchor="middle" font-size="10" font-weight="600" fill="#43A047">仅返回 stdout</text>
 
   <!-- Claude receives -->
   <rect x="590" y="330" width="110" height="50" rx="6" fill="#FFF3E0" stroke="#F57C00" stroke-width="1.5"/>
@@ -112,17 +112,17 @@
   <line x1="645" y1="380" x2="645" y2="410" stroke="#F57C00" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
 
   <rect x="575" y="410" width="140" height="40" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5"/>
-  <text x="645" y="435" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Final Answer</text>
+  <text x="645" y="435" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">最终回答</text>
 
   <!-- Token cost right -->
   <rect x="585" y="475" width="455" height="55" rx="6" fill="#E8F5E9" stroke="#43A047" stroke-width="1"/>
-  <text x="812" y="497" text-anchor="middle" font-size="12" font-weight="600" fill="#2E7D32">Token Cost: ~37% LOWER</text>
-  <text x="812" y="515" text-anchor="middle" font-size="11" fill="#795548">Only stdout summary enters context — raw tool results stay in sandbox</text>
+  <text x="812" y="497" text-anchor="middle" font-size="12" font-weight="600" fill="#2E7D32">Token 成本：约降低 37%</text>
+  <text x="812" y="515" text-anchor="middle" font-size="11" fill="#795548">只有 stdout 摘要进入上下文，原始结果保留在沙箱内</text>
 
   <!-- Key insight box -->
   <rect x="30" y="550" width="1040" height="50" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1"/>
-  <text x="550" y="572" text-anchor="middle" font-size="13" font-weight="600" fill="#0D47A1">Key: Claude pre-bakes decision paths in code. Tool results go to the script, not the context window.</text>
-  <text x="550" y="590" text-anchor="middle" font-size="12" fill="#1565C0">Intermediate data is processed programmatically — only the final summary reaches Claude.</text>
+  <text x="550" y="572" text-anchor="middle" font-size="13" font-weight="600" fill="#0D47A1">关键点：Claude 先把决策路径写进代码，工具结果交给脚本而不是上下文窗口。</text>
+  <text x="550" y="590" text-anchor="middle" font-size="12" fill="#1565C0">中间数据由程序处理，最终只把摘要回传给 Claude。</text>
 
   <!-- Arrow markers -->
   <defs>

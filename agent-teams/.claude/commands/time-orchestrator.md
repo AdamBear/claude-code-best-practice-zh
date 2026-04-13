@@ -4,47 +4,47 @@ model: haiku
 
 # Time Orchestrator Command
 
-Fetch the current time for Dubai (Asia/Dubai, UTC+4) and create a visual SVG time card.
+获取迪拜（Asia/Dubai，UTC+4）当前时间，并生成一张可视化 SVG 时间卡片。
 
-## Workflow
+## 工作流
 
-### Step 1: Fetch Current Dubai Time
+### 步骤 1：获取迪拜当前时间
 
-Use the Agent tool to invoke the time agent:
+使用 Agent 工具调用时间代理：
 - subagent_type: time-agent
-- description: Fetch current Dubai time
-- prompt: Fetch the current time for Dubai (Asia/Dubai, UTC+4). Return exactly three fields: `time` (the time portion, e.g. "14:30:45"), `timezone` ("GST (UTC+4)"), and `formatted` (full formatted string, e.g. "2026-03-12 14:30:45 +04"). The agent has a preloaded skill (time-fetcher) that provides the detailed instructions.
+- description: 获取迪拜当前时间
+- prompt: 获取迪拜（Asia/Dubai，UTC+4）当前时间。请严格返回三个字段：`time`（仅时间部分，例如 "14:30:45"）、`timezone`（"GST (UTC+4)"）和 `formatted`（完整格式化字符串，例如 "2026-03-12 14:30:45 +04"）。该代理已预加载一个技能（time-fetcher），其中包含详细说明。
 - model: haiku
 
-Wait for the agent to complete and capture the returned time data.
+等待代理完成，并捕获返回的时间数据。
 
-### Data Contract
+### 数据契约
 
-The time-agent MUST return these three fields:
-- **time**: The time portion (e.g., "14:30:45")
-- **timezone**: "GST (UTC+4)"
-- **formatted**: Full formatted string (e.g., "2026-03-12 14:30:45 +04")
+time-agent **必须** 返回这三个字段：
+- **time**：时间部分（例如 `"14:30:45"`）
+- **timezone**：`"GST (UTC+4)"`
+- **formatted**：完整格式化字符串（例如 `"2026-03-12 14:30:45 +04"`）
 
-### Step 2: Create SVG Time Card
+### 步骤 2：创建 SVG 时间卡片
 
-Use the Skill tool to invoke the time-svg-creator skill:
+使用 Skill 工具调用 time-svg-creator 技能：
 - skill: time-svg-creator
-- args: Pass the time data from Step 1 — include `time`, `timezone`, and `formatted` values
+- args: 传入步骤 1 返回的时间数据，包含 `time`、`timezone` 和 `formatted`
 
-The skill will use the time data from Step 1 (available in the current context) to create the SVG card and write output files.
+该技能会使用步骤 1 已提供的时间数据（在当前上下文中可用）来创建 SVG 卡片并写出输出文件。
 
-## Critical Requirements
+## 关键要求
 
-1. **Use Agent Tool for time-agent**: DO NOT use bash commands to invoke agents. You must use the Agent tool with `subagent_type: "time-agent"`.
-2. **Use Skill Tool for SVG Creator**: Invoke the SVG creator via the Skill tool with `skill: "time-svg-creator"`, not the Agent tool.
-3. **Sequential Flow**: The agent MUST complete and return time data before the skill is invoked. Do not run them in parallel.
-4. **Data Passing**: Ensure all three fields (time, timezone, formatted) from the agent response are available in context when invoking the skill.
+1. **time-agent 必须用 Agent 工具调用**：不要用 bash 命令调用代理。必须使用 Agent 工具，并设置 `subagent_type: "time-agent"`。
+2. **SVG 创建器必须用 Skill 工具调用**：应通过 `skill: "time-svg-creator"` 调用，而不是使用 Agent 工具。
+3. **顺序执行**：必须先等待代理完成并返回时间数据，再调用技能。不要并行执行。
+4. **数据传递**：调用技能时，确保代理返回的三个字段（`time`、`timezone`、`formatted`）都在上下文中可用。
 
-## Output Summary
+## 输出摘要
 
-After both steps complete, provide a clear summary to the user showing:
-- Current Dubai time fetched
-- Timezone: GST (UTC+4)
-- Full formatted timestamp
-- SVG card created at `agent-teams/output/dubai-time.svg`
-- Summary written to `agent-teams/output/output.md`
+两个步骤完成后，向用户清晰汇报：
+- 获取到的当前迪拜时间
+- 时区：GST (UTC+4)
+- 完整格式化时间戳
+- SVG 卡片已创建：`agent-teams/output/dubai-time.svg`
+- 摘要已写入：`agent-teams/output/output.md`

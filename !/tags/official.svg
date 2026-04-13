@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" role="img" aria-label="Official">
-  <title>Official</title>
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" role="img" aria-label="官方">
+  <title>官方</title>
   <style>
     @keyframes shimmer {
       0% { transform: translateX(-120px); }
@@ -27,6 +27,6 @@
     <rect class="shine" width="120" height="40" fill="url(#shimmer)"/>
   </g>
   <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="18">
-    <text x="60" y="26">Official</text>
+    <text x="60" y="26">官方</text>
   </g>
 </svg>

@@ -1,134 +1,134 @@
-# Verification Checklist — Settings Report
+# 验证清单：设置报告
 
-Rules accumulate over time. Each workflow-changelog run MUST execute ALL rules at the specified depth. When a new type of drift is caught that an existing rule should have caught (but didn't exist or was too shallow), append a new rule here.
+规则会随着时间不断累积。每次运行 workflow-changelog 时，都必须按指定深度执行全部规则。当发现某类漂移本该被现有规则捕获，但由于规则不存在或检查深度不足而漏掉时，就把新规则追加到这里。
 
-## Depth Levels
+## 深度等级
 
-| Depth | Meaning | Example |
-|-------|---------|---------|
-| `exists` | Check if a section/table/file exists | "Does the report have a Sandbox Settings table?" |
-| `presence-check` | Check if a specific item is present or absent | "Is the `ConfigChange` event in the Hook Events table?" |
-| `content-match` | Compare actual values word-by-word against source | "Does the `model` setting description match official docs?" |
-| `field-level` | Verify every individual field is accounted for | "Does each settings key from official docs appear in the correct table?" |
-| `cross-file` | Same value must match across multiple files | "Does CLAUDE.md hooks section match the report's hook events?" |
-
----
-
-## 1. Settings Keys Tables
-
-Rules that verify settings key tables against official docs.
-
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 1A | Key Completeness | For each settings key in official docs, verify it appears in the correct section table in the report | field-level | settings documentation page | 2026-03-05 | Initial checklist — ensures no new settings keys are missed |
-| 1B | Key Types | For each key in the tables, verify the Type column matches official docs | content-match | settings documentation page | 2026-03-05 | Initial checklist — type mismatches cause user confusion |
-| 1C | Key Defaults | For each key with a default, verify the Default column matches official docs | content-match | settings documentation page | 2026-03-05 | Initial checklist — wrong defaults cause unexpected behavior |
-| 1D | Key Descriptions | For each key, verify the Description column accurately reflects official docs behavior | content-match | settings documentation page | 2026-03-05 | Initial checklist — stale descriptions mislead users |
-| 1E | Scope Column | For each key that has a Scope column (MCP, Plugin, Permission tables), verify the scope value matches official docs (e.g., "Managed only", "Any", "Project") | content-match | settings documentation page | 2026-03-15 | v2.1.71 caught `extraKnownMarketplaces` scope wrong ("Any" → "Project"), v2.1.75 caught `autoMemoryDirectory` scope restriction. No rule existed to systematically verify scope columns |
-| 1F | Inverse Completeness | For each key in the report tables, verify it exists in official docs OR is explicitly marked as "not in official docs — unverified". Keys with no official backing must be annotated | field-level | settings documentation page + JSON schema | 2026-03-15 | Suspect keys (`sandbox.ignoreViolations`, `skipWebFetchPreflight`, etc.) stayed ON HOLD for 6 runs because no rule checked the reverse direction — items in report that shouldn't be there |
-| 1G | Edge-Case Semantics | For settings with special behavior at boundary values (e.g., `0`, empty string, `null`), verify the boundary behavior is documented and matches official docs | content-match | settings documentation page | 2026-03-15 | v2.1.75 caught `cleanupPeriodDays` zero-value behavior late; v2.1.76 added "hooks receive empty transcript_path" detail. Edge cases were under-verified |
-| 1H | File Scope Check | For each key listed in the report as a `settings.json` key (particularly Display Settings), verify it is indeed a `settings.json` key and not a `~/.claude.json`-only preference. Official docs separate "Available settings" (settings.json) from "Global config settings" (~/.claude.json). Keys in the wrong scope mislead users and may cause schema validation errors | content-match | settings documentation page "Available settings" vs "Global config settings" sections | 2026-03-18 | v2.1.78 caught `showTurnDuration` and `terminalProgressBarEnabled` listed in Display Settings as settings.json keys, but official docs explicitly state they belong in `~/.claude.json` and "Adding them to settings.json will trigger a schema validation error." No rule existed to verify file scope |
+| 深度 | 含义 | 示例 |
+|-------|------|------|
+| `exists` | 检查某个章节、表格或文件是否存在 | “报告里是否有 Sandbox Settings 表？” |
+| `presence-check` | 检查某个具体项是否存在或缺失 | “Hook Events 表里是否包含 `ConfigChange` 事件？” |
+| `content-match` | 将实际值与来源逐字对比 | “`model` 设置的说明是否与官方文档一致？” |
+| `field-level` | 验证每个单独字段都被覆盖到 | “官方文档里的每个设置键，是否都出现在正确的表里？” |
+| `cross-file` | 同一个值在多个文件中必须一致 | “CLAUDE.md 的 hooks 章节是否与报告里的 hook events 一致？” |
 
 ---
 
-## 2. Settings Hierarchy
+## 1. 设置键表格
 
-Rules that verify the settings hierarchy table.
+用于按官方文档核对设置键表格的规则。
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 2A | Priority Levels | Verify all priority levels in the hierarchy table match official docs (5-level chain + managed policy) | field-level | settings documentation page | 2026-03-05 | Initial checklist — wrong priority causes override confusion |
-| 2B | File Locations | For each priority level, verify the file location path matches official docs | content-match | settings documentation page | 2026-03-05 | Initial checklist — wrong paths cause settings to be ignored |
-| 2C | Merge Semantics | Verify the array/object merge behavior description (e.g., "concatenated and deduplicated") matches official docs wording exactly | content-match | settings documentation page | 2026-03-15 | v2.1.75 caught "merged" → "concatenated and deduplicated" change. No rule existed to check merge behavior wording |
-| 2D | Managed Internals | Verify managed-tier delivery methods (server-managed, MDM, registry, file) and internal precedence order match official docs. Verify platform-specific file paths and deprecation notes | field-level | settings documentation page | 2026-03-15 | v2.1.75 restructured managed tier with internal precedence and Windows path deprecation. These sub-details had no dedicated rule |
-
----
-
-## 3. Permissions
-
-Rules that verify permission configuration accuracy.
-
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 3A | Permission Modes | Verify all permission modes in the table match official docs | field-level | settings documentation page | 2026-03-05 | Initial checklist — missing modes limit user options |
-| 3B | Tool Syntax Patterns | Verify all tool permission syntax patterns and examples match official docs | content-match | settings documentation page | 2026-03-05 | Initial checklist — wrong syntax causes permission failures |
-| 3C | Bidirectional Mode Check | Verify every permission mode in the report exists in official docs, AND every mode in official docs exists in the report. Modes in report but not in docs must be marked "unverified" | field-level | settings + permissions documentation pages | 2026-03-15 | v2.1.74 caught `askEdits`/`viewOnly` in report but not in official docs — they had been unverified since run 1. Unidirectional check (docs→report) missed this for 3 runs |
-| 3D | Evaluation Semantics | Verify permission evaluation order (deny-first), remote-environment restrictions, and path-prefix resolution meanings (`//`, `~/`, `/`, `./`) are documented and match official docs | content-match | permissions documentation page | 2026-03-15 | v2.1.75 caught missing evaluation order; v2.1.76 caught missing path-prefix patterns. Semantic behavior rules had no dedicated check |
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 1A | 键完整性 | 对官方文档中的每个设置键，验证它是否出现在报告对应章节的表格中 | field-level | 设置文档页面 | 2026-03-05 | 初始清单，确保不会漏掉新设置键 |
+| 1B | 键类型 | 对表格中的每个键，验证 Type 列是否与官方文档一致 | content-match | 设置文档页面 | 2026-03-05 | 初始清单，类型错误会误导用户 |
+| 1C | 默认值 | 对每个有默认值的键，验证 Default 列是否与官方文档一致 | content-match | 设置文档页面 | 2026-03-05 | 初始清单，默认值错误会带来意外行为 |
+| 1D | 键说明 | 对每个键，验证 Description 列是否准确反映官方文档行为 | content-match | 设置文档页面 | 2026-03-05 | 初始清单，过时说明会误导用户 |
+| 1E | Scope 列 | 对带有 Scope 列的键（MCP、Plugin、Permission 表），验证作用域值是否与官方文档一致（例如 “Managed only”“Any”“Project”） | content-match | 设置文档页面 | 2026-03-15 | v2.1.71 发现 `extraKnownMarketplaces` 作用域错误（“Any”→“Project”），v2.1.75 发现 `autoMemoryDirectory` 的作用域限制。此前没有系统校验 Scope 列的规则 |
+| 1F | 反向完整性 | 对报告表格中的每个键，验证它是否出现在官方文档中，或者被明确标注为 “not in official docs - unverified”。没有官方依据的键必须标注 | field-level | 设置文档页面 + JSON schema | 2026-03-15 | 可疑键（`sandbox.ignoreViolations`、`skipWebFetchPreflight` 等）连续 6 次保持 ON HOLD，因为此前没有反向检查：报告里存在但官方没有的项 |
+| 1G | 边界语义 | 对具有边界值特殊行为的设置（如 `0`、空字符串、`null`），验证边界行为是否已记录且与官方文档一致 | content-match | 设置文档页面 | 2026-03-15 | v2.1.75 很晚才发现 `cleanupPeriodDays` 的零值行为，v2.1.76 又补充了 “hooks receive empty transcript_path” 细节。此前对边界条件检查不足 |
+| 1H | 文件作用域检查 | 对报告中被标为 `settings.json` 键的项（特别是 Display Settings），验证它确实属于 `settings.json`，而不是只适用于 `~/.claude.json`。官方文档区分了 “Available settings”（settings.json）与 “Global config settings”（~/.claude.json）。作用域错放会误导用户，并可能引发 schema 校验错误 | content-match | 设置文档页面中的 “Available settings” 与 “Global config settings” 章节 | 2026-03-18 | v2.1.78 发现 `showTurnDuration` 和 `terminalProgressBarEnabled` 被误列为 settings.json 键，而官方文档明确说明它们属于 `~/.claude.json`，并指出 “Adding them to settings.json will trigger a schema validation error.” 之前没有验证文件作用域的规则 |
 
 ---
 
-## 4. Hooks (REDIRECTED)
+## 2. 设置层级
 
-Hook analysis is excluded from this workflow. Hooks are maintained in the [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks) repo. Only verify the redirect link is still valid.
+用于核对设置层级表格的规则。
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 4A | Hooks Redirect | Verify the hooks section in the report contains a valid redirect link to the claude-code-hooks repo | exists | report file | 2026-03-05 | Hooks externalized to dedicated repo — only check redirect link validity |
-
----
-
-## 5. Environment Variables
-
-Rules that verify environment variable completeness and ownership.
-
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 5A | Env Var Completeness | Verify all `env`-configurable environment variables from official docs appear in the report | field-level | settings documentation page | 2026-03-05 | Initial checklist — missing env vars limit user configuration options |
-| 5B | Ownership Boundary | Verify no env vars from `best-practice/claude-cli-startup-flags.md` are duplicated in the settings report, and vice versa | cross-file | claude-cli-startup-flags.md vs settings report | 2026-03-05 | Initial checklist — env var refactoring split vars across two files, must prevent re-duplication |
-| 5C | Env Var Descriptions | For each env var in the table, verify the description (format, values, behavior) matches official /en/env-vars page | content-match | env-vars documentation page | 2026-03-15 | v2.1.74 caught `ANTHROPIC_CUSTOM_HEADERS` described as "JSON string" instead of "Name: Value format, newline-separated". Rule 5A only checked presence, not description accuracy |
-| 5D | Inverse Env Var Check | For each env var in the report table, verify it exists on the official /en/env-vars page OR is explicitly marked "not in official docs — unverified" | field-level | env-vars documentation page | 2026-03-15 | v2.1.76 found 7 env vars in report with no official backing. Without inverse checking, undocumented vars accumulate silently |
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 2A | 优先级层级 | 验证层级表中的所有优先级是否与官方文档一致（5 级链路 + managed policy） | field-level | 设置文档页面 | 2026-03-05 | 初始清单，优先级错误会导致覆盖关系混乱 |
+| 2B | 文件位置 | 对每个优先级层级，验证文件路径是否与官方文档一致 | content-match | 设置文档页面 | 2026-03-05 | 初始清单，路径错误会导致设置不生效 |
+| 2C | 合并语义 | 验证数组/对象的合并行为描述（如 “concatenated and deduplicated”）是否与官方文档原文一致 | content-match | 设置文档页面 | 2026-03-15 | v2.1.75 发现 “merged” 应改为 “concatenated and deduplicated”。此前没有检查合并措辞的规则 |
+| 2D | Managed 内部细节 | 验证 managed 层的下发方式（server-managed、MDM、registry、file）及其内部优先级顺序是否与官方文档一致，并核对平台特定路径和弃用说明 | field-level | 设置文档页面 | 2026-03-15 | v2.1.75 重构了 managed 层，加入内部优先级和 Windows 路径弃用说明。这些细节此前没有专门规则覆盖 |
 
 ---
 
-## 6. Examples
+## 3. 权限
 
-Rules that verify example accuracy.
+用于验证权限配置准确性的规则。
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 6A | Quick Reference Example | Verify the Quick Reference complete example uses valid current settings with correct syntax and realistic values | content-match | settings documentation page | 2026-03-05 | Initial checklist — example must demonstrate current best practices |
-| 6B | Example URL Validation | Verify any URLs embedded in JSON example blocks (e.g., `$schema`, API endpoints) resolve correctly and use current domains | exists | HTTP response | 2026-03-15 | v2.1.74 caught `$schema` URL using wrong domain (`www.schemastore.org` vs `json.schemastore.org`). URLs inside code blocks were not covered by rule 9B which only checks markdown links |
-
----
-
-## 7. Cross-File Consistency
-
-Rules that verify consistency between the report and other repo files.
-
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 7A | CLAUDE.md Sync | Verify CLAUDE.md's Configuration Hierarchy and Hooks System sections are consistent with the report | cross-file | CLAUDE.md vs report | 2026-03-05 | Initial checklist — CLAUDE.md could drift from report |
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 3A | 权限模式 | 验证表格中的所有权限模式是否与官方文档一致 | field-level | 设置文档页面 | 2026-03-05 | 初始清单，缺失模式会限制用户选择 |
+| 3B | 工具语法模式 | 验证所有工具权限语法模式和示例是否与官方文档一致 | content-match | 设置文档页面 | 2026-03-05 | 初始清单，语法错误会导致权限配置失效 |
+| 3C | 双向模式检查 | 验证报告中的每个权限模式都存在于官方文档中，同时官方文档里的每个模式也都出现在报告里。报告中存在但文档没有的模式必须标记为 “unverified” | field-level | 设置文档页 + 权限文档页 | 2026-03-15 | v2.1.74 发现报告里有 `askEdits`/`viewOnly`，但官方文档没有；单向检查（docs→report）连续 3 次都漏掉了这个问题 |
+| 3D | 评估语义 | 验证权限评估顺序（deny-first）、远程环境限制，以及路径前缀解析（`//`、`~/`、`/`、`./`）是否被记录且与官方文档一致 | content-match | 权限文档页 | 2026-03-15 | v2.1.75 发现缺少评估顺序说明，v2.1.76 发现缺少路径前缀模式。此前没有专门检查这些语义行为的规则 |
 
 ---
 
-## 8. Process
+## 4. Hooks（已重定向）
 
-Meta-rules about the workflow verification process itself.
+Hook 分析不在此工作流中维护。Hooks 由 [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks) 仓库负责。这里只验证重定向链接仍然有效。
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 8A | Source Credibility Guard | Only flag items as drift if confirmed by official sources (settings documentation page, CLI reference page, GitHub changelog). Third-party blog sources may be outdated or wrong — use them for leads only, verify against official docs before flagging | content-match | official docs only | 2026-03-05 | Adopted from subagents workflow — prevents false positives from blog sources |
-
----
-
-## 10. Version Metadata & Suspect Key Lifecycle
-
-Meta-rules that verify report metadata accuracy and prevent indefinite accumulation of unresolved items.
-
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 10A | Version Metadata | Verify the report's version badge, header settings count, and env var count reflect the actual audited version and current table row counts | content-match | report file internal consistency | 2026-03-15 | v2.1.71 caught version badge mismatch; v2.1.69 caught header counts wrong. No rule existed to verify these meta-fields |
-| 10B | Suspect Key Escalation | After 5 consecutive runs ON HOLD, suspect keys must be resolved: either (a) confirmed via JSON schema and annotated with "in JSON schema, not on official page", or (b) removed from the report. Report the run count for each suspect key | exists | changelog history | 2026-03-15 | Suspect keys (`sandbox.ignoreViolations`, `skipWebFetchPreflight`, etc.) stayed ON HOLD across 6 runs with no resolution mechanism. Indefinite accumulation provides no value |
-| 10C | Bidirectional Completeness | General meta-rule: every settings key, permission mode, and env var in the report must be traceable to an official source or explicitly marked "unverified". This is the inverse of rules 1A/3A/5A. Superset of 1F, 3C, 5D | field-level | official docs vs report | 2026-03-15 | Cross-cutting rule synthesized from research: 6 items were caught late because only docs→report checking existed. The reverse direction (report→docs) catches orphaned entries |
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 4A | Hooks 重定向 | 验证报告中的 hooks 章节包含一个有效的重定向链接，指向 claude-code-hooks 仓库 | exists | 报告文件 | 2026-03-05 | Hooks 已拆分到专门仓库，只需检查重定向是否有效 |
 
 ---
 
-## 9. Hyperlinks
+## 5. 环境变量
 
-Rules that verify all hyperlinks in the report are valid.
+用于验证环境变量完整性和归属边界的规则。
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
-|---|----------|-------|-------|-----------------|-------|--------|
-| 9A | Local File Links | Verify all relative file links resolve to existing files | exists | local filesystem | 2026-03-05 | Initial checklist — file moves can break relative links |
-| 9B | External URL Links | Verify all external URLs return valid pages (not 404 or error) | exists | HTTP response | 2026-03-05 | Initial checklist — external docs pages can be restructured or removed |
-| 9C | Anchor Links | Verify all internal anchor links point to existing headings within the same file | exists | file headings | 2026-03-05 | Initial checklist — section renames can break anchor links |
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 5A | 环境变量完整性 | 验证官方文档中可通过 `env` 配置的所有环境变量，都出现在报告中 | field-level | 设置文档页面 | 2026-03-05 | 初始清单，缺失环境变量会限制用户的可配置能力 |
+| 5B | 归属边界 | 验证 `best-practice/claude-cli-startup-flags.md` 中的环境变量不会与设置报告重复，反之亦然 | cross-file | claude-cli-startup-flags.md 与设置报告 | 2026-03-05 | 初始清单，环境变量重构后拆到两个文件中，必须防止重新重复 |
+| 5C | 环境变量说明 | 对表格中的每个环境变量，验证其说明（格式、取值、行为）是否与官方 `/en/env-vars` 页面一致 | content-match | env-vars 文档页 | 2026-03-15 | v2.1.74 发现 `ANTHROPIC_CUSTOM_HEADERS` 被错误描述成 “JSON string”，实际上应为 “Name: Value format, newline-separated”。5A 只检查是否存在，不检查描述是否准确 |
+| 5D | 反向环境变量检查 | 对报告表格中的每个环境变量，验证它是否存在于官方 `/en/env-vars` 页面，或者被明确标记为 “not in official docs - unverified” | field-level | env-vars 文档页 | 2026-03-15 | v2.1.76 发现报告中有 7 个环境变量没有官方依据。若没有反向检查，未文档化条目会悄悄累积 |
+
+---
+
+## 6. 示例
+
+用于验证示例准确性的规则。
+
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 6A | Quick Reference 示例 | 验证 Quick Reference 的完整示例使用的是当前有效设置、正确语法和合理取值 | content-match | 设置文档页面 | 2026-03-05 | 初始清单，示例应体现当前最佳实践 |
+| 6B | 示例 URL 校验 | 验证 JSON 示例块中的 URL（如 `$schema`、API endpoints）都能正确解析，且域名仍是当前可用域名 | exists | HTTP 响应 | 2026-03-15 | v2.1.74 发现 `$schema` 使用了错误域名（`www.schemastore.org` 而不是 `json.schemastore.org`）。此前的 9B 只检查 markdown 链接，不覆盖代码块中的 URL |
+
+---
+
+## 7. 跨文件一致性
+
+用于验证报告与仓库其他文件之间一致性的规则。
+
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 7A | CLAUDE.md 同步 | 验证 CLAUDE.md 中的 Configuration Hierarchy 和 Hooks System 章节与本报告保持一致 | cross-file | CLAUDE.md 与报告 | 2026-03-05 | 初始清单，CLAUDE.md 可能与报告发生漂移 |
+
+---
+
+## 8. 流程
+
+关于工作流验证流程本身的元规则。
+
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 8A | 来源可信度守卫 | 只有在官方来源确认后，才可将某项标记为漂移（设置文档页、CLI reference 页、GitHub changelog）。第三方博客只能作为线索，最终仍需回到官方文档验证 | content-match | 仅官方文档 | 2026-03-05 | 从 subagents 工作流沿用，避免第三方博客带来误报 |
+
+---
+
+## 10. 版本元数据与可疑键生命周期
+
+用于验证报告元数据准确性，并防止未解决问题无限积累的元规则。
+
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 10A | 版本元数据 | 验证报告的版本徽章、页首 settings 数量、env var 数量是否与实际审计版本和当前表格行数一致 | content-match | 报告文件内部一致性 | 2026-03-15 | v2.1.71 发现版本徽章不一致，v2.1.69 发现页首计数错误。此前没有检查这些元字段的规则 |
+| 10B | 可疑键升级处理 | 对连续 5 次运行仍为 ON HOLD 的可疑键，必须做出结论：要么（a）通过 JSON schema 确认并标注为 “in JSON schema, not on official page”，要么（b）从报告中移除。并记录每个可疑键已持续的运行次数 | exists | changelog 历史 | 2026-03-15 | 可疑键（`sandbox.ignoreViolations`、`skipWebFetchPreflight` 等）连续 6 次 ON HOLD 却没有收敛机制，持续堆积没有价值 |
+| 10C | 双向完整性 | 通用元规则：报告中的每个 settings key、permission mode 和 env var，都必须能追溯到官方来源，或者被明确标记为 “unverified”。这是对规则 1A/3A/5A 的反向补足，也是 1F、3C、5D 的超集 | field-level | 官方文档 vs 报告 | 2026-03-15 | 研究总结出的跨领域规则：有 6 个问题因为只做 docs→report 检查而很晚才被发现；加上 report→docs 方向后才能捕获这些孤立条目 |
+
+---
+
+## 9. 超链接
+
+用于验证报告中全部链接有效性的规则。
+
+| # | 类别 | 检查项 | 深度 | 对照来源 | 添加时间 | 来源说明 |
+|---|------|--------|------|----------|----------|----------|
+| 9A | 本地文件链接 | 验证所有相对文件链接都能解析到真实存在的文件 | exists | 本地文件系统 | 2026-03-05 | 初始清单，文件移动可能导致相对链接失效 |
+| 9B | 外部 URL 链接 | 验证所有外部 URL 都能返回有效页面（不是 404 或错误页） | exists | HTTP 响应 | 2026-03-05 | 初始清单，外部文档页可能改版或被移除 |
+| 9C | 锚点链接 | 验证所有内部锚点链接都指向当前文件内真实存在的标题 | exists | 文件标题 | 2026-03-05 | 初始清单，章节重命名会导致锚点失效 |

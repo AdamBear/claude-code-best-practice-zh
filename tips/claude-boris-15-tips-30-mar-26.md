@@ -1,170 +1,170 @@
-# 15 Hidden & Under-Utilized Features in Claude Code — From Boris Cherny
+# Claude Code 中 15 个隐藏且被低估的功能：来自 Boris Cherny
 
-A summary of tips shared by Boris Cherny ([@bcherny](https://x.com/bcherny)), creator of Claude Code, on March 30, 2026.
+这是 Boris Cherny（[@bcherny](https://x.com/bcherny)），Claude Code 的创造者，于 2026 年 3 月 30 日分享的技巧摘要。
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">← 返回 Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-## Context
+## 背景
 
-Boris shared a bunch of his favorite hidden and under-utilized features in Claude Code, focusing on the ones he uses the most.
+Boris 分享了一批他最喜欢、但常常被忽视或使用不足的 Claude Code 功能，重点聚焦在他自己最常使用的那些能力。
 
-<a href="https://x.com/bcherny/status/2038454336355999749"><img src="assets/boris-30-mar-26/0.png" alt="Boris Cherny intro tweet" width="50%" /></a>
-
----
-
-## 1/ Claude Code Has a Mobile App
-
-Did you know Claude Code has a mobile app? Boris writes a lot of his code from the iOS app — it's a convenient way to make changes without opening a laptop.
-
-- Download the Claude app for iOS/Android
-- Navigate to the **Code** tab on the left
-- You can review changes, approve PRs, and write code directly from your phone
-
-<a href="https://x.com/bcherny/status/2038454337811386436"><img src="assets/boris-30-mar-26/1.png" alt="Claude Code mobile app" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454336355999749"><img src="assets/boris-30-mar-26/0.png" alt="Boris Cherny 介绍推文" width="50%" /></a>
 
 ---
 
-## 2/ Move Sessions Between Mobile/Web/Desktop and Terminal
+## 1/ Claude Code 有移动端应用
 
-Run `claude --teleport` or `/teleport` to continue a cloud session on your machine. Or run `/remote-control` to control a locally running session from your phone/web.
+你知道 Claude Code 有移动端应用吗？Boris 有很多代码就是通过 iOS 应用写的。这是一种不打开笔记本也能快速改动代码的方便方式。
 
-- **Teleport**: pulls a cloud session down to your local terminal
-- **Remote Control**: lets you control a local session from any device
-- Boris has **"Enable Remote Control for all sessions"** set in his `/config`
+- 下载 Claude iOS 或 Android 应用
+- 进入左侧的 **Code** 标签页
+- 你可以直接在手机上审查改动、批准 PR、甚至写代码
 
-<a href="https://x.com/bcherny/status/2038454339933548804"><img src="assets/boris-30-mar-26/2.png" alt="Teleport and Remote Control" width="50%" /></a>
-
----
-
-## 3/ /loop and /schedule — Two of the Most Powerful Features
-
-Use these to schedule Claude to run automatically at a set interval, for up to a week at a time. Boris has a bunch of loops running locally:
-
-- `/loop 5m /babysit` — auto-address code review, auto-rebase, and shepherd PRs to production
-- `/loop 30m /slack-feedback` — automatically put up PRs for Slack feedback every 30 mins
-- `/loop /post-merge-sweeper` — put up PRs to address code review comments he missed
-- `/loop 1h /pr-pruner` — close out stale and no longer necessary PRs
-- ...and lots more!
-
-Experiment with turning workflows into skills + loops. It's powerful.
-
-<a href="https://x.com/bcherny/status/2038454341884154269"><img src="assets/boris-30-mar-26/3.png" alt="/loop and /schedule" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454337811386436"><img src="assets/boris-30-mar-26/1.png" alt="Claude Code 移动端应用" width="50%" /></a>
 
 ---
 
-## 4/ Use Hooks to Deterministically Run Logic
+## 2/ 在移动端、Web、桌面端和终端之间迁移会话
 
-Use hooks to run logic as part of the agent lifecycle. For example:
+运行 `claude --teleport` 或 `/teleport`，把一个云端会话继续接到你的本地机器上。或者运行 `/remote-control`，从手机或 Web 端远程控制一个本地运行中的会话。
 
-- **Dynamically load** in context each time you start Claude (`SessionStart`)
-- **Log every bash command** the model runs (`PreToolUse`)
-- **Route permission prompts** to WhatsApp for you to approve/deny (`PermissionRequest`)
-- **Poke Claude** to keep going whenever it stops (`Stop`)
+- **Teleport**：把云端会话拉回到本地终端
+- **Remote Control**：让你从任意设备控制本地会话
+- Boris 在 `/config` 里开启了 **"Enable Remote Control for all sessions"**
 
-<a href="https://x.com/bcherny/status/2038454343519932844"><img src="assets/boris-30-mar-26/4.png" alt="Use hooks" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454339933548804"><img src="assets/boris-30-mar-26/2.png" alt="Teleport 和 Remote Control" width="50%" /></a>
+
+---
+
+## 3/ `/loop` 和 `/schedule`：最强大的两个功能之一
+
+使用它们可以按固定间隔自动安排 Claude 运行，最长可持续一整周。Boris 本地常驻运行了很多 loop：
+
+- `/loop 5m /babysit`：自动处理代码审查、自动 rebase，并把 PR 一路护送到生产
+- `/loop 30m /slack-feedback`：每 30 分钟自动发起一个 PR，用于收集 Slack 反馈
+- `/loop /post-merge-sweeper`：自动发 PR 处理他遗漏的代码审查评论
+- `/loop 1h /pr-pruner`：关闭陈旧、已无必要的 PR
+- ……以及更多
+
+可以多尝试把工作流做成技能，再和 loop 结合起来，威力非常大。
+
+<a href="https://x.com/bcherny/status/2038454341884154269"><img src="assets/boris-30-mar-26/3.png" alt="/loop 和 /schedule" width="50%" /></a>
+
+---
+
+## 4/ 用钩子以确定性方式运行逻辑
+
+通过钩子，你可以把逻辑挂到代理生命周期里。例如：
+
+- 每次启动 Claude 时，**动态加载**上下文（`SessionStart`）
+- **记录模型执行的每一条 bash 命令**（`PreToolUse`）
+- 把**权限提示**路由到 WhatsApp，由你批准或拒绝（`PermissionRequest`）
+- 在 Claude 停下来时**戳它继续工作**（`Stop`）
+
+<a href="https://x.com/bcherny/status/2038454343519932844"><img src="assets/boris-30-mar-26/4.png" alt="使用钩子" width="50%" /></a>
 
 ---
 
 ## 5/ Cowork Dispatch
 
-Boris uses Dispatch every day to catch up on Slack and emails, manage files, and do things on his laptop when he's not at a computer. When he's not coding, he's dispatching.
+Boris 每天都会用 Dispatch 来追 Slack 和邮件、管理文件，以及在离开电脑时远程处理笔记本上的事情。不写代码时，他就在 dispatch。
 
-- Dispatch is a **secure remote control** for the Claude Desktop app
-- It can use your MCPs, browser, and computer, with your permission
-- Think of it as a way to delegate non-coding tasks to Claude from anywhere
+- Dispatch 是 Claude Desktop 应用的一个**安全远程控制**能力
+- 它可以在你授权的前提下使用你的 MCP、浏览器和电脑
+- 你可以把它理解为：无论身在何处，都能把非编码任务委托给 Claude
 
 <a href="https://x.com/bcherny/status/2038454345419936040"><img src="assets/boris-30-mar-26/5.png" alt="Cowork Dispatch" width="50%" /></a>
 
 ---
 
-## 6/ Use the Chrome Extension for Frontend Work
+## 6/ 前端工作请使用 Chrome 扩展
 
-The most important tip for using Claude Code: **give Claude a way to verify its output.** Once you do that, Claude will iterate until the result is great.
+使用 Claude Code 最重要的一条建议是：**给 Claude 一条验证自己输出结果的路径。** 一旦做到这一点，Claude 就会持续迭代，直到结果足够好。
 
-- Think of it like asking someone to build a website but they aren't allowed to use a browser — the result probably won't look good
-- Give Claude a browser and it will write code and iterate until it looks good
-- Boris uses the Chrome extension every time he works on web code — it tends to work more reliably than other similar MCPs
+- 就像让一个人做网站，却不允许他打开浏览器，结果大概率不会好
+- 给 Claude 一个浏览器，它就会写代码、反复迭代，直到页面效果变好
+- Boris 每次做 Web 代码都会用 Chrome 扩展，它通常比其他类似的 MCP 更稳定
 
-<a href="https://x.com/bcherny/status/2038454347156398333"><img src="assets/boris-30-mar-26/6.png" alt="Chrome extension for frontend" width="50%" /></a>
-
----
-
-## 7/ Use the Claude Desktop App to Auto-Start and Test Web Servers
-
-Along the same vein, the Desktop app bundles in the ability for Claude to **automatically run your web server and even test it in a built-in browser.**
-
-- You can set up something similar in CLI or VSCode using the Chrome extension
-- Or just use the Desktop app for the integrated experience
-
-<a href="https://x.com/bcherny/status/2038454348804714642"><img src="assets/boris-30-mar-26/7.png" alt="Desktop app web server testing" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454347156398333"><img src="assets/boris-30-mar-26/6.png" alt="用于前端工作的 Chrome 扩展" width="50%" /></a>
 
 ---
 
-## 8/ Fork Your Session
+## 7/ 用 Claude Desktop 应用自动启动并测试 Web Server
 
-People often ask how to fork an existing session. Two ways:
+同样的思路，Desktop 应用内置了让 Claude **自动运行你的 Web Server，甚至在内建浏览器里完成测试** 的能力。
 
-1. Run `/branch` from your session
-2. From the CLI, run `claude --resume <session-id> --fork-session`
+- 在 CLI 或 VSCode 中，你也可以借助 Chrome 扩展实现类似能力
+- 但如果你想要一体化体验，直接用 Desktop 应用会更方便
 
-`/branch` creates a branched conversation — you are now in the branch. To resume the original, use `claude -r <original-session-id>`.
-
-<a href="https://x.com/bcherny/status/2038454350214041740"><img src="assets/boris-30-mar-26/8.png" alt="Fork your session" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454348804714642"><img src="assets/boris-30-mar-26/7.png" alt="Desktop 应用中的 Web Server 测试" width="50%" /></a>
 
 ---
 
-## 9/ Use /btw for Side Queries
+## 8/ Fork 你的会话
 
-Boris uses this all the time to answer quick questions while the agent works. `/btw` lets you ask a side question without interrupting the agent's current task.
+很多人会问，怎样从一个已有会话分叉。两种方式：
 
-Example:
+1. 在会话中运行 `/branch`
+2. 在 CLI 中运行 `claude --resume <session-id> --fork-session`
+
+`/branch` 会创建一个分支会话，而且你会直接进入这个分支。如果要回到原始会话，使用 `claude -r <original-session-id>`。
+
+<a href="https://x.com/bcherny/status/2038454350214041740"><img src="assets/boris-30-mar-26/8.png" alt="Fork 你的会话" width="50%" /></a>
+
+---
+
+## 9/ 用 `/btw` 处理旁路问题
+
+Boris 经常用它来在代理工作时顺手回答一些小问题。`/btw` 允许你提出一个旁路问题，而不会打断代理当前的主任务。
+
+示例：
 ```
 /btw how do I spell dachshund?
 > dachshund — German for "badger dog" (dachs + badger, hund + dog).
-↑/↓ to scroll · Space, Enter, or Escape to dismiss
+→→to scroll · Space, Enter, or Escape to dismiss
 ```
 
-<a href="https://x.com/bcherny/status/2038454351849787485"><img src="assets/boris-30-mar-26/9.png" alt="/btw for side queries" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454351849787485"><img src="assets/boris-30-mar-26/9.png" alt="/btw 处理旁路问题" width="50%" /></a>
 
 ---
 
-## 10/ Use Git Worktrees
+## 10/ 使用 Git Worktree
 
-Claude Code ships with deep support for git worktrees. Worktrees are essential for doing lots of parallel work in the same repository. Boris has **dozens of Claudes running at all times**, and this is how he does it.
+Claude Code 对 git worktree 提供了深度支持。想在同一仓库里并行做大量工作，worktree 几乎是必需品。Boris 常年**同时运行几十个 Claude**，而这正是他的实现方式。
 
-- Use `claude -w` to start a new session in a worktree
-- Or hit the **"worktree" checkbox** in the Claude Desktop app
-- For non-git VCS users, use the `WorktreeCreate` hook to add your own logic for worktree creation
+- 使用 `claude -w` 在一个 worktree 中启动新会话
+- 或者在 Claude Desktop 应用里勾选 **"worktree" checkbox**
+- 如果你用的是非 git 的版本控制系统，可以利用 `WorktreeCreate` 钩子加入自己的创建逻辑
 
-<a href="https://x.com/bcherny/status/2038454353787519164"><img src="assets/boris-30-mar-26/10.png" alt="Git worktrees" width="50%" /></a>
-
----
-
-## 11/ Use /batch to Fan Out Massive Changesets
-
-`/batch` interviews you, then has Claude fan out the work to as many **worktree agents** as it takes (dozens, hundreds, even thousands) to get it done.
-
-- Use it for large code migrations and other kinds of parallelizable work
-- Each worktree agent works independently on its own copy of the codebase
-
-<a href="https://x.com/bcherny/status/2038454355469484142"><img src="assets/boris-30-mar-26/11.png" alt="/batch for massive changesets" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454353787519164"><img src="assets/boris-30-mar-26/10.png" alt="Git worktree" width="50%" /></a>
 
 ---
 
-## 12/ Use --bare to Speed Up SDK Startup by Up to 10x
+## 11/ 使用 `/batch` 扇出超大规模改动
 
-By default, when you run `claude -p` (or the TypeScript or Python SDKs), Claude searches for local CLAUDE.md's, settings, and MCPs. But for non-interactive usage, most of the time you want to explicitly specify what to load via `--system-prompt`, `--mcp-config`, `--settings`, etc.
+`/batch` 会先和你对需求做一轮访谈，然后让 Claude 把工作扇出给足够多的 **worktree agent** 去完成，可能是几十个、几百个，甚至上千个。
 
-- This was a design oversight when the SDK was first built
-- In a future version, they will flip the default to `--bare`
-- For now, opt in with the flag to get up to **10x faster startup**
+- 适合大型代码迁移，以及其他可并行化的大规模工作
+- 每个 worktree agent 都会在自己独立的代码库副本里工作
+
+<a href="https://x.com/bcherny/status/2038454355469484142"><img src="assets/boris-30-mar-26/11.png" alt="/batch 处理大规模改动" width="50%" /></a>
+
+---
+
+## 12/ 用 `--bare` 让 SDK 启动速度提升最多 10 倍
+
+默认情况下，当你运行 `claude -p`（或 TypeScript / Python SDK）时，Claude 会搜索本地的 `CLAUDE.md`、设置和 MCP。但在非交互式场景里，大多数时候你其实更想通过 `--system-prompt`、`--mcp-config`、`--settings` 等参数显式指定加载内容。
+
+- 这是 SDK 初版设计时留下的一个问题
+- 未来版本里，默认行为会切换为 `--bare`
+- 当前可以先通过这个 flag 主动启用，从而获得最高 **10 倍更快的启动速度**
 
 ```bash
 claude -p "summarize this codebase" \
@@ -173,48 +173,48 @@ claude -p "summarize this codebase" \
     --bare
 ```
 
-<a href="https://x.com/bcherny/status/2038454357088457168"><img src="assets/boris-30-mar-26/12.png" alt="--bare flag for SDK startup" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454357088457168"><img src="assets/boris-30-mar-26/12.png" alt="用于 SDK 启动的 --bare 参数" width="50%" /></a>
 
 ---
 
-## 13/ Use --add-dir to Give Claude Access to More Folders
+## 13/ 用 `--add-dir` 让 Claude 访问更多文件夹
 
-When working across multiple repositories, Boris usually starts Claude in one repo and uses `--add-dir` (or `/add-dir`) to let Claude see the other repo.
+在多个仓库之间协作时，Boris 通常会在一个仓库里启动 Claude，然后用 `--add-dir`（或 `/add-dir`）让 Claude 同时看到另一个仓库。
 
-- This not only tells Claude about the repo, but also **gives it permissions** to work in the repo
-- Or, add `"additionalDirectories"` to your team's `settings.json` to always load in additional folders when starting Claude Code
+- 这不仅会告诉 Claude 另一个仓库的存在，还会**赋予它在该仓库中工作的权限**
+- 或者，你也可以在团队的 `settings.json` 里加入 `"additionalDirectories"`，让 Claude Code 启动时总是自动加载这些附加目录
 
-<a href="https://x.com/bcherny/status/2038454359047156203"><img src="assets/boris-30-mar-26/13.png" alt="--add-dir for multiple repos" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454359047156203"><img src="assets/boris-30-mar-26/13.png" alt="用于多仓库的 --add-dir" width="50%" /></a>
 
 ---
 
-## 14/ Use --agent to Give Claude Code a Custom System Prompt & Tools
+## 14/ 用 `--agent` 给 Claude Code 自定义系统提示词与工具
 
-Custom agents are a powerful primitive that often gets overlooked. To use it, just define a new agent in `.claude/agents/`, then run:
+自定义代理是一个非常强大、但经常被忽略的基础能力。使用方式很简单：先在 `.claude/agents/` 中定义一个新代理，然后运行：
 
 ```bash
 claude --agent=<your agent's name>
 ```
 
-- Agents can have restricted tools, custom descriptions, and specific models
-- They're great for creating read-only agents, specialized review agents, or domain-specific tools
+- 代理可以拥有受限工具、自定义描述以及特定模型
+- 很适合用来构建只读代理、专用审查代理或领域专属工具
 
-<a href="https://x.com/bcherny/status/2038454360418787764"><img src="assets/boris-30-mar-26/14.png" alt="--agent for custom system prompts" width="50%" /></a>
-
----
-
-## 15/ Use /voice to Enable Voice Input
-
-Fun fact: Boris does most of his coding by speaking to Claude, rather than typing.
-
-- Run `/voice` in CLI then hold the space bar to speak
-- Press the voice button on Desktop
-- Or enable dictation in your iOS settings
-
-<a href="https://x.com/bcherny/status/2038454362226467112"><img src="assets/boris-30-mar-26/15.png" alt="/voice for voice input" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038454360418787764"><img src="assets/boris-30-mar-26/14.png" alt="用于自定义系统提示词的 --agent" width="50%" /></a>
 
 ---
 
-## Sources
+## 15/ 用 `/voice` 启用语音输入
+
+一个有趣的事实是：Boris 大多数时候不是打字写代码，而是直接对 Claude 说话。
+
+- 在 CLI 中运行 `/voice`，然后按住空格键说话
+- 在 Desktop 上点击语音按钮
+- 或者在 iOS 设置中启用听写
+
+<a href="https://x.com/bcherny/status/2038454362226467112"><img src="assets/boris-30-mar-26/15.png" alt="用于语音输入的 /voice" width="50%" /></a>
+
+---
+
+## 来源
 
 - [Boris Cherny (@bcherny) on X — March 30, 2026](https://x.com/bcherny/status/2038454336355999749)

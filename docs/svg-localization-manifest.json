@@ -1,0 +1,285 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "file": "reports/assets/sdk-vs-cli-diagram.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "multiple text labels and captions",
+      "verification_required": true
+    },
+    {
+      "file": "reports/assets/programmatic-tool-calling-diagram.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "multiple text labels and captions",
+      "verification_required": true
+    },
+    {
+      "file": "development-workflows/rpi/rpi-workflow.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "workflow labels",
+      "verification_required": true
+    },
+    {
+      "file": "orchestration-workflow/weather.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "unit, temperature, location",
+      "verification_required": true
+    },
+    {
+      "file": "orchestration-workflow/orchestration-workflow.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "workflow labels and descriptions",
+      "verification_required": true
+    },
+    {
+      "file": "agent-teams/output/dubai-time.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "time card labels",
+      "verification_required": true
+    },
+    {
+      "file": "!/codex-jumping.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "no user-visible text",
+      "verification_required": false
+    },
+    {
+      "file": "!/claude-speaking.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "no user-visible text",
+      "verification_required": false
+    },
+    {
+      "file": "!/claude-jumping.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "no user-visible text",
+      "verification_required": false
+    },
+    {
+      "file": "!/codex-speaking.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "no user-visible text",
+      "verification_required": false
+    },
+    {
+      "file": "!/root/github-trending-day.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge text",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/best-practice.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/anthropic-academy.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "promotional sentence",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/a.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/boris-cherny.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/billion-dollar-questions.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "decorative title text",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/beta.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/c.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/cat-wu.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/claude-certified-architect.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "promotional sentence",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/video.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/thariq.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/s.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/orchestration-workflow.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/orchestration-workflow-hd.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/official.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/lydia.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/implemented.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/implemented-hd.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/how-to-use.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/how-to-implement.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/developed-by.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "promotional sentence",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/community.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/community-shayan.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/community-dex.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/community-davila7.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/click-badges.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "instructional sentence",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/claude.svg",
+      "classification": "A",
+      "completion_mode": "translated",
+      "source_text_nodes": "badge label",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/claude-for-oss.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "promotional sentence",
+      "verification_required": true
+    },
+    {
+      "file": "!/tags/claude-community-ambassador.svg",
+      "classification": "B",
+      "completion_mode": "reflowed",
+      "source_text_nodes": "promotional sentence",
+      "verification_required": true
+    }
+  ]
+}
